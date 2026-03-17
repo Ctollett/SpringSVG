@@ -1,0 +1,11 @@
+{
+  "name": "springsvg-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "pnpm --filter springsvg build",
+    "dev": "pnpm --parallel --filter '*' dev",
+    "test": "pnpm --filter springsvg test",
+    "lint": "pnpm --filter '*' lint"
+  }
+}

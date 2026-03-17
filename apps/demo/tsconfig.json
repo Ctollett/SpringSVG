@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "types": ["vite/client"],
+    "paths": {
+      "springsvg": ["../../packages/springsvg/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

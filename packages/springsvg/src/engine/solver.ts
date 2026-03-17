@@ -15,7 +15,7 @@ let rafId: number | null = null
 let lastTime: number = 0
 
 function tick(timestamp: number): void {
-    const dt = (timestamp - lastTime) / 1000
+    const dt = lastTime === 0 ? 0 : (timestamp - lastTime) / 1000
     lastTime = timestamp
 
     for (const [id, animation] of animations) {

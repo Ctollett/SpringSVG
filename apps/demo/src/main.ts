@@ -521,11 +521,11 @@ const medusaSkullLabel = document.getElementById('medusaSkullLabel') as HTMLPara
 const medusaSkullConfig = { stiffness: 140, damping: 14, mass: 1 }
 let isMedusaSkull = false
 
-morphSvg(medusaSkullContainer, giMedusaHeadSvg, giCrownedSkullSvg, medusaSkullConfig)
+morphSvg(medusaSkullContainer, giMedusaHeadSvg, giCrownedSkullSvg, 'bouncy')
 
 medusaSkullContainer.addEventListener('click', () => {
   isMedusaSkull = !isMedusaSkull
-  morphSvg(medusaSkullContainer, isMedusaSkull ? giMedusaHeadSvg : giCrownedSkullSvg, isMedusaSkull ? giCrownedSkullSvg : giMedusaHeadSvg, medusaSkullConfig)
+  morphSvg(medusaSkullContainer, isMedusaSkull ? giMedusaHeadSvg : giCrownedSkullSvg, isMedusaSkull ? giCrownedSkullSvg : giMedusaHeadSvg, 'bouncy')
   medusaSkullLabel.textContent = isMedusaSkull ? 'click for medusa' : 'click for skull'
 })
 

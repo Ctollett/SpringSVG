@@ -2,6 +2,7 @@ import { SpringConfig } from "../engine/types";
 import { morph } from "./morph";
 import { parseViewBox, scaleD } from "../svg/viewbox";
 import { parseSvgPaths } from "./parseSvg";
+import { PRESETS } from "./presets";
 
 const ATTRS = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule']
 
@@ -16,7 +17,7 @@ export function morphSvg(
     container: SVGSVGElement,
     fromSvg: string,
     toSvg: string,
-    config: SpringConfig
+    config: SpringConfig | string = 'smooth'
 ): void {
     const toVB = containerViewBox(container)
     const fromVB = parseViewBox(fromSvg)
@@ -62,6 +63,7 @@ export function morphSvg(
 
     // Morph each element — extras collapse into the last target path
     const lastTarget = scaledTo[scaledTo.length - 1]!
+      const resolvedConfig = (typeof config === 'string' ? PRESETS[config] : config) ?? PRESETS.smooth!
     existing.forEach((el, i) => {
         const isExtra = i >= scaledTo.length
         const isNew = i >= existingCount
@@ -81,7 +83,6 @@ export function morphSvg(
             el.style.transition = ''
             el.style.opacity = '1'
         }
-
-        morph(el, scaledTo[i] ?? lastTarget, config)
+        morph(el, scaledTo[i] ?? lastTarget, resolvedConfig)
     })
 }

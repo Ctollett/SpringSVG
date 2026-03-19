@@ -1,4 +1,4 @@
-import {parse, serialize, toAbsolute} from './path'
+import {parse, serialize, toAbsolute, toAbsoluteCubic} from './path'
  
 
 export function parseViewBox(svgString: string): [number, number, number, number] {
@@ -16,22 +16,17 @@ export function scaleD(
 ): string {
     const [fx, fy, fw, fh] = from
     const [tx, ty, tw, th] = to
-    const sx = tw / fw
-    const sy = th / fh
-    const ox = tx - fx * sx
-    const oy = ty - fy * sy
+    // Uniform "xMidYMid meet" — preserves aspect ratio, centers in target viewBox.
+    // Converting to absolute cubics first means we only scale M and C coordinates,
+    // avoiding arc-specific parameter corruption (radii, flags, rotation).
+    const s = Math.min(tw / fw, th / fh)
+    const ox = tx + (tw - fw * s) / 2 - fx * s
+    const oy = ty + (th - fh * s) / 2 - fy * s
 
-    const commands = toAbsolute(parse(d).commands)
-    const scaled = commands.map(cmd => {
-        switch (cmd.type) {
-            case 'H': return { type: 'H', values: [cmd.values[0]! * sx + ox] }
-            case 'V': return { type: 'V', values: [cmd.values[0]! * sy + oy] }
-            case 'Z': return cmd
-            default:  return {
-                type: cmd.type,
-                values: cmd.values.map((v, i) => i % 2 === 0 ? v * sx + ox : v * sy + oy)
-            }
-        }
-    })
+    const commands = toAbsoluteCubic(toAbsolute(parse(d).commands))
+    const scaled = commands.map(cmd => ({
+        type: cmd.type,
+        values: cmd.values.map((v, i) => v * s + (i % 2 === 0 ? ox : oy))
+    }))
     return serialize(scaled)
 }

@@ -16,5 +16,5 @@ export function stepSpring(
 
     const settled = Math.abs(velocity) < 0.001 && Math.abs(displacement) < 0.001
 
-    return { value: position, velocity, settled}
+    return { value: settled ? state.target : position, velocity, settled }
 }

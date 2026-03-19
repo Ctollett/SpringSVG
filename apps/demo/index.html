@@ -5,50 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SpringSVG Demo</title>
     <style>
+      *, *::before, *::after { box-sizing: border-box; }
+
       body {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
         margin: 0;
         background: #0a0a0a;
-        font-family: sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         color: white;
       }
+
+      h1 {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.3);
+        margin: 0 0 48px;
+      }
+
+      .demos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 64px;
+        align-items: flex-start;
+        max-width: 900px;
+      }
+
+      .demo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+
+      .demo-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.25);
+        margin: 0 0 20px;
+      }
+
       svg {
         cursor: pointer;
         overflow: visible;
       }
-      p {
-        opacity: 0.5;
-        font-size: 14px;
-        margin-top: 24px;
+
+      svg:hover {
+        opacity: 0.8;
+      }
+
+      p.hint {
+        font-size: 12px;
+        color: rgba(255,255,255,0.2);
+        margin: 20px 0 0;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <svg width="200" height="200" viewBox="0 0 100 100">
-      <path id="shape" d="M 50 10 L 90 90 L 10 90 Z" fill="none" stroke="white" stroke-width="2"/>
-    </svg>
-    <p id="label">click to morph</p>
+    <h1>SpringSVG</h1>
 
-    <div style="margin-top: 48px; display: flex; flex-direction: column; align-items: center;">
-      <svg id="menu" width="80" height="80" viewBox="0 0 100 100" style="cursor:pointer; overflow:visible;">
-        <path id="bar1" d="M 20 30 L 80 30" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
-        <path id="bar2" d="M 20 50 L 80 50" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
-        <path id="bar3" d="M 20 70 L 80 70" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
-      </svg>
-      <p id="menuLabel">click to toggle</p>
+    <div class="demos">
+      <div class="demo">
+        <p class="demo-label">Menu</p>
+        <svg id="menuContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="menuLabel">click to close</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Playback</p>
+        <svg id="playContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="playLabel">click to play</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Reaction</p>
+        <svg id="reactionContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="reactionLabel">click to like</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Volume</p>
+        <svg id="volumeContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="volumeLabel">click to mute</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Theme</p>
+        <svg id="themeContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="themeLabel">click for dark</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Visibility</p>
+        <svg id="visibilityContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="visibilityLabel">click to hide</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Power</p>
+        <svg id="powerContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="powerLabel">click to shield</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Toggle</p>
+        <svg id="toggleContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="toggleLabel">click to enable</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">React</p>
+        <svg id="thumbContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="thumbLabel">click to dislike</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Mood</p>
+        <svg id="moodContainer" width="48" height="48" viewBox="0 0 16 16" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="moodLabel">click to change</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">CPU</p>
+        <svg id="cpuContainer" width="48" height="48" viewBox="0 0 16 16" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="cpuLabel">click to fill</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Ghost</p>
+        <svg id="ghostContainer" width="48" height="48" viewBox="0 0 256 256" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="ghostLabel">click for skull</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Heart</p>
+        <svg id="heartFireContainer" width="48" height="48" viewBox="0 0 256 256" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="heartFireLabel">click for fire</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Mood</p>
+        <svg id="faceContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faceLabel">click to frown</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Lock</p>
+        <svg id="lockContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="lockLabel">click to unlock</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Cloud</p>
+        <svg id="cloudContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="cloudLabel">click to download</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Bell</p>
+        <svg id="bellContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="bellLabel">click to mute</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Add</p>
+        <svg id="addCancelContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="addCancelLabel">click to cancel</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Cloud</p>
+        <svg id="miCloudContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="miCloudLabel">click to download</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Day</p>
+        <svg id="themeContainer2" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="themeLabel2">click for night</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Send</p>
+        <svg id="sendReplyContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="sendReplyLabel">click to reply</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Mic</p>
+        <svg id="micContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" stroke="white" fill="none"></svg>
+        <p class="hint" id="micLabel">click to mute</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Tree</p>
+        <svg id="faTreeContainer" width="42" height="48" viewBox="0 0 448 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faTreeLabel">click for snowflake</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Chess</p>
+        <svg id="faChessContainer" width="42" height="48" viewBox="0 0 448 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faChessLabel">click for queen</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Animal</p>
+        <svg id="faAnimalContainer" width="60" height="48" viewBox="0 0 640 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faAnimalLabel">click for dragon</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Bolt → Guitar</p>
+        <svg id="faBoltGuitarContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faBoltGuitarLabel">click for guitar</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Leaf → House</p>
+        <svg id="faLeafHouseContainer" width="54" height="48" viewBox="0 0 576 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="faLeafHouseLabel">click for house</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Slack → Discord</p>
+        <svg id="slackDiscordContainer" width="42" height="48" viewBox="0 0 448 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="slackDiscordLabel">click for discord</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Twitter → X</p>
+        <svg id="twitterXContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="twitterXLabel">click for X</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Vercel → Netlify</p>
+        <svg id="vercelNetlifyContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="vercelNetlifyLabel">click for netlify</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">React → Angular</p>
+        <svg id="reactAngularContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="reactAngularLabel">click for angular</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">GitHub → GitLab</p>
+        <svg id="githubGitlabContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="githubGitlabLabel">click for gitlab</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Spotify → Apple Music</p>
+        <svg id="spotifyAppleContainer" width="48" height="48" viewBox="0 0 24 24" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="spotifyAppleLabel">click for apple music</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Alien → Fire</p>
+        <svg id="alienFireContainer" width="48" height="48" viewBox="0 0 128 128" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="alienFireLabel">click for fire</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Fox → Owl</p>
+        <svg id="foxOwlContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="foxOwlLabel">click for owl</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Dragon → Skull</p>
+        <svg id="dragonSkullContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="dragonSkullLabel">click for skull</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Medusa → Skull</p>
+        <svg id="medusaSkullContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="medusaSkullLabel">click for skull</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Wings → Web</p>
+        <svg id="wingsWebContainer" width="48" height="48" viewBox="0 0 512 512" style="cursor:pointer; overflow:visible;" fill="white" stroke="none"></svg>
+        <p class="hint" id="wingsWebLabel">click for web</p>
+      </div>
     </div>
 
-    <div style="margin-top: 48px; display: flex; flex-direction: column; align-items: center;">
-      <svg id="playPause" width="80" height="80" viewBox="0 0 100 100" style="cursor:pointer; overflow:visible;">
-        <path id="playLeft"  d="M 32 22 L 55 36 L 55 64 L 32 78 Z" fill="white"/>
-        <path id="playRight" d="M 55 36 L 78 50 L 55 64 Z"          fill="white"/>
-      </svg>
-      <p id="playLabel">click to pause</p>
-    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

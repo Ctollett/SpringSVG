@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "MD UI XS";
+  src: url("./fonts/MDUIXSTrial-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  ascent-override: 100%;
+}
+
+@font-face {
+  font-family: "MD UI XS";
+  src: url("./fonts/MDUIXSTrial-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  ascent-override: 100%;
+}
+
+@font-face {
+  font-family: "MD UI XS";
+  src: url("./fonts/MDUIXSTrial-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  ascent-override: 100%;
+}
+
+#root {
+    max-width: 636px;
+    margin: 0 auto;
+    margin-top: 32px;
+}
+
+body {
+  font-family: "MD UI XS", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-synthesis: none; 
+  line-height: 1;
+}

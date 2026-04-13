@@ -6,7 +6,7 @@
     "strict": true,
     "types": ["vite/client"],
     "paths": {
-      "springsvg": ["../../packages/springsvg/src/index.ts"]
+      "ruune": ["../../packages/ruune/src/index.ts"]
     }
   },
   "include": ["src"]

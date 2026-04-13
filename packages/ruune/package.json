@@ -1,7 +1,7 @@
 {
-  "name": "springsvg",
+  "name": "ruune",
   "version": "0.1.0",
-  "description": "Spring physics-based SVG drawing animation library",
+  "description": "Spring physics-based SVG morphing library",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

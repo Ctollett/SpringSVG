@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "springsvg": "workspace:*"
+    "ruune": "workspace:*"
   },
   "devDependencies": {
     "vite": "^6.0.0"

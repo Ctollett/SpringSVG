@@ -1,11 +1,11 @@
 {
-  "name": "springsvg-monorepo",
+  "name": "ruune-monorepo",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "pnpm --filter springsvg build",
+    "build": "pnpm --filter ruune build",
     "dev": "pnpm --parallel --filter '*' dev",
-    "test": "pnpm --filter springsvg test",
+    "test": "pnpm --filter ruune test",
     "lint": "pnpm --filter '*' lint"
   }
 }

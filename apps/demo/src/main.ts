@@ -1,4 +1,4 @@
-import { morphSvg } from 'springsvg'
+import { morphSvg } from 'ruune'
 import menuSvg from './assets/menu.svg?raw'
 import closeSvg from './assets/close.svg?raw'
 import playSvg from './assets/play.svg?raw'
@@ -44,8 +44,6 @@ import faLeafSvg from './assets/fa-leaf.svg?raw'
 import faHouseSvg from './assets/fa-house.svg?raw'
 import siVercelSvg from './assets/si-vercel.svg?raw'
 import siNetlifySvg from './assets/si-netlify.svg?raw'
-import notoAlienSvg from './assets/noto-alien.svg?raw'
-import notoFireSvg from './assets/noto-fire.svg?raw'
 import giFoxHeadSvg from './assets/gi-fox-head.svg?raw'
 import giOwlSvg from './assets/gi-owl.svg?raw'
 import giDragonHeadSvg from './assets/gi-dragon-head.svg?raw'
@@ -543,19 +541,6 @@ wingsWebContainer.addEventListener('click', () => {
   wingsWebLabel.textContent = isWeb ? 'click for wings' : 'click for web'
 })
 
-// ── Alien → Fire ──────────────────────────────────────────────────────────────
-const alienFireContainer = document.getElementById('alienFireContainer') as unknown as SVGSVGElement
-const alienFireLabel = document.getElementById('alienFireLabel') as HTMLParagraphElement
-const alienFireConfig = { stiffness: 200, damping: 16, mass: 1 }
-let isFire = false
-
-morphSvg(alienFireContainer, notoAlienSvg, notoFireSvg, alienFireConfig)
-
-alienFireContainer.addEventListener('click', () => {
-  isFire = !isFire
-  morphSvg(alienFireContainer, isFire ? notoAlienSvg : notoFireSvg, isFire ? notoFireSvg : notoAlienSvg, alienFireConfig)
-  alienFireLabel.textContent = isFire ? 'click for alien' : 'click for fire'
-})
 
 // ── React → Angular ───────────────────────────────────────────────────────────
 const reactAngularContainer = document.getElementById('reactAngularContainer') as unknown as SVGSVGElement

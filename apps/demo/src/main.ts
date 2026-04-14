@@ -1,4 +1,4 @@
-import { morphSvg } from 'ruune'
+import { initMorphSvg, morphSvg } from 'ruun'
 import menuSvg from './assets/menu.svg?raw'
 import closeSvg from './assets/close.svg?raw'
 import playSvg from './assets/play.svg?raw'
@@ -81,11 +81,11 @@ const menuLabel = document.getElementById('menuLabel') as HTMLParagraphElement
 const menuConfig = { stiffness: 600, damping: 20, mass: 1 }
 let isOpen = false
 
-morphSvg(menuContainer, menuSvg, closeSvg, menuConfig)
+initMorphSvg(menuContainer, menuSvg)
 
 menuContainer.addEventListener('click', () => {
   isOpen = !isOpen
-  morphSvg(menuContainer, isOpen ? menuSvg : closeSvg, isOpen ? closeSvg : menuSvg, menuConfig)
+  morphSvg(menuContainer, isOpen ? closeSvg : menuSvg, menuConfig)
   menuLabel.textContent = isOpen ? 'click to close' : 'click to open'
 })
 
@@ -95,11 +95,11 @@ const playLabel = document.getElementById('playLabel') as HTMLParagraphElement
 const playConfig = { stiffness: 300, damping: 28, mass: 1.5 }
 let isPlaying = false
 
-morphSvg(playContainer, pauseSvg, playSvg, playConfig)
+initMorphSvg(playContainer, pauseSvg)
 
 playContainer.addEventListener('click', () => {
   isPlaying = !isPlaying
-  morphSvg(playContainer, isPlaying ? pauseSvg : playSvg, isPlaying ? playSvg : pauseSvg, playConfig)
+  morphSvg(playContainer, isPlaying ? playSvg : pauseSvg, playConfig)
   playLabel.textContent = isPlaying ? 'click to pause' : 'click to play'
 })
 
@@ -109,11 +109,11 @@ const reactionLabel = document.getElementById('reactionLabel') as HTMLParagraphE
 const reactionConfig = { stiffness: 200, damping: 15, mass: 1 }
 let isStarred = false
 
-morphSvg(reactionContainer, heartSvg, starSvg, reactionConfig)
+initMorphSvg(reactionContainer, heartSvg)
 
 reactionContainer.addEventListener('click', () => {
   isStarred = !isStarred
-  morphSvg(reactionContainer, isStarred ? heartSvg : starSvg, isStarred ? starSvg : heartSvg, reactionConfig)
+  morphSvg(reactionContainer, isStarred ? starSvg : heartSvg, reactionConfig)
   reactionLabel.textContent = isStarred ? 'click to unlike' : 'click to like'
 })
 
@@ -123,11 +123,11 @@ const volumeLabel = document.getElementById('volumeLabel') as HTMLParagraphEleme
 const volumeConfig = { stiffness: 400, damping: 22, mass: 1 }
 let isMuted = false
 
-morphSvg(volumeContainer, volume2Svg, volumeXSvg, volumeConfig)
+initMorphSvg(volumeContainer, volume2Svg)
 
 volumeContainer.addEventListener('click', () => {
   isMuted = !isMuted
-  morphSvg(volumeContainer, isMuted ? volume2Svg : volumeXSvg, isMuted ? volumeXSvg : volume2Svg, volumeConfig)
+  morphSvg(volumeContainer, isMuted ? volumeXSvg : volume2Svg, volumeConfig)
   volumeLabel.textContent = isMuted ? 'click to unmute' : 'click to mute'
 })
 
@@ -137,11 +137,11 @@ const themeLabel = document.getElementById('themeLabel') as HTMLParagraphElement
 const themeConfig = { stiffness: 250, damping: 18, mass: 1 }
 let isDark = false
 
-morphSvg(themeContainer, sunSvg, moonSvg, themeConfig)
+initMorphSvg(themeContainer, sunSvg)
 
 themeContainer.addEventListener('click', () => {
   isDark = !isDark
-  morphSvg(themeContainer, isDark ? sunSvg : moonSvg, isDark ? moonSvg : sunSvg, themeConfig)
+  morphSvg(themeContainer, isDark ? moonSvg : sunSvg, themeConfig)
   themeLabel.textContent = isDark ? 'click for light' : 'click for dark'
 })
 
@@ -151,25 +151,25 @@ const visibilityLabel = document.getElementById('visibilityLabel') as HTMLParagr
 const visibilityConfig = { stiffness: 350, damping: 20, mass: 1 }
 let isHidden = false
 
-morphSvg(visibilityContainer, eyeSvg, eyeOffSvg, visibilityConfig)
+initMorphSvg(visibilityContainer, eyeSvg)
 
 visibilityContainer.addEventListener('click', () => {
   isHidden = !isHidden
-  morphSvg(visibilityContainer, isHidden ? eyeSvg : eyeOffSvg, isHidden ? eyeOffSvg : eyeSvg, visibilityConfig)
+  morphSvg(visibilityContainer, isHidden ? eyeOffSvg : eyeSvg, visibilityConfig)
   visibilityLabel.textContent = isHidden ? 'click to show' : 'click to hide'
 })
 
-// ── Zap → Shield (fill) ───────────────────────────────────────────────────────
+// ── Zap → Shield ─────────────────────────────────────────────────────────────
 const powerContainer = document.getElementById('powerContainer') as unknown as SVGSVGElement
 const powerLabel = document.getElementById('powerLabel') as HTMLParagraphElement
 const powerConfig = { stiffness: 280, damping: 22, mass: 1 }
 let isShielded = false
 
-morphSvg(powerContainer, zapSvg, shieldSvg, powerConfig)
+initMorphSvg(powerContainer, zapSvg)
 
 powerContainer.addEventListener('click', () => {
   isShielded = !isShielded
-  morphSvg(powerContainer, isShielded ? zapSvg : shieldSvg, isShielded ? shieldSvg : zapSvg, powerConfig)
+  morphSvg(powerContainer, isShielded ? shieldSvg : zapSvg, powerConfig)
   powerLabel.textContent = isShielded ? 'click to zap' : 'click to shield'
 })
 
@@ -179,11 +179,11 @@ const toggleLabel = document.getElementById('toggleLabel') as HTMLParagraphEleme
 const toggleConfig = { stiffness: 400, damping: 8, mass: 6 }
 let isToggled = false
 
-morphSvg(toggleContainer, toggleLeftSvg, toggleRightSvg, toggleConfig)
+initMorphSvg(toggleContainer, toggleLeftSvg)
 
 toggleContainer.addEventListener('click', () => {
   isToggled = !isToggled
-  morphSvg(toggleContainer, isToggled ? toggleLeftSvg : toggleRightSvg, isToggled ? toggleRightSvg : toggleLeftSvg, toggleConfig)
+  morphSvg(toggleContainer, isToggled ? toggleRightSvg : toggleLeftSvg, toggleConfig)
   toggleLabel.textContent = isToggled ? 'click to disable' : 'click to enable'
 })
 
@@ -193,11 +193,11 @@ const thumbLabel = document.getElementById('thumbLabel') as HTMLParagraphElement
 const thumbConfig = { stiffness: 320, damping: 20, mass: 1 }
 let isDisliked = false
 
-morphSvg(thumbContainer, thumbsUpSvg, thumbsDownSvg, thumbConfig)
+initMorphSvg(thumbContainer, thumbsUpSvg)
 
 thumbContainer.addEventListener('click', () => {
   isDisliked = !isDisliked
-  morphSvg(thumbContainer, isDisliked ? thumbsUpSvg : thumbsDownSvg, isDisliked ? thumbsDownSvg : thumbsUpSvg, thumbConfig)
+  morphSvg(thumbContainer, isDisliked ? thumbsDownSvg : thumbsUpSvg, thumbConfig)
   thumbLabel.textContent = isDisliked ? 'click to like' : 'click to dislike'
 })
 
@@ -209,13 +209,11 @@ const moodLabel = document.getElementById('moodLabel') as HTMLParagraphElement
 const moodConfig = { stiffness: 260, damping: 12, mass: 1 }
 let moodIndex = 0
 
-morphSvg(moodContainer, moodFaces[0]!, moodFaces[1]!, moodConfig)
+initMorphSvg(moodContainer, moodFaces[0]!)
 
 moodContainer.addEventListener('click', () => {
-  const from = moodFaces[moodIndex]!
   moodIndex = (moodIndex + 1) % moodFaces.length
-  const to = moodFaces[moodIndex]!
-  morphSvg(moodContainer, from, to, moodConfig)
+  morphSvg(moodContainer, moodFaces[moodIndex]!, moodConfig)
   moodLabel.textContent = moodHints[moodIndex]!
 })
 
@@ -225,11 +223,11 @@ const ghostLabel = document.getElementById('ghostLabel') as HTMLParagraphElement
 const ghostConfig = { stiffness: 280, damping: 10, mass: 1 }
 let isSkull = false
 
-morphSvg(ghostContainer, phGhostSvg, phSkullSvg, ghostConfig)
+initMorphSvg(ghostContainer, phGhostSvg)
 
 ghostContainer.addEventListener('click', () => {
   isSkull = !isSkull
-  morphSvg(ghostContainer, isSkull ? phGhostSvg : phSkullSvg, isSkull ? phSkullSvg : phGhostSvg, ghostConfig)
+  morphSvg(ghostContainer, isSkull ? phSkullSvg : phGhostSvg, ghostConfig)
   ghostLabel.textContent = isSkull ? 'click for ghost' : 'click for skull'
 })
 
@@ -239,11 +237,11 @@ const heartFireLabel = document.getElementById('heartFireLabel') as HTMLParagrap
 const heartFireConfig = { stiffness: 240, damping: 16, mass: 1 }
 let isOnFire = false
 
-morphSvg(heartFireContainer, phHeartSvg, phFireSvg, heartFireConfig)
+initMorphSvg(heartFireContainer, phHeartSvg)
 
 heartFireContainer.addEventListener('click', () => {
   isOnFire = !isOnFire
-  morphSvg(heartFireContainer, isOnFire ? phHeartSvg : phFireSvg, isOnFire ? phFireSvg : phHeartSvg, heartFireConfig)
+  morphSvg(heartFireContainer, isOnFire ? phFireSvg : phHeartSvg, heartFireConfig)
   heartFireLabel.textContent = isOnFire ? 'click for heart' : 'click for fire'
 })
 
@@ -253,11 +251,11 @@ const faceLabel = document.getElementById('faceLabel') as HTMLParagraphElement
 const faceConfig = { stiffness: 320, damping: 22, mass: 1 }
 let isFrowning = false
 
-morphSvg(faceContainer, hiFaceSmileSvg, hiFaceFrownSvg, faceConfig)
+initMorphSvg(faceContainer, hiFaceSmileSvg)
 
 faceContainer.addEventListener('click', () => {
   isFrowning = !isFrowning
-  morphSvg(faceContainer, isFrowning ? hiFaceSmileSvg : hiFaceFrownSvg, isFrowning ? hiFaceFrownSvg : hiFaceSmileSvg, faceConfig)
+  morphSvg(faceContainer, isFrowning ? hiFaceFrownSvg : hiFaceSmileSvg, faceConfig)
   faceLabel.textContent = isFrowning ? 'click to smile' : 'click to frown'
 })
 
@@ -267,11 +265,11 @@ const lockLabel = document.getElementById('lockLabel') as HTMLParagraphElement
 const lockConfig = { stiffness: 400, damping: 22, mass: 1 }
 let isLocked = true
 
-morphSvg(lockContainer, hiLockClosedSvg, hiLockOpenSvg, lockConfig)
+initMorphSvg(lockContainer, hiLockClosedSvg)
 
 lockContainer.addEventListener('click', () => {
   isLocked = !isLocked
-  morphSvg(lockContainer, isLocked ? hiLockOpenSvg : hiLockClosedSvg, isLocked ? hiLockClosedSvg : hiLockOpenSvg, lockConfig)
+  morphSvg(lockContainer, isLocked ? hiLockClosedSvg : hiLockOpenSvg, lockConfig)
   lockLabel.textContent = isLocked ? 'click to unlock' : 'click to lock'
 })
 
@@ -281,11 +279,11 @@ const cloudLabel = document.getElementById('cloudLabel') as HTMLParagraphElement
 const cloudConfig = { stiffness: 300, damping: 20, mass: 1 }
 let isDownload = false
 
-morphSvg(cloudContainer, hiCloudUpSvg, hiCloudDownSvg, cloudConfig)
+initMorphSvg(cloudContainer, hiCloudUpSvg)
 
 cloudContainer.addEventListener('click', () => {
   isDownload = !isDownload
-  morphSvg(cloudContainer, isDownload ? hiCloudUpSvg : hiCloudDownSvg, isDownload ? hiCloudDownSvg : hiCloudUpSvg, cloudConfig)
+  morphSvg(cloudContainer, isDownload ? hiCloudDownSvg : hiCloudUpSvg, cloudConfig)
   cloudLabel.textContent = isDownload ? 'click to upload' : 'click to download'
 })
 
@@ -295,11 +293,11 @@ const bellLabel = document.getElementById('bellLabel') as HTMLParagraphElement
 const bellConfig = { stiffness: 350, damping: 24, mass: 1 }
 let isBellMuted = false
 
-morphSvg(bellContainer, hiBellSvg, hiBellSlashSvg, bellConfig)
+initMorphSvg(bellContainer, hiBellSvg)
 
 bellContainer.addEventListener('click', () => {
   isBellMuted = !isBellMuted
-  morphSvg(bellContainer, isBellMuted ? hiBellSvg : hiBellSlashSvg, isBellMuted ? hiBellSlashSvg : hiBellSvg, bellConfig)
+  morphSvg(bellContainer, isBellMuted ? hiBellSlashSvg : hiBellSvg, bellConfig)
   bellLabel.textContent = isBellMuted ? 'click to unmute' : 'click to mute'
 })
 
@@ -309,11 +307,11 @@ const addCancelLabel = document.getElementById('addCancelLabel') as HTMLParagrap
 const addCancelConfig = { stiffness: 400, damping: 20, mass: 1 }
 let isCancelled = false
 
-morphSvg(addCancelContainer, miAddCircleSvg, miCancelSvg, addCancelConfig)
+initMorphSvg(addCancelContainer, miAddCircleSvg)
 
 addCancelContainer.addEventListener('click', () => {
   isCancelled = !isCancelled
-  morphSvg(addCancelContainer, isCancelled ? miAddCircleSvg : miCancelSvg, isCancelled ? miCancelSvg : miAddCircleSvg, addCancelConfig)
+  morphSvg(addCancelContainer, isCancelled ? miCancelSvg : miAddCircleSvg, addCancelConfig)
   addCancelLabel.textContent = isCancelled ? 'click to add' : 'click to cancel'
 })
 
@@ -323,11 +321,11 @@ const miCloudLabel = document.getElementById('miCloudLabel') as HTMLParagraphEle
 const miCloudConfig = { stiffness: 300, damping: 22, mass: 1 }
 let miIsDownload = false
 
-morphSvg(miCloudContainer, miCloudUploadSvg, miCloudDownloadSvg, miCloudConfig)
+initMorphSvg(miCloudContainer, miCloudUploadSvg)
 
 miCloudContainer.addEventListener('click', () => {
   miIsDownload = !miIsDownload
-  morphSvg(miCloudContainer, miIsDownload ? miCloudUploadSvg : miCloudDownloadSvg, miIsDownload ? miCloudDownloadSvg : miCloudUploadSvg, miCloudConfig)
+  morphSvg(miCloudContainer, miIsDownload ? miCloudDownloadSvg : miCloudUploadSvg, miCloudConfig)
   miCloudLabel.textContent = miIsDownload ? 'click to upload' : 'click to download'
 })
 
@@ -337,11 +335,11 @@ const themeLabel2 = document.getElementById('themeLabel2') as HTMLParagraphEleme
 const themeConfig2 = { stiffness: 220, damping: 18, mass: 1 }
 let isNight = false
 
-morphSvg(themeContainer2, miSunnySvg, miNightlightSvg, themeConfig2)
+initMorphSvg(themeContainer2, miSunnySvg)
 
 themeContainer2.addEventListener('click', () => {
   isNight = !isNight
-  morphSvg(themeContainer2, isNight ? miSunnySvg : miNightlightSvg, isNight ? miNightlightSvg : miSunnySvg, themeConfig2)
+  morphSvg(themeContainer2, isNight ? miNightlightSvg : miSunnySvg, themeConfig2)
   themeLabel2.textContent = isNight ? 'click for day' : 'click for night'
 })
 
@@ -351,11 +349,11 @@ const sendReplyLabel = document.getElementById('sendReplyLabel') as HTMLParagrap
 const sendReplyConfig = { stiffness: 350, damping: 20, mass: 1 }
 let isReplying = false
 
-morphSvg(sendReplyContainer, miSendSvg, miReplySvg, sendReplyConfig)
+initMorphSvg(sendReplyContainer, miSendSvg)
 
 sendReplyContainer.addEventListener('click', () => {
   isReplying = !isReplying
-  morphSvg(sendReplyContainer, isReplying ? miSendSvg : miReplySvg, isReplying ? miReplySvg : miSendSvg, sendReplyConfig)
+  morphSvg(sendReplyContainer, isReplying ? miReplySvg : miSendSvg, sendReplyConfig)
   sendReplyLabel.textContent = isReplying ? 'click to send' : 'click to reply'
 })
 
@@ -365,11 +363,11 @@ const micLabel = document.getElementById('micLabel') as HTMLParagraphElement
 const micConfig = { stiffness: 320, damping: 22, mass: 1 }
 let isMicMuted = false
 
-morphSvg(micContainer, miMicSvg, miMicOffSvg, micConfig)
+initMorphSvg(micContainer, miMicSvg)
 
 micContainer.addEventListener('click', () => {
   isMicMuted = !isMicMuted
-  morphSvg(micContainer, isMicMuted ? miMicSvg : miMicOffSvg, isMicMuted ? miMicOffSvg : miMicSvg, micConfig)
+  morphSvg(micContainer, isMicMuted ? miMicOffSvg : miMicSvg, micConfig)
   micLabel.textContent = isMicMuted ? 'click to unmute' : 'click to mute'
 })
 
@@ -379,11 +377,11 @@ const cpuLabel = document.getElementById('cpuLabel') as HTMLParagraphElement
 const cpuConfig = { stiffness: 300, damping: 24, mass: 1 }
 let isCpuFilled = false
 
-morphSvg(cpuContainer, cpuSvg, cpuFillSvg, cpuConfig)
+initMorphSvg(cpuContainer, cpuSvg)
 
 cpuContainer.addEventListener('click', () => {
   isCpuFilled = !isCpuFilled
-  morphSvg(cpuContainer, isCpuFilled ? cpuSvg : cpuFillSvg, isCpuFilled ? cpuFillSvg : cpuSvg, cpuConfig)
+  morphSvg(cpuContainer, isCpuFilled ? cpuFillSvg : cpuSvg, cpuConfig)
   cpuLabel.textContent = isCpuFilled ? 'click for outline' : 'click to fill'
 })
 
@@ -393,11 +391,11 @@ const faTreeLabel = document.getElementById('faTreeLabel') as HTMLParagraphEleme
 const faTreeConfig = { stiffness: 260, damping: 18, mass: 1 }
 let isSnowflake = false
 
-morphSvg(faTreeContainer, faTreeSvg, faSnowflakeSvg, faTreeConfig)
+initMorphSvg(faTreeContainer, faTreeSvg)
 
 faTreeContainer.addEventListener('click', () => {
   isSnowflake = !isSnowflake
-  morphSvg(faTreeContainer, isSnowflake ? faTreeSvg : faSnowflakeSvg, isSnowflake ? faSnowflakeSvg : faTreeSvg, faTreeConfig)
+  morphSvg(faTreeContainer, isSnowflake ? faSnowflakeSvg : faTreeSvg, faTreeConfig)
   faTreeLabel.textContent = isSnowflake ? 'click for tree' : 'click for snowflake'
 })
 
@@ -407,11 +405,11 @@ const faChessLabel = document.getElementById('faChessLabel') as HTMLParagraphEle
 const faChessConfig = { stiffness: 300, damping: 20, mass: 1 }
 let isChessQueen = false
 
-morphSvg(faChessContainer, faChessKnightSvg, faChessQueenSvg, faChessConfig)
+initMorphSvg(faChessContainer, faChessKnightSvg)
 
 faChessContainer.addEventListener('click', () => {
   isChessQueen = !isChessQueen
-  morphSvg(faChessContainer, isChessQueen ? faChessKnightSvg : faChessQueenSvg, isChessQueen ? faChessQueenSvg : faChessKnightSvg, faChessConfig)
+  morphSvg(faChessContainer, isChessQueen ? faChessQueenSvg : faChessKnightSvg, faChessConfig)
   faChessLabel.textContent = isChessQueen ? 'click for knight' : 'click for queen'
 })
 
@@ -421,11 +419,11 @@ const faAnimalLabel = document.getElementById('faAnimalLabel') as HTMLParagraphE
 const faAnimalConfig = { stiffness: 280, damping: 16, mass: 1 }
 let isDragon = false
 
-morphSvg(faAnimalContainer, faDogSvg, faDragonSvg, faAnimalConfig)
+initMorphSvg(faAnimalContainer, faDogSvg)
 
 faAnimalContainer.addEventListener('click', () => {
   isDragon = !isDragon
-  morphSvg(faAnimalContainer, isDragon ? faDogSvg : faDragonSvg, isDragon ? faDragonSvg : faDogSvg, faAnimalConfig)
+  morphSvg(faAnimalContainer, isDragon ? faDragonSvg : faDogSvg, faAnimalConfig)
   faAnimalLabel.textContent = isDragon ? 'click for dog' : 'click for dragon'
 })
 
@@ -435,11 +433,11 @@ const faBoltGuitarLabel = document.getElementById('faBoltGuitarLabel') as HTMLPa
 const faBoltGuitarConfig = { stiffness: 240, damping: 18, mass: 1 }
 let isGuitar = false
 
-morphSvg(faBoltGuitarContainer, faBoltSvg, faGuitarSvg, faBoltGuitarConfig)
+initMorphSvg(faBoltGuitarContainer, faBoltSvg)
 
 faBoltGuitarContainer.addEventListener('click', () => {
   isGuitar = !isGuitar
-  morphSvg(faBoltGuitarContainer, isGuitar ? faBoltSvg : faGuitarSvg, isGuitar ? faGuitarSvg : faBoltSvg, faBoltGuitarConfig)
+  morphSvg(faBoltGuitarContainer, isGuitar ? faGuitarSvg : faBoltSvg, faBoltGuitarConfig)
   faBoltGuitarLabel.textContent = isGuitar ? 'click for bolt' : 'click for guitar'
 })
 
@@ -449,11 +447,11 @@ const faLeafHouseLabel = document.getElementById('faLeafHouseLabel') as HTMLPara
 const faLeafHouseConfig = { stiffness: 220, damping: 20, mass: 1 }
 let isHouse = false
 
-morphSvg(faLeafHouseContainer, faLeafSvg, faHouseSvg, faLeafHouseConfig)
+initMorphSvg(faLeafHouseContainer, faLeafSvg)
 
 faLeafHouseContainer.addEventListener('click', () => {
   isHouse = !isHouse
-  morphSvg(faLeafHouseContainer, isHouse ? faLeafSvg : faHouseSvg, isHouse ? faHouseSvg : faLeafSvg, faLeafHouseConfig)
+  morphSvg(faLeafHouseContainer, isHouse ? faHouseSvg : faLeafSvg, faLeafHouseConfig)
   faLeafHouseLabel.textContent = isHouse ? 'click for leaf' : 'click for house'
 })
 
@@ -463,11 +461,11 @@ const vercelNetlifyLabel = document.getElementById('vercelNetlifyLabel') as HTML
 const vercelNetlifyConfig = { stiffness: 280, damping: 20, mass: 1 }
 let isNetlify = false
 
-morphSvg(vercelNetlifyContainer, siVercelSvg, siNetlifySvg, vercelNetlifyConfig)
+initMorphSvg(vercelNetlifyContainer, siVercelSvg)
 
 vercelNetlifyContainer.addEventListener('click', () => {
   isNetlify = !isNetlify
-  morphSvg(vercelNetlifyContainer, isNetlify ? siVercelSvg : siNetlifySvg, isNetlify ? siNetlifySvg : siVercelSvg, vercelNetlifyConfig)
+  morphSvg(vercelNetlifyContainer, isNetlify ? siNetlifySvg : siVercelSvg, vercelNetlifyConfig)
   vercelNetlifyLabel.textContent = isNetlify ? 'click for vercel' : 'click for netlify'
 })
 
@@ -477,11 +475,11 @@ const slackDiscordLabel = document.getElementById('slackDiscordLabel') as HTMLPa
 const slackDiscordConfig = { stiffness: 260, damping: 20, mass: 1 }
 let isDiscord = false
 
-morphSvg(slackDiscordContainer, faSlackSvg, siDiscordSvg, slackDiscordConfig)
+initMorphSvg(slackDiscordContainer, faSlackSvg)
 
 slackDiscordContainer.addEventListener('click', () => {
   isDiscord = !isDiscord
-  morphSvg(slackDiscordContainer, isDiscord ? faSlackSvg : siDiscordSvg, isDiscord ? siDiscordSvg : faSlackSvg, slackDiscordConfig)
+  morphSvg(slackDiscordContainer, isDiscord ? siDiscordSvg : faSlackSvg, slackDiscordConfig)
   slackDiscordLabel.textContent = isDiscord ? 'click for slack' : 'click for discord'
 })
 
@@ -491,11 +489,11 @@ const foxOwlLabel = document.getElementById('foxOwlLabel') as HTMLParagraphEleme
 const foxOwlConfig = { stiffness: 180, damping: 18, mass: 1 }
 let isOwl = false
 
-morphSvg(foxOwlContainer, giFoxHeadSvg, giOwlSvg, foxOwlConfig)
+initMorphSvg(foxOwlContainer, giFoxHeadSvg)
 
 foxOwlContainer.addEventListener('click', () => {
   isOwl = !isOwl
-  morphSvg(foxOwlContainer, isOwl ? giFoxHeadSvg : giOwlSvg, isOwl ? giOwlSvg : giFoxHeadSvg, foxOwlConfig)
+  morphSvg(foxOwlContainer, isOwl ? giOwlSvg : giFoxHeadSvg, foxOwlConfig)
   foxOwlLabel.textContent = isOwl ? 'click for fox' : 'click for owl'
 })
 
@@ -505,25 +503,24 @@ const dragonSkullLabel = document.getElementById('dragonSkullLabel') as HTMLPara
 const dragonSkullConfig = { stiffness: 160, damping: 16, mass: 1 }
 let isHornedSkull = false
 
-morphSvg(dragonSkullContainer, giDragonHeadSvg, giHornedSkullSvg, dragonSkullConfig)
+initMorphSvg(dragonSkullContainer, giDragonHeadSvg)
 
 dragonSkullContainer.addEventListener('click', () => {
   isHornedSkull = !isHornedSkull
-  morphSvg(dragonSkullContainer, isHornedSkull ? giDragonHeadSvg : giHornedSkullSvg, isHornedSkull ? giHornedSkullSvg : giDragonHeadSvg, dragonSkullConfig)
+  morphSvg(dragonSkullContainer, isHornedSkull ? giHornedSkullSvg : giDragonHeadSvg, dragonSkullConfig)
   dragonSkullLabel.textContent = isHornedSkull ? 'click for dragon' : 'click for skull'
 })
 
 // ── Medusa → Crowned Skull ────────────────────────────────────────────────────
 const medusaSkullContainer = document.getElementById('medusaSkullContainer') as unknown as SVGSVGElement
 const medusaSkullLabel = document.getElementById('medusaSkullLabel') as HTMLParagraphElement
-const medusaSkullConfig = { stiffness: 140, damping: 14, mass: 1 }
 let isMedusaSkull = false
 
-morphSvg(medusaSkullContainer, giMedusaHeadSvg, giCrownedSkullSvg, 'bouncy')
+initMorphSvg(medusaSkullContainer, giMedusaHeadSvg)
 
 medusaSkullContainer.addEventListener('click', () => {
   isMedusaSkull = !isMedusaSkull
-  morphSvg(medusaSkullContainer, isMedusaSkull ? giMedusaHeadSvg : giCrownedSkullSvg, isMedusaSkull ? giCrownedSkullSvg : giMedusaHeadSvg, 'bouncy')
+  morphSvg(medusaSkullContainer, isMedusaSkull ? giCrownedSkullSvg : giMedusaHeadSvg, 'bouncy')
   medusaSkullLabel.textContent = isMedusaSkull ? 'click for medusa' : 'click for skull'
 })
 
@@ -533,14 +530,13 @@ const wingsWebLabel = document.getElementById('wingsWebLabel') as HTMLParagraphE
 const wingsWebConfig = { stiffness: 120, damping: 14, mass: 1 }
 let isWeb = false
 
-morphSvg(wingsWebContainer, giAngelWingsSvg, giSpiderWebSvg, wingsWebConfig)
+initMorphSvg(wingsWebContainer, giAngelWingsSvg)
 
 wingsWebContainer.addEventListener('click', () => {
   isWeb = !isWeb
-  morphSvg(wingsWebContainer, isWeb ? giAngelWingsSvg : giSpiderWebSvg, isWeb ? giSpiderWebSvg : giAngelWingsSvg, wingsWebConfig)
+  morphSvg(wingsWebContainer, isWeb ? giSpiderWebSvg : giAngelWingsSvg, wingsWebConfig)
   wingsWebLabel.textContent = isWeb ? 'click for wings' : 'click for web'
 })
-
 
 // ── React → Angular ───────────────────────────────────────────────────────────
 const reactAngularContainer = document.getElementById('reactAngularContainer') as unknown as SVGSVGElement
@@ -548,11 +544,11 @@ const reactAngularLabel = document.getElementById('reactAngularLabel') as HTMLPa
 const reactAngularConfig = { stiffness: 280, damping: 20, mass: 1 }
 let isAngular = false
 
-morphSvg(reactAngularContainer, siReactSvg, siAngularSvg, reactAngularConfig)
+initMorphSvg(reactAngularContainer, siReactSvg)
 
 reactAngularContainer.addEventListener('click', () => {
   isAngular = !isAngular
-  morphSvg(reactAngularContainer, isAngular ? siReactSvg : siAngularSvg, isAngular ? siAngularSvg : siReactSvg, reactAngularConfig)
+  morphSvg(reactAngularContainer, isAngular ? siAngularSvg : siReactSvg, reactAngularConfig)
   reactAngularLabel.textContent = isAngular ? 'click for react' : 'click for angular'
 })
 
@@ -562,11 +558,11 @@ const githubGitlabLabel = document.getElementById('githubGitlabLabel') as HTMLPa
 const githubGitlabConfig = { stiffness: 300, damping: 22, mass: 1 }
 let isGitlab = false
 
-morphSvg(githubGitlabContainer, siGithubSvg, siGitlabSvg, githubGitlabConfig)
+initMorphSvg(githubGitlabContainer, siGithubSvg)
 
 githubGitlabContainer.addEventListener('click', () => {
   isGitlab = !isGitlab
-  morphSvg(githubGitlabContainer, isGitlab ? siGithubSvg : siGitlabSvg, isGitlab ? siGitlabSvg : siGithubSvg, githubGitlabConfig)
+  morphSvg(githubGitlabContainer, isGitlab ? siGitlabSvg : siGithubSvg, githubGitlabConfig)
   githubGitlabLabel.textContent = isGitlab ? 'click for github' : 'click for gitlab'
 })
 
@@ -576,11 +572,11 @@ const spotifyAppleLabel = document.getElementById('spotifyAppleLabel') as HTMLPa
 const spotifyAppleConfig = { stiffness: 260, damping: 18, mass: 1 }
 let isAppleMusic = false
 
-morphSvg(spotifyAppleContainer, siSpotifySvg, siAppleMusicSvg, spotifyAppleConfig)
+initMorphSvg(spotifyAppleContainer, siSpotifySvg)
 
 spotifyAppleContainer.addEventListener('click', () => {
   isAppleMusic = !isAppleMusic
-  morphSvg(spotifyAppleContainer, isAppleMusic ? siSpotifySvg : siAppleMusicSvg, isAppleMusic ? siAppleMusicSvg : siSpotifySvg, spotifyAppleConfig)
+  morphSvg(spotifyAppleContainer, isAppleMusic ? siAppleMusicSvg : siSpotifySvg, spotifyAppleConfig)
   spotifyAppleLabel.textContent = isAppleMusic ? 'click for spotify' : 'click for apple music'
 })
 
@@ -590,10 +586,10 @@ const twitterXLabel = document.getElementById('twitterXLabel') as HTMLParagraphE
 const twitterXConfig = { stiffness: 300, damping: 18, mass: 1 }
 let isX = false
 
-morphSvg(twitterXContainer, faTwitterSvg, siXSvg, twitterXConfig)
+initMorphSvg(twitterXContainer, faTwitterSvg)
 
 twitterXContainer.addEventListener('click', () => {
   isX = !isX
-  morphSvg(twitterXContainer, isX ? faTwitterSvg : siXSvg, isX ? siXSvg : faTwitterSvg, twitterXConfig)
+  morphSvg(twitterXContainer, isX ? siXSvg : faTwitterSvg, twitterXConfig)
   twitterXLabel.textContent = isX ? 'click for bird' : 'click for X'
 })

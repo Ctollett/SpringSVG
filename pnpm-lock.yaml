@@ -10,7 +10,7 @@ importers:
 
   apps/demo:
     dependencies:
-      ruune:
+      ruun:
         specifier: workspace:*
         version: link:../../packages/ruune
     devDependencies:
@@ -20,15 +20,21 @@ importers:
 
   apps/site:
     dependencies:
+      lucide-react:
+        specifier: ^1.8.0
+        version: 1.8.0(react@19.2.5)
       react:
         specifier: ^19.2.4
         version: 19.2.5
       react-dom:
         specifier: ^19.2.4
         version: 19.2.5(react@19.2.5)
-      ruune:
+      ruun:
         specifier: workspace:*
         version: link:../../packages/ruune
+      ruun-react:
+        specifier: workspace:*
+        version: link:../../packages/ruune-react
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.4
@@ -93,6 +99,25 @@ importers:
       vitest:
         specifier: ^4.1.0
         version: 4.1.0(@types/node@24.12.2)(jsdom@29.0.0)(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.4)(jiti@2.6.1))
+
+  packages/ruune-react:
+    dependencies:
+      ruun:
+        specifier: workspace:*
+        version: link:../ruune
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.14
+        version: 19.2.14
+      react:
+        specifier: ^19.2.4
+        version: 19.2.5
+      tsup:
+        specifier: ^8.5.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.8)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -1666,6 +1691,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-react@1.8.0:
+    resolution: {integrity: sha512-WuvlsjngSk7TnTBJ1hsCy3ql9V9VOdcPkd3PKcSmM34vJD8KG6molxz7m7zbYFgICwsanQWmJ13JlYs4Zp7Arw==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -3506,6 +3536,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-react@1.8.0(react@19.2.5):
+    dependencies:
+      react: 19.2.5
 
   magic-string@0.30.21:
     dependencies:

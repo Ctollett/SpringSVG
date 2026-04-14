@@ -21,7 +21,8 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "ruune": ["../../packages/ruune/src/index.ts"]
+      "ruun": ["../../packages/ruun/src/index.ts"],
+      "ruun-react": ["../../packages/ruune-react/src/index.ts"]
     }
   },
   "include": ["src"]

@@ -6,7 +6,7 @@
     "strict": true,
     "types": ["vite/client"],
     "paths": {
-      "ruune": ["../../packages/ruune/src/index.ts"]
+      "ruun": ["../../packages/ruun/src/index.ts"]
     }
   },
   "include": ["src"]

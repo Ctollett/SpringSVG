@@ -1,11 +1,11 @@
 {
-  "name": "ruune-monorepo",
+  "name": "ruun-monorepo",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "pnpm --filter ruune build",
+    "build": "pnpm --filter ruun build",
     "dev": "pnpm --parallel --filter '*' dev",
-    "test": "pnpm --filter ruune test",
+    "test": "pnpm --filter ruun test",
     "lint": "pnpm --filter '*' lint"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "ruun",
+  "name": "ruun-react",
   "version": "0.1.0",
-  "description": "Spring physics-based SVG morphing library",
+  "description": "React wrapper for the Ruune SVG morphing library",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -19,26 +19,19 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "vitest",
-    "test:coverage": "vitest --coverage",
-    "lint": "biome check ./src",
-    "format": "biome format --write ./src",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "svg",
-    "animation",
-    "spring",
-    "physics",
-    "drawing"
-  ],
-  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "ruun": "workspace:*"
+  },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.7",
-    "@vitest/coverage-v8": "^4.1.0",
-    "jsdom": "^29.0.0",
+    "@types/react": "^19.2.14",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
-  }
+    "react": "^19.2.4"
+  },
+  "license": "MIT"
 }

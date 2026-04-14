@@ -13,38 +13,39 @@ function containerViewBox(container: SVGSVGElement): [number, number, number, nu
     return [parts[0] ?? 0, parts[1] ?? 0, parts[2] ?? 100, parts[3] ?? 100]
 }
 
-export function morphSvg(
+export function initMorphSvg(
     container: SVGSVGElement,
     fromSvg: string,
-    toSvg: string,
-    config: SpringConfig | string = 'smooth'
 ): void {
     const toVB = containerViewBox(container)
     const fromVB = parseViewBox(fromSvg)
-    const targetVB = parseViewBox(toSvg)
-
     const fromPaths = parseSvgPaths(fromSvg)
-    const toPaths = parseSvgPaths(toSvg)
-
     const scaledFrom = fromPaths.map(p => scaleD(p.d, fromVB, toVB))
-    const scaledTo   = toPaths.map(p => scaleD(p.d, targetVB, toVB))
 
-    // If container is empty, initialise it with the from paths
-    const existing = Array.from(container.querySelectorAll('path')) as SVGPathElement[]
-    if (existing.length === 0) {
-        for (const { attrs } of fromPaths) {
-            const el = document.createElementNS('http://www.w3.org/2000/svg', 'path') as SVGPathElement
-            for (const attr of ATTRS) {
-                const val = attrs[attr]
-                if (val) el.setAttribute(attr, val)
-            }
-            container.appendChild(el)
+    for (const { attrs } of fromPaths) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', 'path') as SVGPathElement
+        for (const attr of ATTRS) {
+            const val = attrs[attr]
+            if (val) el.setAttribute(attr, val)
         }
-        const els = Array.from(container.querySelectorAll('path')) as SVGPathElement[]
-        els.forEach((el, i) => el.setAttribute('d', scaledFrom[i] ?? ''))
-        return
+        container.appendChild(el)
     }
 
+    const els = Array.from(container.querySelectorAll('path')) as SVGPathElement[]
+    els.forEach((el, i) => el.setAttribute('d', scaledFrom[i] ?? ''))
+}
+
+export function morphSvg(
+    container: SVGSVGElement,
+    toSvg: string,
+    config: SpringConfig | string = 'smooth',
+): void {
+    const toVB = containerViewBox(container)
+    const targetVB = parseViewBox(toSvg)
+    const toPaths = parseSvgPaths(toSvg)
+    const scaledTo = toPaths.map(p => scaleD(p.d, targetVB, toVB))
+
+    const existing = Array.from(container.querySelectorAll('path')) as SVGPathElement[]
     const existingCount = existing.length
 
     // Add new elements if target has more paths than source
@@ -63,18 +64,16 @@ export function morphSvg(
 
     // Morph each element — extras collapse into the last target path
     const lastTarget = scaledTo[scaledTo.length - 1]!
-      const resolvedConfig = (typeof config === 'string' ? PRESETS[config] : config) ?? PRESETS.smooth!
+    const resolvedConfig = (typeof config === 'string' ? PRESETS[config] : config) ?? PRESETS.smooth!
     existing.forEach((el, i) => {
         const isExtra = i >= scaledTo.length
         const isNew = i >= existingCount
         const wasHidden = el.style.opacity === '0'
 
         if (isExtra) {
-            // Fade out redundant elements — instant hide causes a visible pop
             el.style.transition = 'opacity 0.3s ease'
             el.style.opacity = '0'
         } else if (isNew || wasHidden) {
-            // Fade in elements that are starting from a collapsed/hidden position
             requestAnimationFrame(() => {
                 el.style.transition = 'opacity 0.4s ease 0.1s'
                 el.style.opacity = '1'

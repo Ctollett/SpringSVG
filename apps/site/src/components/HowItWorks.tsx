@@ -3,6 +3,13 @@ import giOwlSvg from '../assets/gi-owl.svg?raw'
 import { RuunSVG } from 'ruun-react'
 import {useRef, useEffect, useState} from 'react'
 
+const howData = [
+  { num: '01', title: 'Any SVG. No Prep', description: 'Pass any SVG path directly, drawn in Figma, exported from Illustrator, or hand-coded. Ruun normalizes mismatched points automatically.'},
+  { num: '02', title: 'One Function Call', description: 'morphSvg(element, fromSvg, toSvg) is the entire API. Trigger it on click, scroll, hover, or any event your UI already handles.'},
+  { num: '03', title: 'Accessible by Default.', description: 'Detects  prefers-reduced-motion automatically. Users who need reduced motion get an instant swap. No animation, no jarring transitions.'},
+  { num: '04', title: 'Real Spring Physics.', description: 'morphSvg(element, fromSvg, toSvg) is the entire API. Trigger it on click, scroll, hover, or any event your UI already handles.'}
+]
+
 function FeatureCard({num, title, description}) {
   const [isActive, setIsActive] = useState(false)
   const svgContainerRef = useRef<HTMLDivElement>(null)
@@ -12,6 +19,7 @@ function FeatureCard({num, title, description}) {
     let timer: ReturnType<typeof setTimeout> | null = null
     const observer = new IntersectionObserver(
       ([entry]) => {
+          clearTimeout(timer)
         timer = setTimeout(() => {
           setIsActive(entry.isIntersecting)
         }, 300)
@@ -48,7 +56,7 @@ function FeatureCard({num, title, description}) {
           backgroundPosition: '12px 12px',
         }}
       >
-        <RuunSVG className="w-[160px] h-[196px]" from={giFoxHeadSvg} to={giOwlSvg} active={isActive} />
+        <RuunSVG className="w-[108px] h-[108px]" from={giFoxHeadSvg} to={giOwlSvg} active={isActive} />
       </div>
     </div>
   )
@@ -77,12 +85,13 @@ export default function HowItWorks() {
       </div>
       <div className='flex flex-col gap-16'>
       <div>
-        <FeatureCard num="01" title="Any SVG. No Prep." description="Pass any SVG path directly, drawn in Figma, exported from Illustrator, or hand-coded. Ruun normalizes mismatched points automatically."/>
+        <FeatureCard {...howData[0]} />
       </div>
        <div className='grid grid-cols-3 gap-16'>
-        <SmallCard num="01" title="Any SVG. No Prep." description="Pass any SVG path directly, drawn in Figma, exported from Illustrator, or hand-coded. Ruun normalizes mismatched points automatically."/>
-         <SmallCard num="01" title="Any SVG. No Prep." description="Pass any SVG path directly, drawn in Figma, exported from Illustrator, or hand-coded. Ruun normalizes mismatched points automatically."/>
-          <SmallCard num="01" title="Any SVG. No Prep." description="Pass any SVG path directly, drawn in Figma, exported from Illustrator, or hand-coded. Ruun normalizes mismatched points automatically."/>
+        {howData.slice(1).map((data ) => (
+        <SmallCard key={data.num} {...data}/>
+        ))}
+        
        </div>
        </div>
     </section>

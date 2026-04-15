@@ -4,7 +4,7 @@ import { parseViewBox, scaleD } from "../svg/viewbox";
 import { parseSvgPaths } from "./parseSvg";
 import { PRESETS } from "./presets";
 
-const ATTRS = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule']
+const ATTRS = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'opacity']
 
 function containerViewBox(container: SVGSVGElement): [number, number, number, number] {
     const vb = container.getAttribute('viewBox')
@@ -17,6 +17,7 @@ export function initMorphSvg(
     container: SVGSVGElement,
     fromSvg: string,
 ): void {
+    if (container.querySelectorAll('path').length > 0) return
     const toVB = containerViewBox(container)
     const fromVB = parseViewBox(fromSvg)
     const fromPaths = parseSvgPaths(fromSvg)

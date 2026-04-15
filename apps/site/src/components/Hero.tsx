@@ -3,7 +3,7 @@ import CopyIcon from '../assets/lucide/copy.svg'
 
 export default function Hero() {
   return (
-    <div className="flex flex-col h-[85vh] w-full justify-center items-center">
+    <section className="flex flex-col h-[85vh] w-full justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="">
         <p className="text-[24px] text-center leading-[40px]">Ruun is an SVG animation library powered by spring physics, built for any framework, any SVG</p>
@@ -14,6 +14,6 @@ export default function Hero() {
         </div>
       </div>
 
-    </div>
+    </section>
   )
 }

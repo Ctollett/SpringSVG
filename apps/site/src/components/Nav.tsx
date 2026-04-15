@@ -9,7 +9,7 @@ export default function Nav() {
   }
 
   return (
-    <div className="flex flex-row justify-between items-center h-16">
+    <nav className="flex flex-row justify-between items-center h-16">
       <p className="m-0 self-center text-[18px] leading-none font-semibold">Ruun.</p>
       <ul className="flex leading-none items-center gap-8 text-[12px] font-thin p-0">
         <li onClick={(()=> handleActiveState('Home'))} className="flex items-center cursor-pointer gap-2">
@@ -21,6 +21,6 @@ export default function Nav() {
           <div>Docs</div>
           </li>
       </ul>
-    </div>
+    </nav>
   )
 }

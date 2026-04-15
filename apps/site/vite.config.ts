@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      ruune: resolve(__dirname, '../../packages/ruune/src/index.ts')
+      ruun: resolve(__dirname, '../../packages/ruune/src/index.ts'),
+      'ruun-react': resolve(__dirname, '../../packages/ruune-react/src/index.ts'),
     }
   }
 })

@@ -61,8 +61,8 @@ import folderSvg from '../assets/lucide/folder.svg?raw'
 import folderOpenSvg from '../assets/lucide/folder-open.svg?raw'
 import imageSvg from '../assets/lucide/image.svg?raw'
 import imageOffSvg from '../assets/lucide/image-off.svg?raw'
-import smileSvg from '../assets/lucide/smile.svg?raw'
-import frownSvg from '../assets/lucide/frown.svg?raw'
+import flagSvg from '../assets/lucide/flag.svg?raw'
+import flagOffSvg from '../assets/lucide/flag-off.svg?raw'
 import coffeeSvg from '../assets/lucide/coffee.svg?raw'
 import beerSvg from '../assets/lucide/beer.svg?raw'
 import zapSvg from '../assets/lucide/zap.svg?raw'
@@ -79,58 +79,59 @@ import settings2Svg from '../assets/lucide/settings-2.svg?raw'
 export type IconPair = {
   from: string
   to: string
+  config?: { stiffness: number, damping: number, mass: number }
 }
 
 export const iconPairs: IconPair[] = [
   // Navigation
-  { from: menuSvg, to: xSvg },
-  { from: homeSvg, to: searchSvg },
-  { from: arrowLeftSvg, to: arrowRightSvg },
-  { from: chevronUpSvg, to: chevronDownSvg },
-  { from: chevronLeftSvg, to: chevronRightSvg },
+  { from: menuSvg,          to: xSvg,               config: { stiffness: 600, damping: 20, mass: 1   } },
+  { from: homeSvg,          to: searchSvg,           config: { stiffness: 400, damping: 28, mass: 1   } },
+  { from: arrowLeftSvg,     to: arrowRightSvg,       config: { stiffness: 500, damping: 24, mass: 1   } },
+  { from: chevronUpSvg,     to: chevronDownSvg,      config: { stiffness: 500, damping: 24, mass: 1   } },
+  { from: chevronLeftSvg,   to: chevronRightSvg,     config: { stiffness: 500, damping: 24, mass: 1   } },
   // Media Controls
-  { from: playSvg, to: pauseSvg },
-  { from: volume2Svg, to: volumeXSvg },
-  { from: skipBackSvg, to: skipForwardSvg },
-  { from: maximizeSvg, to: minimizeSvg },
+  { from: playSvg,          to: pauseSvg,            config: { stiffness: 300, damping: 28, mass: 1.5 } },
+  { from: volume2Svg,       to: volumeXSvg,          config: { stiffness: 400, damping: 22, mass: 1   } },
+  { from: skipBackSvg,      to: skipForwardSvg,      config: { stiffness: 500, damping: 24, mass: 1   } },
+  { from: maximizeSvg,      to: minimizeSvg,         config: { stiffness: 400, damping: 26, mass: 1   } },
   // Actions
-  { from: plusSvg, to: minusSvg },
-  { from: checkSvg, to: xSvg },
-  { from: editSvg, to: saveSvg },
-  { from: trashSvg, to: refreshCwSvg },
-  { from: downloadSvg, to: uploadSvg },
+  { from: plusSvg,          to: minusSvg,            config: { stiffness: 600, damping: 20, mass: 1   } },
+  { from: checkSvg,         to: xSvg,                config: { stiffness: 500, damping: 22, mass: 1   } },
+  { from: editSvg,          to: saveSvg,             config: { stiffness: 350, damping: 24, mass: 1   } },
+  { from: trashSvg,         to: refreshCwSvg,        config: { stiffness: 280, damping: 20, mass: 1   } },
+  { from: downloadSvg,      to: uploadSvg,           config: { stiffness: 400, damping: 22, mass: 1   } },
   // Communication
-  { from: mailSvg, to: mailOpenSvg },
-  { from: bellSvg, to: bellOffSvg },
-  { from: messageCircleSvg, to: messageSquareSvg },
-  { from: phoneSvg, to: phoneOffSvg },
+  { from: mailSvg,          to: mailOpenSvg,         config: { stiffness: 350, damping: 24, mass: 1   } },
+  { from: bellSvg,          to: bellOffSvg,          config: { stiffness: 350, damping: 24, mass: 1   } },
+  { from: messageCircleSvg, to: messageSquareSvg,    config: { stiffness: 400, damping: 26, mass: 1   } },
+  { from: phoneSvg,         to: phoneOffSvg,         config: { stiffness: 400, damping: 24, mass: 1   } },
   // Weather
-  { from: sunSvg, to: moonSvg },
-  { from: cloudSvg, to: cloudRainSvg },
-  { from: windSvg, to: snowflakeSvg },
-  { from: sunSvg, to: cloudRainSvg },
+  { from: sunSvg,           to: moonSvg,             config: { stiffness: 250, damping: 18, mass: 1   } },
+  { from: cloudSvg,         to: cloudRainSvg,        config: { stiffness: 300, damping: 20, mass: 1   } },
+  { from: windSvg,          to: snowflakeSvg,        config: { stiffness: 200, damping: 16, mass: 1   } },
+  { from: sunSvg,           to: cloudRainSvg,        config: { stiffness: 250, damping: 18, mass: 1   } },
   // UI State
-  { from: eyeSvg, to: eyeOffSvg },
-  { from: lockSvg, to: unlockSvg },
-  { from: wifiSvg, to: wifiOffSvg },
-  { from: batterySvg, to: batteryLowSvg },
-  { from: heartSvg, to: heartOffSvg },
-  { from: starSvg, to: starOffSvg },
-  { from: bookmarkSvg, to: bookmarkCheckSvg },
-  { from: thumbsUpSvg, to: thumbsDownSvg },
+  { from: eyeSvg,           to: eyeOffSvg,           config: { stiffness: 350, damping: 20, mass: 1   } },
+  { from: lockSvg,          to: unlockSvg,           config: { stiffness: 400, damping: 22, mass: 1   } },
+  { from: wifiSvg,          to: wifiOffSvg,          config: { stiffness: 400, damping: 24, mass: 1   } },
+  { from: batterySvg,       to: batteryLowSvg,       config: { stiffness: 300, damping: 22, mass: 1   } },
+  { from: heartSvg,         to: heartOffSvg,         config: { stiffness: 200, damping: 15, mass: 1   } },
+  { from: starSvg,          to: starOffSvg,          config: { stiffness: 250, damping: 18, mass: 1   } },
+  { from: bookmarkSvg,      to: bookmarkCheckSvg,    config: { stiffness: 350, damping: 22, mass: 1   } },
+  { from: thumbsUpSvg,      to: thumbsDownSvg,       config: { stiffness: 320, damping: 20, mass: 1   } },
   // Files
-  { from: fileSvg, to: fileCheckSvg },
-  { from: folderSvg, to: folderOpenSvg },
-  { from: imageSvg, to: imageOffSvg },
+  { from: fileSvg,          to: fileCheckSvg,        config: { stiffness: 400, damping: 24, mass: 1   } },
+  { from: folderSvg,        to: folderOpenSvg,       config: { stiffness: 350, damping: 22, mass: 1   } },
+  { from: imageSvg,         to: imageOffSvg,         config: { stiffness: 300, damping: 20, mass: 1   } },
   // Misc
-  { from: smileSvg, to: frownSvg },
-  { from: coffeeSvg, to: beerSvg },
-  { from: zapSvg, to: zapOffSvg },
-  { from: bugSvg, to: shieldSvg },
+  { from: flagSvg,          to: flagOffSvg,          config: { stiffness: 350, damping: 22, mass: 1   } },
+  { from: coffeeSvg,        to: beerSvg,             config: { stiffness: 280, damping: 18, mass: 1   } },
+  { from: zapSvg,           to: zapOffSvg,           config: { stiffness: 500, damping: 20, mass: 1   } },
+  { from: bugSvg,           to: shieldSvg,           config: { stiffness: 280, damping: 20, mass: 1   } },
   // Security
-  { from: shieldCheckSvg, to: shieldAlertSvg },
+  { from: shieldCheckSvg,   to: shieldAlertSvg,      config: { stiffness: 350, damping: 22, mass: 1   } },
   // Social
-  { from: githubSvg, to: globeSvg },
+  { from: githubSvg,        to: globeSvg,            config: { stiffness: 300, damping: 20, mass: 1   } },
   // Settings
-  { from: settingsSvg, to: settings2Svg },
+  { from: settingsSvg,      to: settings2Svg,        config: { stiffness: 300, damping: 22, mass: 1   } },
 ]

@@ -170,7 +170,7 @@ export function parseSvgPaths(svgString: string): { d: string, attrs: Record<str
     // Inherit presentation attrs from root <svg> as defaults
     const rootSvg = doc.querySelector('svg')
     const rootDefaults: Record<string, string> = {}
-    for (const attr of ['stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule']) {
+    for (const attr of ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule']) {
         const val = rootSvg?.getAttribute(attr)
         if (val) rootDefaults[attr] = val
     }
@@ -199,12 +199,9 @@ export function parseSvgPaths(svgString: string): { d: string, attrs: Record<str
             }
         }
 
-        for (const attr of ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule']) {
+        for (const attr of ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'opacity']) {
             const val = el.getAttribute(attr)
             if (!val) continue
-            // Skip explicit color values on fill/stroke — let the container SVG control color.
-            // Only pass through 'none' (structural) and 'currentColor' (pass-through).
-            if ((attr === 'fill' || attr === 'stroke') && val !== 'none' && val !== 'currentColor') continue
             attrs[attr] = val
         }
 

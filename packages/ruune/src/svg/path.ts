@@ -54,8 +54,18 @@ export function parse(d: string): MorphTarget {
 }
 
 export function serialize(commands: PathCommand[]): string {
-   return commands.map(cmd => `${cmd.type} ${cmd.values.join(" ")}` 
-    ).join(" ")
+    const parts = commands.map(cmd => `${cmd.type} ${cmd.values.join(" ")}`)
+    // If the last cubic endpoint ≈ the first M point, close the path so the
+    // renderer applies stroke-linejoin instead of open-path linecaps.
+    const m = commands.find(c => c.type === 'M')
+    const cs = commands.filter(c => c.type === 'C')
+    if (m && cs.length > 0) {
+        const last = cs[cs.length - 1]!
+        if (Math.hypot(m.values[0]! - last.values[4]!, m.values[1]! - last.values[5]!) < 0.5) {
+            parts.push('Z')
+        }
+    }
+    return parts.join(' ')
 }
 
 
@@ -434,6 +444,19 @@ function evalCubicAt(x0: number, y0: number, x1: number, y1: number, x2: number,
     ]
 }
 
+// A cubic bezier converted from an L command has both control points exactly on
+// the chord (d = 0). Arc-converted cubics deviate from the chord by an amount
+// proportional to the arc's curvature. This lets us distinguish straight-line
+// segments from arc segments without looking at the original command type.
+function isStraightSeg(x0: number, y0: number, x1: number, y1: number, x2: number, y2: number, x3: number, y3: number): boolean {
+    const dx = x3 - x0, dy = y3 - y0
+    const len = Math.hypot(dx, dy)
+    if (len < 0.001) return false
+    const d1 = Math.abs((x1 - x0) * dy - (y1 - y0) * dx) / len
+    const d2 = Math.abs((x2 - x0) * dy - (y2 - y0) * dx) / len
+    return d1 < 0.001 && d2 < 0.001
+}
+
 // Resample a [M, C, C, ...] path to N equal-arc-length segments, reconstructed as a Catmull-Rom spline.
 function resamplePath(commands: PathCommand[], N: number): PathCommand[] {
     type Seg = { x0: number, y0: number, x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, len: number }
@@ -471,18 +494,57 @@ function resamplePath(commands: PathCommand[], N: number): PathCommand[] {
     // Detect closed paths (start ≈ end) to use wrap-around Catmull-Rom tangents
     const isClosed = Math.hypot(pts[0]![0] - pts[N]![0], pts[0]![1] - pts[N]![1]) < 0.5
 
-    // Reconstruct Catmull-Rom spline through sample points
+    // Find sharp corners: junctions between two straight-line segments (L-derived)
+    // that change direction. Arc-based corners are intentionally skipped so they
+    // remain smooth. For each corner we snap the nearest sample to the exact corner
+    // coordinate so one-sided tangents produce geometrically perfect straight edges.
+    const cornerSamples = new Set<number>()
+    const straight = segs.map(s => isStraightSeg(s.x0, s.y0, s.x1, s.y1, s.x2, s.y2, s.x3, s.y3))
+
+    const snapCorner = (arcLen: number, cx: number, cy: number) => {
+        const near = Math.max(0, Math.min(N, Math.round((arcLen / totalLen) * N)))
+        pts[near] = [cx, cy]
+        for (let d = -1; d <= 1; d++) {
+            const idx = near + d
+            if (idx >= 0 && idx <= N) cornerSamples.add(idx)
+        }
+    }
+
+    for (let i = 0; i + 1 < segs.length; i++) {
+        if (!straight[i] || !straight[i + 1]) continue
+        const s1 = segs[i]!, s2 = segs[i + 1]!
+        const dot = ((s1.x3-s1.x0)*(s2.x3-s2.x0) + (s1.y3-s1.y0)*(s2.y3-s2.y0))
+            / (Math.hypot(s1.x3-s1.x0, s1.y3-s1.y0) * Math.hypot(s2.x3-s2.x0, s2.y3-s2.y0))
+        if (dot < 0.99) snapCorner(cumLen[i + 1]!, s1.x3, s1.y3)
+    }
+    // Wrap-around junction (last segment → first segment) for closed paths
+    if (segs.length > 1 && straight[segs.length - 1] && straight[0]) {
+        const last = segs[segs.length - 1]!, first = segs[0]!
+        const dot = ((last.x3-last.x0)*(first.x3-first.x0) + (last.y3-last.y0)*(first.y3-first.y0))
+            / (Math.hypot(last.x3-last.x0, last.y3-last.y0) * Math.hypot(first.x3-first.x0, first.y3-first.y0))
+        if (dot < 0.99) {
+            snapCorner(0, first.x0, first.y0)
+            snapCorner(totalLen, last.x3, last.y3)
+        }
+    }
+
+    // Reconstruct Catmull-Rom spline. At corner samples, use a one-sided tangent
+    // (pointing only along the current segment) instead of the cross-corner tangent.
+    // This produces a mathematically straight cubic for each edge while leaving
+    // smooth arc corners completely unaffected.
     const result: PathCommand[] = [{ type: 'M', values: [pts[0]![0], pts[0]![1]] }]
     for (let i = 0; i < N; i++) {
         const p0 = (isClosed && i === 0) ? pts[N - 1]! : pts[Math.max(0, i - 1)]!
         const p1 = pts[i]!
         const p2 = pts[i + 1]!
         const p3 = (isClosed && i === N - 1) ? pts[1]! : pts[Math.min(N, i + 2)]!
+        const p1c = cornerSamples.has(i)
+        const p2c = cornerSamples.has(i + 1)
         result.push({ type: 'C', values: [
-            p1[0] + (p2[0] - p0[0]) / 6,
-            p1[1] + (p2[1] - p0[1]) / 6,
-            p2[0] - (p3[0] - p1[0]) / 6,
-            p2[1] - (p3[1] - p1[1]) / 6,
+            p1c ? p1[0] + (p2[0] - p1[0]) / 3 : p1[0] + (p2[0] - p0[0]) / 6,
+            p1c ? p1[1] + (p2[1] - p1[1]) / 3 : p1[1] + (p2[1] - p0[1]) / 6,
+            p2c ? p2[0] - (p2[0] - p1[0]) / 3 : p2[0] - (p3[0] - p1[0]) / 6,
+            p2c ? p2[1] - (p2[1] - p1[1]) / 3 : p2[1] - (p3[1] - p1[1]) / 6,
             p2[0], p2[1],
         ]})
     }

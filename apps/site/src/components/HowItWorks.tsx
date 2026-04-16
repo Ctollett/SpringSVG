@@ -22,7 +22,7 @@ function FeatureCard({num, title, description}) {
           clearTimeout(timer)
         timer = setTimeout(() => {
           setIsActive(entry.isIntersecting)
-        }, 300)
+        }, 500)
       },
       { threshold: 0.1}
     )

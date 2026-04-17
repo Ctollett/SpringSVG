@@ -70,6 +70,12 @@
   }
 }
 
+#arrow-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+
 #next-steps {
   display: flex;
   border-top: 1px solid var(--border);

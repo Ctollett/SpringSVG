@@ -27,6 +27,7 @@
 html {
   background: white;
   scrollbar-width: none;
+  scroll-behavior: none;
 }
 
 html::-webkit-scrollbar {

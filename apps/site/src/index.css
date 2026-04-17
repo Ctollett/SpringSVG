@@ -24,19 +24,30 @@
   ascent-override: 100%;
 }
 
+html {
+  background: white;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html, body, #root {
+  width: 100%;
+}
+
 #root {
-    max-width: 636px;
-    margin: 0 auto;
-    margin-top: 32px;
+  margin: 0 auto;
 }
 
 body {
   font-family: "MD UI XS", sans-serif;
+  background: white;
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
-  font-synthesis: none; 
-
+  font-synthesis: none;
 }

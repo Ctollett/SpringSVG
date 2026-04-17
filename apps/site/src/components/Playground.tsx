@@ -101,6 +101,43 @@ import type { Spring } from 'framer-motion'
     )
   }
 
+  function SpringVisual({config} : { config: SpringConfig }) {
+    const positions = []
+    let velocity = 0
+    let position = 10
+    const svgWidth = 200
+    const svgHeight = 50
+
+    const dt = 0.016
+
+    for(let t = 0; t < 3; t += dt) {
+      const force = -(config.stiffness * position) - (config.damping * velocity)
+      const acceleration = force / config.mass
+      velocity = velocity + acceleration * dt
+      position = position + velocity * dt
+      positions.push(position)
+    }
+
+    let pathString = ''
+    const maxPos = Math.max(...positions)
+    for(let i = 0; i < positions.length; i++) {
+      const x = (i / positions.length) * svgWidth
+      const y = svgHeight - (positions[i]! / maxPos) * svgHeight
+      pathString += i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`
+    }
+
+
+    return (
+       <div className='flex flex-col gap-8 border 1 grey border-dashed p-4 w-1/2 rounded-xl justify-center items-center'>
+        <svg overflow='visible' width={svgWidth} height={svgHeight}>
+          <path fill='none' stroke='black' d={pathString}></path>
+        </svg>
+       </div>
+       
+    )
+  }
+
+  
 
 export default function Playground() {
 const [springConfig, setSpringConfig] = useState({stiffness: 200, damping: 20, mass: 1})
@@ -114,7 +151,10 @@ const [springConfig, setSpringConfig] = useState({stiffness: 200, damping: 20, m
       <div className='flex flex-col gap-16'>
       <Shape config={springConfig} />
       <ControlPanel config={springConfig} onUpdate={setSpringConfig} />
+      <div className='flex flex-row gap-4'>
       <CodeSnippet config={springConfig} />
+      <SpringVisual config={springConfig} />
+      </div>
       </div>
     </section>
   )

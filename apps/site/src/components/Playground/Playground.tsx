@@ -1,20 +1,24 @@
-import copySvg from '../assets/lucide/copy.svg?raw'
-import triangleSvg from '../assets/shapes/triangle.svg?raw'
-import { HorizontalSlider } from './HorizontalSlider'
-import circleSvg from '../assets/shapes/circle.svg?raw'
+import copySvg from '../../assets/lucide/copy.svg?raw'
+import triangleSvg from '../../assets/shapes/triangle.svg?raw'
+import { HorizontalSlider } from '../HorizontalSlider'
+import circleSvg from '../../assets/shapes/circle.svg?raw'
 import { RuunSVG } from 'ruun-react'
 import { useState } from 'react'
 import type { SpringConfig } from 'ruun'
 import type { Spring } from 'framer-motion'
+import './Playground.css'
 
 
 
 
   function Shape({ config }: { config: SpringConfig }) {
     const [isActive, setIsActive] = useState(false)
+    const [isSettled, setIsSettled] = useState(false)
+
 
     const handleClick = () => {
       setIsActive(prev => !prev)
+      setIsSettled(false)
     }
 
     return (
@@ -28,27 +32,27 @@ import type { Spring } from 'framer-motion'
             backgroundPosition: 'center center',
           }}
         >
-          <RuunSVG className="w-[420px] h-[420px] overflow-visible" from={triangleSvg} to={circleSvg} config={config} active={isActive} />
+          <RuunSVG className="w-[420px] h-[420px] overflow-visible" from={triangleSvg} to={circleSvg} config={config} active={isActive} onSettle={() => setIsSettled(true)} />
         </div>
         <div className="mt-3 flex flex-col gap-2 items-start">
           <p style={{ fontSize: '6px', display: 'flex', alignItems: 'center', gap: '6px', color: '#6b7280', userSelect: 'none' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isActive ? 'green' : '#6b7280', display: 'inline-block' }} />
-            {isActive ? 'ANIMATING' : 'AT REST'}
+            <span className={!isSettled ? 'blink-smooth': ''} style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isSettled ? '#6b7280' : 'green', display: 'inline-block' }} />
+            {isSettled ? 'Settled' : 'Animating...' }
           </p>
           <button
-            onClick={handleClick}
+            onClick={handleClick} 
             style={{
-              border: '1px solid #9ca3af',
+              border: !isSettled ? 'grey' : '1px solid #9ca3af',
               borderRadius: '9999px',
               width: '64px', 
               height: '18px',
               fontSize: '8px',
               backgroundColor: 'transparent',
               cursor: 'pointer',
-              color: '#111827',
+              color: !isSettled ? 'grey' : '#111827',
             }}
           >
-            Trigger
+            Morph
           </button>
         </div>
       </div>

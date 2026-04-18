@@ -28,7 +28,8 @@ function fadeOutExtraSubpaths(element: SVGPathElement, extraD: string): void {
 export function morph (
     element: SVGPathElement,
     targetPath: string,
-    config: SpringConfig
+    config: SpringConfig, 
+    onSettle?: () => void
 ): number {
     const existing = activeAnimations.get(element)
     if (existing !== undefined) removeAnimation(existing)
@@ -62,6 +63,7 @@ export function morph (
     }, () => {
         activeAnimations.delete(element)
         render(element, interpolate(normalizedA, normalizedB, 1))
+        onSettle?.();
     })
 
     activeAnimations.set(element, id)

@@ -76,6 +76,7 @@ function SmallCard({num, title, description}) {
 
 
 
+
 export default function HowItWorks() {
   return(
     <section className="">

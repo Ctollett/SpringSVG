@@ -4,7 +4,7 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Demo from './components/Demo'
 import HowItWorks from './components/HowItWorks'
-import Playground from './components/Playground'
+import Playground from './components/Playground/Playground'
 import Footer from './components/Footer'
 import Lenis from 'lenis'
 

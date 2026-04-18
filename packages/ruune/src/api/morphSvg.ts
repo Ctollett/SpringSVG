@@ -40,6 +40,7 @@ export function morphSvg(
     container: SVGSVGElement,
     toSvg: string,
     config: SpringConfig | string = 'smooth',
+    onSettle?: () => void
 ): void {
     const toVB = containerViewBox(container)
     const targetVB = parseViewBox(toSvg)
@@ -83,6 +84,8 @@ export function morphSvg(
             el.style.transition = ''
             el.style.opacity = '1'
         }
-        morph(el, scaledTo[i] ?? lastTarget, resolvedConfig)
+        const isLast = i === existing.length - 1
+        morph(el, scaledTo[i] ?? lastTarget, resolvedConfig, isLast ? onSettle : undefined)
+
     })
 }

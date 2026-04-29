@@ -176,7 +176,7 @@ export function parseSvgPaths(svgString: string): { d: string, attrs: Record<str
     }
 
     const selector = 'path, rect, circle, ellipse, line, polygon, polyline'
-    for (const el of Array.from(doc.querySelectorAll(selector))) {
+    for (const el of Array.from(doc.querySelectorAll(selector)).filter(el => !el.closest('defs'))) {
         let d = elementToD(el)
         if (!d) continue
 

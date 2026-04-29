@@ -75,12 +75,30 @@ import githubSvg from '../assets/lucide/github.svg?raw'
 import globeSvg from '../assets/lucide/globe.svg?raw'
 import settingsSvg from '../assets/lucide/settings.svg?raw'
 import settings2Svg from '../assets/lucide/settings-2.svg?raw'
+import starShapeSvg from '../assets/shapes/star.svg?raw'
+import star2Svg from '../assets/shapes/star-2.svg?raw'
+import spring2Svg from '../assets/shapes/spring-2.svg?raw'
+import animation2Svg from '../assets/shapes/animation-2.svg?raw'
+import code2Svg from '../assets/shapes/code-2.svg?raw'
+import svg2Svg from '../assets/shapes/svg-2.svg?raw'
+import animationSvg from '../assets/shapes/animation.svg?raw'
+import springSvg from '../assets/shapes/spring.svg?raw'
+import codeSvg from '../assets/shapes/code.svg?raw'
+import svgSvg from '../assets/shapes/svg.svg?raw'
 
 export type IconPair = {
   from: string
   to: string
   config?: { stiffness: number, damping: number, mass: number }
 }
+
+export const heroIconPairs: IconPair[] = [
+  { from: starShapeSvg,  to: star2Svg,     config: { stiffness: 400, damping: 14, mass: 0.5 } },
+  { from: animationSvg,  to: animation2Svg, config: { stiffness: 400, damping: 14, mass: 0.5 } },
+  { from: springSvg,     to: spring2Svg,    config: { stiffness: 400, damping: 14, mass: 0.5 } },
+  { from: codeSvg,       to: code2Svg,      config: { stiffness: 400, damping: 14, mass: 0.5 } },
+  { from: svgSvg,        to: svg2Svg,       config: { stiffness: 400, damping: 14, mass: 0.5 } },
+]
 
 export const iconPairs: IconPair[] = [
   // Navigation

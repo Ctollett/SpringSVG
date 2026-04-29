@@ -7,6 +7,7 @@ interface RuunProps {
     className?: string
     active: boolean,
     onSettle?: () => void
+    viewBox?: string
 }
 
 function extractViewBox(svgString: string): string {
@@ -14,8 +15,8 @@ function extractViewBox(svgString: string): string {
     return match?.[1] ?? '0 0 24 24'
 }
 
-export function RuunSVG ({from, to, config, className, active, onSettle} : RuunProps) {
-    const viewBox = extractViewBox(from)
+export function RuunSVG ({from, to, config, className, active, onSettle, viewBox: viewBoxProp} : RuunProps) {
+    const viewBox = viewBoxProp ?? extractViewBox(from)
     const svgRef = useRef<SVGSVGElement | null>(null)
     const isMounted = useRef(false)
 

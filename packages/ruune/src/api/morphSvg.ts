@@ -84,8 +84,44 @@ export function morphSvg(
             el.style.transition = ''
             el.style.opacity = '1'
         }
+
+        const targetAttrs = !isExtra
+            ? (toPaths[i]?.attrs ?? toPaths[toPaths.length - 1]?.attrs ?? {})
+            : {}
+
+        const attrsChanged = ATTRS.some(attr => {
+            const current = el.getAttribute(attr) ?? ''
+            const target = targetAttrs[attr] ?? ''
+            return current !== target
+        })
+
+        const applyTargetAttrs = () => {
+            for (const attr of ATTRS) {
+                const val = targetAttrs[attr]
+                if (val) el.setAttribute(attr, val)
+                else el.removeAttribute(attr)
+            }
+        }
+
         const isLast = i === existing.length - 1
-        morph(el, scaledTo[i] ?? lastTarget, resolvedConfig, isLast ? onSettle : undefined)
+
+        // If style differs, morph first then crossfade style at settle so the
+        // fill/stroke switch doesn't interrupt the shape animation mid-flight.
+        if (!isExtra && attrsChanged) {
+            morph(el, scaledTo[i] ?? lastTarget, resolvedConfig, isLast ? onSettle : undefined)
+            // Swap style on the next frame so the shape is already in motion
+            // when attrs change — the blink lasts ~16ms and is imperceptible
+            setTimeout(() => {
+                el.style.opacity = '0'
+                requestAnimationFrame(() => {
+                    applyTargetAttrs()
+                    el.style.opacity = '1'
+                })
+            }, 80)
+        } else {
+            if (!isExtra) applyTargetAttrs()
+            morph(el, scaledTo[i] ?? lastTarget, resolvedConfig, isLast ? onSettle : undefined)
+        }
 
     })
 }

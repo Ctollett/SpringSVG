@@ -85,6 +85,7 @@ import animationSvg from '../assets/shapes/animation.svg?raw'
 import springSvg from '../assets/shapes/spring.svg?raw'
 import codeSvg from '../assets/shapes/code.svg?raw'
 import svgSvg from '../assets/shapes/svg.svg?raw'
+import checkMarkSvg from '../assets/shapes/check-mark.svg?raw'
 
 export type IconPair = {
   from: string

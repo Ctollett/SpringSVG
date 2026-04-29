@@ -40,7 +40,8 @@ import './Playground.css'
             {isSettled ? 'Settled' : 'Animating...' }
           </p>
           <button
-            onClick={handleClick} 
+            data-hover
+            onClick={handleClick}
             style={{
               border: !isSettled ? 'grey' : '1px solid #9ca3af',
               borderRadius: '9999px',
@@ -87,7 +88,7 @@ import './Playground.css'
     return (
       <div className='flex flex-col gap-8 border 1 grey border-dashed p-4 w-1/2 rounded-xl justify-center items-center'>
         <div className='flex w-full justify-end'>
-          <button onClick={handleClick}>
+          <button data-hover onClick={handleClick}>
               <span style={{color: isCopied ? 'grey' : 'black', cursor: 'pointer'}} dangerouslySetInnerHTML={{ __html: copySvg }} />
           </button>
 

@@ -42,7 +42,7 @@ export function HorizontalSlider({ value, onChange, label, width = 140 }: Horizo
         <span style={{ fontSize: '16px', color: 'black', userSelect: 'none', WebkitUserSelect: 'none'}}>{label}</span>
         <span style={{ display: 'flex', justifyContent: 'center', width: '36px', height: '18px', border: '1px solid black', borderRadius: '24px', padding: '4px', fontSize: '8px', color: 'black', userSelect: 'none', WebkitUserSelect: 'none' }}>{Math.round(value * 100)}</span>
       </div>
-      <div onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} style={{ cursor: 'pointer', position: 'relative', width: `${width}px`, height: '2px', borderRadius: '4px', backgroundColor: 'lightgrey', overflow: 'visible' }} ref={trackRef}>
+      <div data-drag onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} style={{ cursor: 'pointer', position: 'relative', width: `${width}px`, height: '2px', borderRadius: '4px', backgroundColor: 'lightgrey', overflow: 'visible' }} ref={trackRef}>
         <div style={{ position: 'absolute', backgroundColor: '#000', width: `${value * width}px`, height: '2px', left: 0, borderRadius: '4px', overflow: 'visible' }} />
         <motion.div transition={{ type: 'spring', stiffness: 200, damping: 35 }} animate={{ width: expandCircle ? 24 : 16, height: expandCircle ? 24 : 16 }} style={{ display: 'flex', justifyContent: 'center', left: value * width - halfCircleSize, top: '50%', transform: 'translateY(-50%)', position: 'absolute', alignItems: 'center', borderRadius: '50%', backgroundColor: 'transparent', border: '1px solid #000' }}>
           <div style={{ height: '12px', width: '12px', borderRadius: '50%', backgroundColor: '#000' }} />

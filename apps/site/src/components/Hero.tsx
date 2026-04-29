@@ -75,8 +75,8 @@ export default function Hero() {
         </div>
         </div>
         <div className="flex flex-row gap-4">
-          <button onClick={() => lenis?.scrollTo('#demo-section')} className="flex leading-none gap-2 justify-center items-center text-[12px] border-1 w-[108px] h-[32px] rounded-full cursor-pointer">Get Started <img className='w-[10px] h-[10px]' src={ArrowIcon} /></button>
-          <button onClick={handleClick} style={{color: copied ? 'grey' : 'black'}} className="flex leading-none gap-2 justify-center items-center text-[12px] w-[116px] h-[32px] rounded-full cursor-pointer">npm install ruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
+          <button data-hover onClick={() => lenis?.scrollTo('#demo-section')} className="flex leading-none gap-2 justify-center items-center text-[12px] border-1 w-[108px] h-[32px] rounded-full">Get Started <img className='w-[10px] h-[10px]' src={ArrowIcon} /></button>
+          <button data-hover onClick={handleClick} style={{color: copied ? 'grey' : 'black'}} className="flex leading-none gap-2 justify-center items-center text-[12px] w-[116px] h-[32px] rounded-full">npm install ruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
         </div>
       </div>
     </section>

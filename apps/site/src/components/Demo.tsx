@@ -22,7 +22,7 @@ export default function Demo() {
       </div>
       <div className="grid grid-cols-8 w-full cursor-pointer">
         {iconPairs.map((icon, index) => (
-          <div onClick={() => handleClick(index)}
+          <div data-hover onClick={() => handleClick(index)}
             className={`flex justify-center items-center aspect-square border-dashed border-gray-400 ${index % 8 !== 7 ? 'border-r' : ''} ${index < 32 ? 'border-b' : ''}`}
             key={index}
           ><RuunSVG className="w-[24px] h-[24px]" from={icon.from} to={icon.to} active={isActive[index]} config={icon.config}/></div>

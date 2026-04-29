@@ -45,6 +45,7 @@ html, body, #root {
 body {
   font-family: "MD UI XS", sans-serif;
   background: white;
+  cursor: none;
 }
 
 * {
@@ -52,3 +53,10 @@ body {
   box-sizing: border-box;
   font-synthesis: none;
 }
+
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+
+

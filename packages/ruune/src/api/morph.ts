@@ -3,7 +3,7 @@ import { SpringConfig, SpringState } from "../engine/types";
 import { filterDegenerate, interpolate, normalize, parse, serialize, splitSubpaths, toAbsolute, toAbsoluteCubic } from "../svg/path";
 import { render } from "../svg/renderer";
 
-const activeAnimations = new Map<SVGPathElement, number>()
+const activeAnimations = new Map<SVGPathElement, { id: number; state: SpringState }>()
 
 const EXTRA_FADE_MS = 250
 
@@ -16,6 +16,7 @@ function fadeOutExtraSubpaths(element: SVGPathElement, extraD: string): void {
         if (val) overlay.setAttribute(attr, val)
     }
     overlay.setAttribute('d', extraD)
+    overlay.setAttribute('data-morph-temp', '')
     overlay.style.opacity = element.style.opacity || '1'
     parent.insertBefore(overlay, element)
     requestAnimationFrame(() => {
@@ -28,11 +29,12 @@ function fadeOutExtraSubpaths(element: SVGPathElement, extraD: string): void {
 export function morph (
     element: SVGPathElement,
     targetPath: string,
-    config: SpringConfig, 
+    config: SpringConfig,
     onSettle?: () => void
 ): number {
     const existing = activeAnimations.get(element)
-    if (existing !== undefined) removeAnimation(existing)
+    const inheritedVelocity = existing ? existing.state.velocity : 0
+    if (existing !== undefined) removeAnimation(existing.id)
 
     const d = element.getAttribute('d')
     if(!d) return 0
@@ -51,24 +53,21 @@ export function morph (
     const [normalizedA, normalizedB] = normalize(parsedElement, parsedTarget)
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-
     if(reduced) {
         render(element, interpolate(normalizedA, normalizedB, 1))
         return 0
     } else {
-        const initialState: SpringState = { position: 0, velocity: 0, target: 1 }
-          const id = addAnimation(config, initialState, (t) => {
-        const commands = interpolate(normalizedA, normalizedB, t)
-        render(element, commands)
-    }, () => {
-        activeAnimations.delete(element)
-        render(element, interpolate(normalizedA, normalizedB, 1))
-        onSettle?.();
-    })
+        const initialState: SpringState = { position: 0, velocity: inheritedVelocity, target: 1 }
+        const id = addAnimation(config, initialState, (t) => {
+            const commands = interpolate(normalizedA, normalizedB, t)
+            render(element, commands)
+        }, () => {
+            activeAnimations.delete(element)
+            render(element, interpolate(normalizedA, normalizedB, 1))
+            onSettle?.()
+        })
 
-    activeAnimations.set(element, id)
-    return id
-
+        activeAnimations.set(element, { id, state: initialState })
+        return id
     }
 }
-

@@ -47,7 +47,7 @@ export function morphSvg(
     const toPaths = parseSvgPaths(toSvg)
     const scaledTo = toPaths.map(p => scaleD(p.d, targetVB, toVB))
 
-    const existing = Array.from(container.querySelectorAll('path')) as SVGPathElement[]
+    const existing = Array.from(container.querySelectorAll('path:not([data-morph-temp])')) as SVGPathElement[]
     const existingCount = existing.length
 
     // Add new elements if target has more paths than source

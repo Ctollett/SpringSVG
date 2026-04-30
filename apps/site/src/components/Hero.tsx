@@ -1,5 +1,6 @@
-import ArrowIcon from '../assets/arrow.svg'
 import checkMarkSvg from '../assets/shapes/check-mark.svg?raw'
+import chevronSingleSvg from '../assets/shapes/chevron-single.svg?raw'
+import chevronTripleSvg from '../assets/shapes/chevron-triple.svg?raw'
 import CopyIcon from '../assets/lucide/copy.svg?raw'
 import { RuunSVG } from 'ruun-react'
 import { heroIconPairs } from "../data/iconPairs"
@@ -13,6 +14,7 @@ export default function Hero() {
   const [morph, setMorph] = useState(false)
   const [copied, setIsCopied] = useState(false)
   const cooldownsRef = useRef(new Array(5).fill(false))
+  const [fillHover, setFillHover] = useState(false)
   const lenis = useLenis()
 
 
@@ -22,6 +24,7 @@ export default function Hero() {
       setMorph(true)
       
     }
+
 
 
   useEffect(() => {
@@ -75,7 +78,12 @@ export default function Hero() {
         </div>
         </div>
         <div className="flex flex-row gap-4">
-          <button data-hover onClick={() => lenis?.scrollTo('#demo-section')} className="flex leading-none gap-2 justify-center items-center text-[12px] border-1 w-[108px] h-[32px] rounded-full">Get Started <img className='w-[10px] h-[10px]' src={ArrowIcon} /></button>
+          <button data-hover onMouseEnter={() => setFillHover(true)} onMouseLeave={() => setFillHover(false)} onClick={() => lenis?.scrollTo('#demo-section')} className="relative overflow-hidden flex leading-none gap-2 justify-center items-center text-[12px] border-1 w-[108px] h-[32px] rounded-full bg-white">
+            <div className="absolute bottom-0 left-0 right-0 bg-black" style={{ height: fillHover ? '100%' : '0%', transition: 'height 0.4s ease' }} />
+            <div style={{ mixBlendMode: 'difference', color: 'white' }} className="relative z-10 flex items-center gap-2">
+              Get Started <RuunSVG className="w-[10px] h-[12px] overflow-visible" from={chevronSingleSvg} to={chevronTripleSvg} active={fillHover} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
+            </div>
+          </button>
           <button data-hover onClick={handleClick} style={{color: copied ? 'grey' : 'black'}} className="flex leading-none gap-2 justify-center items-center text-[12px] w-[116px] h-[32px] rounded-full">npm install ruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
         </div>
       </div>

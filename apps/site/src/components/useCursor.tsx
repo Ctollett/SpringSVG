@@ -15,6 +15,11 @@ export function CursorProvider({children}: {children: React.ReactNode}) {
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
+        document.body.classList.add('custom-cursor')
+        return () => document.body.classList.remove('custom-cursor')
+    }, [])
+
+    useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setPosition({x: e.clientX, y: e.clientY})
         }
@@ -55,6 +60,7 @@ export function CursorProvider({children}: {children: React.ReactNode}) {
                 from={circleSvg}
                 to={crosshairSvg}
                 active={hover}
+                
                 config={{ stiffness: 400, damping: 25, mass: 0.8 }}
             />
         </div>

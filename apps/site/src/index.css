@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink:            #0a0a0a;
+  --color-ink-secondary:  #71717a;
+  --color-ink-muted:      #a1a1aa;
+  --color-surface:        #ffffff;
+  --color-surface-raised: #f4f4f5;
+  --color-surface-sunken: #e5e7eb;
+  --color-border:         #e4e4e7;
+  --color-border-strong:  #71717a;
+}
+
 @font-face {
   font-family: "MD UI XS";
   src: url("./fonts/MDUIXSTrial-Thin.otf") format("opentype");
@@ -45,7 +56,6 @@ html, body, #root {
 body {
   font-family: "MD UI XS", sans-serif;
   background: white;
-  cursor: none;
 }
 
 * {
@@ -54,7 +64,7 @@ body {
   font-synthesis: none;
 }
 
-*, *::before, *::after {
+body.custom-cursor, body.custom-cursor *, body.custom-cursor *::before, body.custom-cursor *::after {
   cursor: none !important;
 }
 

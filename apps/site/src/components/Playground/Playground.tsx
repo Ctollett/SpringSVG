@@ -1,11 +1,12 @@
 import copySvg from '../../assets/lucide/copy.svg?raw'
+import arrowLeftRightSvg from '../../assets/lucide/arrow-left-right.svg?raw'
+import arrowRightLeftSvg from '../../assets/lucide/arrow-right-left.svg?raw'
 import triangleSvg from '../../assets/shapes/triangle.svg?raw'
 import { HorizontalSlider } from '../HorizontalSlider'
 import circleSvg from '../../assets/shapes/circle.svg?raw'
 import { RuunSVG } from 'ruun-react'
 import { useState } from 'react'
 import type { SpringConfig } from 'ruun'
-import type { Spring } from 'framer-motion'
 import './Playground.css'
 
 
@@ -13,12 +14,14 @@ import './Playground.css'
 
   function Shape({ config }: { config: SpringConfig }) {
     const [isActive, setIsActive] = useState(false)
-    const [isSettled, setIsSettled] = useState(false)
-
+    const [isSettled, setIsSettled] = useState(true)
+    const [fillHover, setFillHover] = useState(false)
+    const [arrowActive, setArrowActive] = useState(false)
 
     const handleClick = () => {
       setIsActive(prev => !prev)
       setIsSettled(false)
+      setArrowActive(true)
     }
 
     return (
@@ -27,33 +30,43 @@ import './Playground.css'
           className="relative w-full flex justify-center items-center overflow-visible"
           style={{
             height: '520px',
-            backgroundColor: '#e5e7eb',
+            backgroundColor: 'var(--color-surface-sunken)',
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cpath d='M 160 0 L 0 0 0 160' fill='none' stroke='%23b0b7c3' stroke-width='1' stroke-dasharray='6 6'/%3E%3C/svg%3E")`,
             backgroundPosition: 'center center',
           }}
         >
-          <RuunSVG className="w-[420px] h-[420px] overflow-visible" from={triangleSvg} to={circleSvg} config={config} active={isActive} onSettle={() => setIsSettled(true)} />
+          <RuunSVG className="w-[420px] h-[420px] overflow-visible" from={triangleSvg} to={circleSvg} config={config} active={isActive} onSettle={() => { setIsSettled(true); setArrowActive(false) }} />
         </div>
-        <div className="mt-3 flex flex-col gap-2 items-start">
-          <p style={{ fontSize: '6px', display: 'flex', alignItems: 'center', gap: '6px', color: '#6b7280', userSelect: 'none' }}>
-            <span className={!isSettled ? 'blink-smooth': ''} style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isSettled ? '#6b7280' : 'green', display: 'inline-block' }} />
+        <div className="mt-4 flex flex-col gap-snug items-start">
+          <p style={{ fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-ink-secondary)', userSelect: 'none' }}>
+            <span className={!isSettled ? 'blink-smooth': ''} style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isSettled ? 'var(--color-ink-muted)' : '#22c55e', display: 'inline-block' }} />
             {isSettled ? 'Settled' : 'Animating...' }
           </p>
           <button
             data-hover
             onClick={handleClick}
+            onMouseEnter={() => setFillHover(true)}
+            onMouseLeave={() => setFillHover(false)}
             style={{
-              border: !isSettled ? 'grey' : '1px solid #9ca3af',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              border: !isSettled ? '1px solid var(--color-border)' : '1px solid var(--color-border-strong)',
               borderRadius: '9999px',
-              width: '64px', 
-              height: '18px',
-              fontSize: '8px',
-              backgroundColor: 'transparent',
-              cursor: 'pointer',
-              color: !isSettled ? 'grey' : '#111827',
+              width: '80px',
+              height: '26px',
+              fontSize: '11px',
+              backgroundColor: 'var(--color-surface)',
+              cursor: !isSettled ? 'not-allowed' : 'pointer',
             }}
           >
-            Morph
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'var(--color-ink)', height: (fillHover && isSettled) || !isSettled ? '100%' : '0%', transition: 'height 0.4s ease' }} />
+            <span style={{ position: 'relative', zIndex: 10, mixBlendMode: 'difference', color: 'white', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              Morph
+              <RuunSVG className="w-[8px] h-[8px] overflow-visible" from={arrowLeftRightSvg} to={arrowRightLeftSvg} active={arrowActive} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
+            </span>
           </button>
         </div>
       </div>
@@ -86,19 +99,18 @@ import './Playground.css'
 
 
     return (
-      <div className='flex flex-col gap-8 border 1 grey border-dashed p-4 w-1/2 rounded-xl justify-center items-center'>
+      <div className='flex flex-col gap-6 p-5 w-1/2 rounded-xl justify-center items-center' style={{ border: '1px dashed #9ca3af' }}>
         <div className='flex w-full justify-end'>
           <button data-hover onClick={handleClick}>
-              <span style={{color: isCopied ? 'grey' : 'black', cursor: 'pointer'}} dangerouslySetInnerHTML={{ __html: copySvg }} />
+              <span style={{color: isCopied ? 'var(--color-ink-muted)' : 'var(--color-ink)', cursor: 'pointer'}} dangerouslySetInnerHTML={{ __html: copySvg }} />
           </button>
-
         </div>
-        <pre>
-  <span style={{ color: '#6b7280' }}>morphSvg</span>
+        <pre style={{ fontSize: '13px', lineHeight: '1.7' }}>
+  <span style={{ color: 'var(--color-ink-secondary)' }}>morphSvg</span>
   <span>(element, toSvg, {'{'}</span>
-  {'\n  '}<span style={{ color: '#6b7280' }}>stiffness:</span> <span style={{ color: '#000' }}>{stiffness}</span>
-  {'\n  '}<span style={{ color: '#6b7280' }}>damping:</span> <span style={{ color: '#000' }}>{damping}</span>
-  {'\n  '}<span style={{ color: '#6b7280' }}>mass:</span> <span style={{ color: '#000' }}>{mass}</span>
+  {'\n  '}<span style={{ color: 'var(--color-ink-secondary)' }}>stiffness:</span> <span style={{ color: 'var(--color-ink)' }}>{stiffness}</span>
+  {'\n  '}<span style={{ color: 'var(--color-ink-secondary)' }}>damping:</span> <span style={{ color: 'var(--color-ink)' }}>{damping}</span>
+  {'\n  '}<span style={{ color: 'var(--color-ink-secondary)' }}>mass:</span> <span style={{ color: 'var(--color-ink)' }}>{mass}</span>
   {'\n'}{'})'}
 </pre>
 
@@ -133,25 +145,25 @@ import './Playground.css'
 
 
     return (
-       <div className='flex flex-col gap-8 border 1 grey border-dashed p-4 w-1/2 rounded-xl justify-center items-center'>
+       <div className='flex flex-col gap-6 p-5 w-1/2 rounded-xl justify-center items-center' style={{ border: '1px dashed #9ca3af' }}>
         <svg overflow='visible' width={svgWidth} height={svgHeight}>
-          <path fill='none' stroke='black' d={pathString}></path>
+          <path fill='none' stroke='var(--color-ink)' d={pathString}></path>
         </svg>
        </div>
-       
+
     )
   }
 
-  
+
 
 export default function Playground() {
 const [springConfig, setSpringConfig] = useState({stiffness: 200, damping: 20, mass: 1})
 
   return (
-    <section>
-       <div className="flex flex-col justify-center items-center h-84">
-        <h3>Try it Out</h3>
-        <p>Lorem upsum dolor sit amet</p>
+    <section className="pb-16">
+      <div className="flex flex-col justify-center items-center h-84 gap-2">
+        <h3 className='text-xl font-bold'>Try it Out</h3>
+        <p className='text-sm text-ink-secondary'>Lorem ipsum dolor sit amet</p>
       </div>
       <div className='flex flex-col gap-16'>
       <Shape config={springConfig} />

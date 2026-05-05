@@ -15,7 +15,7 @@ export default function Demo() {
 
 
   return (
-    <section id="demo-section" className="flex flex-col border-t-1 border-dashed border-gray-600">
+    <section id="demo-section" className="flex flex-col border-t-1 border-dashed border-gray-600 pb-16">
       <div className="flex flex-col justify-center items-center p-[16px] gap-2">
         <h3>Less Setup. More Spring</h3>
         <p className="text-center text-[8px]">Ruun slots into any framework in a single import and handles the physics so you don't have to</p>

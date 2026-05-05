@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Docs from './pages/Docs'
 import Showcase from './pages/Showcase'
 import Record from './pages/Record'
+import MorphDemo from './pages/MorphDemo'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
             <Route path="/docs" element={<CursorProvider><Docs /></CursorProvider>} />
             <Route path="/showcase" element={<Showcase />} />
             <Route path="/record" element={<Record />} />
+            <Route path="/morph" element={<MorphDemo />} />
           </Routes>
       </ReactLenis>
     </BrowserRouter>

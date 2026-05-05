@@ -72,34 +72,36 @@ export default function HowItWorks() {
 
   return (
     <section ref={sectionRef} style={{ height: '290vh' }}>
-      <div style={{ position: 'sticky', top: '15vh', height: '70vh' }} className="flex items-center justify-between">
-        <div className="flex flex-col justify-center gap-8">
+      <div style={{ position: 'sticky', top: '15vh', height: '70vh' }} className="flex items-center">
+        <div className="flex items-stretch gap-10 w-full">
+        <div className="flex flex-col justify-center gap-8" style={{ maxWidth: '260px', flexShrink: 0 }}>
           <h3 className="text-[18px] font-bold">How it Works</h3>
           {steps.map((step, i) => (
             <div
               key={step.num}
               style={{
-                opacity: activeStep === i ? 1 : 0.2,
                 transform: `translateX(${activeStep === i ? 0 : -8}px)`,
-                transition: 'opacity 0.4s ease, transform 0.4s ease'
+                transition: 'transform 0.4s ease'
               }}
             >
-              <p className="text-[9px] text-gray-400 mb-1">{step.num}</p>
-              <h4 className="text-[13px] font-bold mb-1">{step.title}</h4>
-              <p className="text-[10px] leading-relaxed max-w-[220px]">{step.description}</p>
+              <div className='flex flex-col gap-3'>
+                <div style={{ opacity: activeStep === i ? 1 : 0.2, transition: 'opacity 0.4s ease' }}>
+                  <p className="text-[9px] text-gray-400 mb-1">{step.num}</p>
+                  <h4 className="text-[13px] font-bold mb-1">{step.title}</h4>
+                </div>
+                <p className="text-[10px] leading-relaxed max-w-[220px]" style={{ opacity: activeStep === i ? 1 : 0.45, transition: 'opacity 0.4s ease' }}>{step.description}</p>
+              </div>
             </div>
           ))}
         </div>
         <div
           className="flex items-center justify-center"
           style={{
-            width: '300px',
-            height: '300px',
-            flexShrink: 0,
+            flex: 1,
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-dasharray='4 4'/%3E%3C/svg%3E")`,
             backgroundPosition: '20px 20px',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 75%)',
-            maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(ellipse at center, black 55%, transparent 90%)',
+            maskImage: 'radial-gradient(ellipse at center, black 55%, transparent 90%)',
           }}
         >
           <svg
@@ -107,6 +109,7 @@ export default function HowItWorks() {
             viewBox="0 0 256 256"
             className="w-[160px] h-[160px] overflow-visible"
           />
+        </div>
         </div>
       </div>
     </section>

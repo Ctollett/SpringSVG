@@ -39,8 +39,8 @@ export function HorizontalSlider({ value, onChange, label, width = 140 }: Horizo
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', userSelect: 'none', WebkitUserSelect: 'none', gap: '16px' }}>
       <div className='flex flex-row gap-4 justify-between items-center w-full'>
-        <span style={{ fontSize: '16px', color: 'black', userSelect: 'none', WebkitUserSelect: 'none'}}>{label}</span>
-        <span style={{ display: 'flex', justifyContent: 'center', width: '36px', height: '18px', border: '1px solid black', borderRadius: '24px', padding: '4px', fontSize: '8px', color: 'black', userSelect: 'none', WebkitUserSelect: 'none' }}>{Math.round(value * 100)}</span>
+        <span style={{ fontSize: '14px', color: 'var(--color-ink)', userSelect: 'none', WebkitUserSelect: 'none'}}>{label}</span>
+        <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '40px', height: '22px', border: '1px solid var(--color-ink)', borderRadius: '24px', padding: '4px', fontSize: '11px', color: 'var(--color-ink)', userSelect: 'none', WebkitUserSelect: 'none' }}>{Math.round(value * 100)}</span>
       </div>
       <div data-drag onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} style={{ cursor: 'pointer', position: 'relative', width: `${width}px`, height: '2px', borderRadius: '4px', backgroundColor: 'lightgrey', overflow: 'visible' }} ref={trackRef}>
         <div style={{ position: 'absolute', backgroundColor: '#000', width: `${value * width}px`, height: '2px', left: 0, borderRadius: '4px', overflow: 'visible' }} />

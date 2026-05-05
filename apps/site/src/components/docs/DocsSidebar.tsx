@@ -22,9 +22,9 @@ export default function DocsSidebar({ activeId, onSelect }: { activeId: string, 
 
       <div className="flex flex-col pl-[24px] gap-3">
         {docsConfig.flatMap(({ category, items }) => [
-          <p key={category} className="text-[8px] font-semibold text-gray-400 uppercase tracking-widest" style={{ borderTop: '1px dashed #9ca3af', paddingTop: '12px', marginTop: '4px' }}>{category}</p>,
+          <p key={category} className="text-[8px] font-semibold uppercase tracking-widest" style={{ color: '#c4c4c4', borderTop: '1px dashed #9ca3af', paddingTop: '12px', marginTop: '4px' }}>{category}</p>,
           ...items.map(({ id, label }) => (
-            <AnimatedNavLink key={id} id={id} label={label} isActive={activeId === id} onClick={onSelect} />
+            <AnimatedNavLink key={id} id={id} label={label} isActive={activeId === id} dimmed={!!activeId && activeId !== id} onClick={onSelect} />
           ))
         ])}
       </div>

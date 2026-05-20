@@ -3,7 +3,7 @@ import hiw2Svg from '../assets/phosphor/ph-function-fill.svg?raw'
 import hiw3Svg from '../assets/phosphor/ph-person-simple-circle-fill.svg?raw'
 import hiw4Svg from '../assets/phosphor/ph-atom-fill.svg?raw'
 import { initMorphSvg, morphSvg } from 'ruun'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 import { useLenis } from 'lenis/react'
 
 const steps = [
@@ -41,6 +41,46 @@ export default function HowItWorks() {
   const morphTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [activeStep, setActiveStep] = useState(0)
 
+  const mobileSvgRef     = useRef<SVGSVGElement>(null)
+  const mobileInitRef    = useRef(false)
+  const mobileFirstRender = useRef(true)
+  const swipeRef         = useRef<HTMLDivElement>(null)
+  const [mobileStep, setMobileStep] = useState(0)
+
+  useEffect(() => {
+    if (!mobileSvgRef.current || mobileInitRef.current) return
+    initMorphSvg(mobileSvgRef.current, steps[0].svg)
+    mobileInitRef.current = true
+  }, [])
+
+  useEffect(() => {
+    if (mobileFirstRender.current) { mobileFirstRender.current = false; return }
+    if (!mobileSvgRef.current) return
+    morphSvg(mobileSvgRef.current, steps[mobileStep].svg, 'smooth')
+  }, [mobileStep])
+
+  const advanceMobile = useCallback((dir: 1 | -1) => {
+    setMobileStep(prev => (prev + dir + steps.length) % steps.length)
+  }, [])
+
+  useEffect(() => {
+    const el = swipeRef.current
+    if (!el) return
+    let startX = 0
+    const onDown = (e: PointerEvent) => { startX = e.clientX }
+    const onUp   = (e: PointerEvent) => {
+      const delta = startX - e.clientX
+      if (Math.abs(delta) < 50) return
+      advanceMobile(delta > 0 ? 1 : -1)
+    }
+    el.addEventListener('pointerdown', onDown)
+    el.addEventListener('pointerup', onUp)
+    return () => {
+      el.removeEventListener('pointerdown', onDown)
+      el.removeEventListener('pointerup', onUp)
+    }
+  }, [advanceMobile])
+
   useEffect(() => {
     if (!svgRef.current || initRef.current) return
     initMorphSvg(svgRef.current, steps[0].svg)
@@ -71,7 +111,44 @@ export default function HowItWorks() {
   })
 
   return (
-    <section ref={sectionRef} style={{ height: '290vh' }}>
+    <>
+    {/* Mobile: tap-to-advance */}
+    <section className="md:hidden flex flex-col border-t-1 border-dashed border-gray-600 pb-16 pt-8">
+      <div className="flex flex-col justify-center items-center p-[16px] gap-2 mb-4">
+        <h3>How it Works</h3>
+      </div>
+      <div
+        ref={swipeRef}
+        className="flex flex-col items-center gap-6 px-4 select-none"
+      >
+        <div
+          className="flex items-center justify-center w-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-dasharray='4 4'/%3E%3C/svg%3E")`,
+            backgroundPosition: '20px 20px',
+            WebkitMaskImage: 'radial-gradient(ellipse at center, black 55%, transparent 90%)',
+            maskImage: 'radial-gradient(ellipse at center, black 55%, transparent 90%)',
+            height: '220px',
+          }}
+        >
+          <svg ref={mobileSvgRef} viewBox="0 0 256 256" className="w-[160px] h-[160px] overflow-visible" />
+        </div>
+        <div className="flex flex-col items-center gap-2 text-center">
+          <p className="text-[9px] text-gray-400">{steps[mobileStep].num}</p>
+          <h4 className="text-[15px] font-bold">{steps[mobileStep].title}</h4>
+          <p className="text-[11px] leading-relaxed max-w-[280px] text-gray-600">{steps[mobileStep].description}</p>
+        </div>
+        <div className="flex gap-2">
+          {steps.map((_, i) => (
+            <div key={i} className="w-[6px] h-[6px] rounded-full bg-black transition-opacity duration-300" style={{ opacity: i === mobileStep ? 1 : 0.2 }} />
+          ))}
+        </div>
+        <p className="text-[9px] text-gray-400">swipe to continue</p>
+      </div>
+    </section>
+
+    {/* Desktop: sticky scroll */}
+    <section ref={sectionRef} style={{ height: '290vh' }} className="hidden md:block">
       <div style={{ position: 'sticky', top: '15vh', height: '70vh' }} className="flex items-center">
         <div className="flex items-stretch gap-10 w-full">
         <div className="flex flex-col justify-center gap-8" style={{ maxWidth: '260px', flexShrink: 0 }}>
@@ -113,5 +190,6 @@ export default function HowItWorks() {
         </div>
       </div>
     </section>
+    </>
   )
 }

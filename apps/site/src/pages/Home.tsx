@@ -9,12 +9,14 @@ export default function Home() {
   return (
     <main className='bg-black min-h-screen'>
       <div className='flex flex-col justify-center items-center w-full self-stretch bg-white relative z-10 rounded-b-[48px] pb-[32px] shadow-[0_20px_60px_rgba(0,0,0,3.0)]'>
-        <div className='w-full max-w-[636px]'>
+        <div className='w-full max-w-[636px] px-4 md:px-0'>
           <Nav />
           <Hero />
           <Demo />
           <HowItWorks />
-          <Playground />
+          <div className='hidden md:block'>
+            <Playground />
+          </div>
         </div>
       </div>
       <Footer />

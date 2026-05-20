@@ -5,6 +5,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: { host: true },
   resolve: {
     alias: {
       ruun: resolve(__dirname, '../../packages/ruune/src/index.ts'),

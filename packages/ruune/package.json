@@ -30,9 +30,18 @@
     "animation",
     "spring",
     "physics",
-    "drawing"
+    "morph"
   ],
   "license": "MIT",
+  "homepage": "https://ruun.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ctollett/ruun-svg.git",
+    "directory": "packages/ruune"
+  },
+  "bugs": {
+    "url": "https://github.com/Ctollett/ruun-svg/issues"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
     "@vitest/coverage-v8": "^4.1.0",

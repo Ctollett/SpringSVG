@@ -33,5 +33,22 @@
     "typescript": "^5.9.3",
     "react": "^19.2.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://ruun.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ctollett/ruun-svg.git",
+    "directory": "packages/ruune-react"
+  },
+  "bugs": {
+    "url": "https://github.com/Ctollett/ruun-svg/issues"
+  },
+  "keywords": [
+    "svg",
+    "animation",
+    "spring",
+    "physics",
+    "morph",
+    "react"
+  ]
 }

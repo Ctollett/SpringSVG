@@ -10,7 +10,7 @@ export default function DocsSidebar({ activeId, onSelect }: { activeId: string, 
   const [hover, setHover] = useState(false)
 
   return (
-    <div className="flex flex-col p-4 pt-12 gap-12 justify-center">
+    <div className="flex flex-col p-4 gap-12" style={{ paddingTop: '112px' }}>
       <Link to="/">
         <button data-hover onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className="text-[18px] leading-none font-semibold">
           <div className='flex flex-row items-center gap-2'>

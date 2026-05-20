@@ -21,7 +21,7 @@ export default function AnimatedNavLink({ id, label, isActive, dimmed = false, o
       className="text-[12px] font-medium"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => onClick(id)}
+      onClick={(e) => { e.preventDefault(); onClick(id) }}
       animate={{
         x: hovered && !isActive ? 8 : 0,
         paddingLeft: isActive ? 8 : 0,

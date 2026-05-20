@@ -1,3 +1,18 @@
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

@@ -7,6 +7,12 @@ export const docsConfig = [
     ]
   },
   {
+    category: 'For Designers',
+    items: [
+      { id: 'for-designers', label: 'Vibe Coding Guide', headings: ['Exporting from Figma', 'Using Presets', 'Drop-in Snippet', 'What Morphs Well'] },
+    ]
+  },
+  {
     category: 'API Reference',
     items: [
       { id: 'morph-svg',      label: 'morphSvg',     headings: ['Usage', 'Parameters', 'Returns']          },

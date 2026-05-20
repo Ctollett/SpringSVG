@@ -54,26 +54,26 @@ export default function Hero() {
     <section className="flex flex-col h-[85vh] w-full justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-6">
         {/* Mobile layout */}
-        <div className='md:hidden flex flex-col gap-0.5 text-[21px] items-center'>
-          <div className='flex flex-row items-center flex-wrap gap-x-1.5 justify-center'>
+        <div className='md:hidden flex flex-col gap-0.5 items-center' style={{ fontSize: '3.8vw' }}>
+          <div className='flex flex-row items-center gap-x-[1.5vw] whitespace-nowrap'>
             <span className='font-bold'>Ruun</span>
-            <RuunSVG className="w-[30px] h-[30px] overflow-visible shrink-0" from={heroIconPairs[0].from} to={heroIconPairs[0].to} active={Active[0]} config={heroIconPairs[0].config}/>
+            <RuunSVG className="w-[5.5vw] h-[5.5vw] overflow-visible shrink-0" from={heroIconPairs[0].from} to={heroIconPairs[0].to} active={Active[0]} config={heroIconPairs[0].config}/>
             <span>is an</span>
             <span className='font-bold'>SVG animation library</span>
-            <RuunSVG className="w-[30px] h-[30px] overflow-visible shrink-0" from={heroIconPairs[1].from} to={heroIconPairs[1].to} active={Active[1]} config={heroIconPairs[1].config}/>
+            <RuunSVG className="w-[5.5vw] h-[5.5vw] overflow-visible shrink-0" from={heroIconPairs[1].from} to={heroIconPairs[1].to} active={Active[1]} config={heroIconPairs[1].config}/>
           </div>
-          <div className='flex flex-row items-center flex-wrap gap-x-1.5 justify-center'>
+          <div className='flex flex-row items-center gap-x-[1.5vw] whitespace-nowrap'>
             <span>powered by spring</span>
-            <RuunSVG className="w-[30px] h-[30px] overflow-visible shrink-0" from={heroIconPairs[2].from} to={heroIconPairs[2].to} active={Active[2]} config={heroIconPairs[2].config}/>
+            <RuunSVG className="w-[5.5vw] h-[5.5vw] overflow-visible shrink-0" from={heroIconPairs[2].from} to={heroIconPairs[2].to} active={Active[2]} config={heroIconPairs[2].config}/>
             <span className='font-bold'>physics,</span>
             <span>built</span>
           </div>
-          <div className='flex flex-row items-center gap-x-1.5 justify-center'>
+          <div className='flex flex-row items-center gap-x-[1.5vw] whitespace-nowrap'>
             <span>for</span>
             <span className='font-bold'>any framework</span>
-            <RuunSVG className="w-[30px] h-[30px] overflow-visible shrink-0" from={heroIconPairs[3].from} to={heroIconPairs[3].to} active={Active[3]} config={heroIconPairs[3].config}/>
+            <RuunSVG className="w-[5.5vw] h-[5.5vw] overflow-visible shrink-0" from={heroIconPairs[3].from} to={heroIconPairs[3].to} active={Active[3]} config={heroIconPairs[3].config}/>
             <span className='font-bold'>any SVG</span>
-            <RuunSVG className="w-[30px] h-[30px] overflow-visible shrink-0" from={heroIconPairs[4].from} to={heroIconPairs[4].to} active={Active[4]} config={heroIconPairs[4].config}/>
+            <RuunSVG className="w-[5.5vw] h-[5.5vw] overflow-visible shrink-0" from={heroIconPairs[4].from} to={heroIconPairs[4].to} active={Active[4]} config={heroIconPairs[4].config}/>
           </div>
         </div>
 

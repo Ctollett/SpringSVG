@@ -1,5 +1,5 @@
 {
-  "name": "ruune-react",
+  "name": "getruun-react",
   "version": "0.1.0",
   "description": "React wrapper for the Ruune SVG morphing library",
   "type": "module",
@@ -25,7 +25,7 @@
     "react": ">=18"
   },
   "dependencies": {
-    "ruune": "workspace:*"
+    "getruun": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

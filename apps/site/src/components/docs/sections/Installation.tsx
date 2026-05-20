@@ -5,7 +5,7 @@ export default function Installation() {
     <DocSection id="installation" title="Installation">
       <DocSubsection title="npm">
         <p style={prose}>Install Ruun and the React bindings via npm. <code style={inline}>ruun</code> provides the core engine and <code style={inline}>ruun-react</code> exposes the declarative component layer.</p>
-        <CodeBlock>npm install ruune ruune-react</CodeBlock>
+        <CodeBlock>npm install getruun getruun-react</CodeBlock>
         <p style={{ ...prose, marginTop: '12px' }}>Both packages are tree-shakeable and have no peer dependencies beyond React.</p>
       </DocSubsection>
 

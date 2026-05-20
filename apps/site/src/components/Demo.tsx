@@ -1,7 +1,7 @@
 
 import { iconPairs } from "../data/iconPairs"
 import {useState} from 'react'
-import { RuunSVG } from 'ruune-react'
+import { RuunSVG } from 'getruun-react'
 
 
 export default function Demo() {

@@ -2,7 +2,7 @@ import checkMarkSvg from '../assets/shapes/check-mark.svg?raw'
 import chevronSingleSvg from '../assets/shapes/chevron-single.svg?raw'
 import chevronTripleSvg from '../assets/shapes/chevron-triple.svg?raw'
 import CopyIcon from '../assets/lucide/copy.svg?raw'
-import { RuunSVG } from 'ruune-react'
+import { RuunSVG } from 'getruun-react'
 import { heroIconPairs } from "../data/iconPairs"
 import { useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
@@ -19,7 +19,7 @@ export default function Hero() {
 
 
    const handleClick = () => {
-      navigator.clipboard.writeText(`npm install ruune`)
+      navigator.clipboard.writeText(`npm install getruun`)
       setIsCopied(true)
       setMorph(true)
       

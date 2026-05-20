@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-import { initMorphSvg, morphSvg } from 'ruune'
-import type { SpringConfig } from 'ruune'
+import { initMorphSvg, morphSvg } from 'getruun'
+import type { SpringConfig } from 'getruun'
 interface RuunProps {
     from: string,
     to: string,

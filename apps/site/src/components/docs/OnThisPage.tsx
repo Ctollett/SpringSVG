@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { useLenis } from 'lenis/react'
-import { RuunSVG } from 'ruune-react'
+import { RuunSVG } from 'getruun-react'
 import textAlignJustifySvg from '../../assets/lucide/text-align-justify.svg?raw'
 import textAlignLeftSvg from '../../assets/lucide/text-align-left.svg?raw'
 

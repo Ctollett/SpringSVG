@@ -1,4 +1,4 @@
-import { RuunSVG } from 'ruune-react'
+import { RuunSVG } from 'getruun-react'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import downloadSvg from '../assets/lucide/download.svg?raw'

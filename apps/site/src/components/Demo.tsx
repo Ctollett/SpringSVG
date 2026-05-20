@@ -7,7 +7,7 @@ import { RuunSVG } from 'ruun-react'
 export default function Demo() {
   const [isActive, setIsActive] = useState(new Array(iconPairs.length).fill(false))
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     setIsActive(prev => (
      prev.map((item, i) => i === index ? !item : item)
     ))

@@ -36,7 +36,7 @@ morphSvg(container, toSvg, 'bouncy')
 
 ## Documentation
 
-Full docs at [ruunsvg.dev/docs](https://ruunsvg.dev/docs)
+Full docs at [getruun.com/docs](https://getruun.com/docs)
 
 ## License
 

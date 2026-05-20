@@ -37,7 +37,7 @@
   "homepage": "https://getruun.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ctollett/ruun-svg.git",
+    "url": "git+https://github.com/Ctollett/ruun-svg.git",
     "directory": "packages/ruune-react"
   },
   "bugs": {

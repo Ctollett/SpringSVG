@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ruun": "workspace:*"
+    "ruune": "workspace:*"
   },
   "devDependencies": {
     "vite": "^6.0.0"

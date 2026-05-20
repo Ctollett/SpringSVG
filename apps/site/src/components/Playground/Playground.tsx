@@ -4,9 +4,9 @@ import arrowRightLeftSvg from '../../assets/lucide/arrow-right-left.svg?raw'
 import triangleSvg from '../../assets/shapes/triangle.svg?raw'
 import { HorizontalSlider } from '../HorizontalSlider'
 import circleSvg from '../../assets/shapes/circle.svg?raw'
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 import { useState } from 'react'
-import type { SpringConfig } from 'ruun'
+import type { SpringConfig } from 'ruune'
 import './Playground.css'
 
 

@@ -5,7 +5,7 @@ export default function MorphSvg() {
     <DocSection id="morph-svg" title="morphSvg">
       <DocSubsection title="Usage">
         <p style={prose}>The core imperative API. Pass a container SVG element, a destination SVG string, and an optional spring config. The animation starts immediately.</p>
-        <CodeBlock>{`import { morphSvg } from 'ruun'
+        <CodeBlock>{`import { morphSvg } from 'ruune'
 
 morphSvg(container, toSvg, {
   stiffness: 200,

@@ -2,7 +2,7 @@ import { docsConfig } from './docsConfig'
 import { Link } from 'react-router-dom'
 import chevronLeftSvg from '../../assets/lucide/chevron-left.svg?raw'
 import chevronsLeftSvg from '../../assets/lucide/chevrons-left.svg?raw'
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 import { useState } from 'react'
 import AnimatedNavLink from './AnimatedNavLink'
 

@@ -5,7 +5,7 @@ export default function InitMorphSvg() {
     <DocSection id="init-morph-svg" title="initMorphSvg">
       <DocSubsection title="Usage">
         <p style={prose}>Seeds path elements into an SVG container so the first <code style={inline}>morphSvg</code> call has no startup cost. Call it at mount time — by the time the user triggers the morph, the DOM is already populated and ready.</p>
-        <CodeBlock>{`import { initMorphSvg, morphSvg } from 'ruun'
+        <CodeBlock>{`import { initMorphSvg, morphSvg } from 'ruune'
 
 const container = document.querySelector('svg')
 

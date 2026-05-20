@@ -5,7 +5,7 @@ export default function QuickStart() {
     <DocSection id="quick-start" title="Quick Start">
       <DocSubsection title="Basic Usage">
         <p style={prose}>Call <code style={inline}>morphSvg</code> with a target element, a destination SVG string, and a spring config. The animation starts immediately and settles naturally — no timings to manage.</p>
-        <CodeBlock>{`import { morphSvg } from 'ruun'
+        <CodeBlock>{`import { morphSvg } from 'ruune'
 
 const el = document.querySelector('svg')
 
@@ -19,7 +19,7 @@ morphSvg(el, targetSvg, {
 
       <DocSubsection title="With React">
         <p style={prose}>Use the <code style={inline}>RuunSVG</code> component to declaratively morph between two SVGs via an <code style={inline}>active</code> prop. State changes drive the spring — no imperative calls needed.</p>
-        <CodeBlock>{`import { RuunSVG } from 'ruun-react'
+        <CodeBlock>{`import { RuunSVG } from 'ruune-react'
 import foxSvg from './fox.svg?raw'
 import owlSvg from './owl.svg?raw'
 

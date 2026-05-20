@@ -8,8 +8,8 @@ export default defineConfig({
   server: { host: true },
   resolve: {
     alias: {
-      ruun: resolve(__dirname, '../../packages/ruune/src/index.ts'),
-      'ruun-react': resolve(__dirname, '../../packages/ruune-react/src/index.ts'),
+      ruune: resolve(__dirname, '../../packages/ruune/src/index.ts'),
+      'ruune-react': resolve(__dirname, '../../packages/ruune-react/src/index.ts'),
     }
   }
 })

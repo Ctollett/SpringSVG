@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 import foxSvg from '../assets/gi-fox-head.svg?raw'
 import owlSvg from '../assets/gi-owl.svg?raw'
 import skullSvg from '../assets/gi-skull-crossed-bones.svg?raw'

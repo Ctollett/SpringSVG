@@ -26,7 +26,7 @@ config="wobbly"   // exaggerated bounce — use sparingly`}</CodeBlock>
       <DocSubsection title="Drop-in Snippet">
         <p style={prose}>Copy this into your AI prompt or drop it straight into a React component. Replace the SVG strings and wire <code style={inline}>isActive</code> to whatever triggers your animation — a click, a hover, a scroll event.</p>
         <CodeBlock>{`import { useState } from 'react'
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 
 // Paste your Figma SVGs here
 const fromSvg = \`<svg viewBox="0 0 24 24"><path d="..." /></svg>\`

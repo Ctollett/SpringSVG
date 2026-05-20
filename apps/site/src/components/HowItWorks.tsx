@@ -2,7 +2,7 @@ import hiw1Svg from '../assets/phosphor/ph-ghost-fill.svg?raw'
 import hiw2Svg from '../assets/phosphor/ph-function-fill.svg?raw'
 import hiw3Svg from '../assets/phosphor/ph-person-simple-circle-fill.svg?raw'
 import hiw4Svg from '../assets/phosphor/ph-atom-fill.svg?raw'
-import { initMorphSvg, morphSvg } from 'ruun'
+import { initMorphSvg, morphSvg } from 'ruune'
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { useLenis } from 'lenis/react'
 

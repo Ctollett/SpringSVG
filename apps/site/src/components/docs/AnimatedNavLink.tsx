@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 import chevronRightSvg from '../../assets/lucide/chevron-right.svg?raw'
 import chevronsRightSvg from '../../assets/lucide/chevrons-right.svg?raw'
 

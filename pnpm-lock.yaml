@@ -10,7 +10,7 @@ importers:
 
   apps/demo:
     dependencies:
-      ruun:
+      ruune:
         specifier: workspace:*
         version: link:../../packages/ruune
     devDependencies:
@@ -38,10 +38,10 @@ importers:
       react-router-dom:
         specifier: ^7.14.2
         version: 7.14.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      ruun:
+      ruune:
         specifier: workspace:*
         version: link:../../packages/ruune
-      ruun-react:
+      ruune-react:
         specifier: workspace:*
         version: link:../../packages/ruune-react
     devDependencies:
@@ -111,7 +111,7 @@ importers:
 
   packages/ruune-react:
     dependencies:
-      ruun:
+      ruune:
         specifier: workspace:*
         version: link:../ruune
     devDependencies:

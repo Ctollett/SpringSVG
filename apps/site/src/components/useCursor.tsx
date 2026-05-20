@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'ruune-react'
 import circleSvg from '../assets/shapes/cursor-circle.svg?raw'
 import crosshairSvg from '../assets/shapes/cursor-crosshair.svg?raw'
 

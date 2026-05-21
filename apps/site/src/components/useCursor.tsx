@@ -9,17 +9,20 @@ export function useCursor() {}
 export const CursorContext = createContext(null)
 
 export function CursorProvider({children}: {children: React.ReactNode}) {
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
     const [hover, setHover] = useState(false)
     const [visible, setVisible] = useState(true)
     const [inverted, setInverted] = useState(false)
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
+        if (isTouchDevice) return
         document.body.classList.add('custom-cursor')
         return () => document.body.classList.remove('custom-cursor')
     }, [])
 
     useEffect(() => {
+        if (isTouchDevice) return
         const handleMouseMove = (e: MouseEvent) => {
             setPosition({x: e.clientX, y: e.clientY})
         }
@@ -54,16 +57,17 @@ export function CursorProvider({children}: {children: React.ReactNode}) {
     return (
         <>
          {children}
-        <div style={{ position: 'fixed', zIndex: 9999, top: position.y, left: position.x, pointerEvents: 'none', transform: 'translate(-50%, -50%)', opacity: visible ? 1 : 0, filter: inverted ? 'invert(1)' : 'none' }}>
-            <RuunSVG
-                className="w-[24px] h-[24px] overflow-visible"
-                from={circleSvg}
-                to={crosshairSvg}
-                active={hover}
-                
-                config={{ stiffness: 400, damping: 25, mass: 0.8 }}
-            />
-        </div>
+        {!isTouchDevice && (
+            <div style={{ position: 'fixed', zIndex: 9999, top: position.y, left: position.x, pointerEvents: 'none', transform: 'translate(-50%, -50%)', opacity: visible ? 1 : 0, filter: inverted ? 'invert(1)' : 'none' }}>
+                <RuunSVG
+                    className="w-[24px] h-[24px] overflow-visible"
+                    from={circleSvg}
+                    to={crosshairSvg}
+                    active={hover}
+                    config={{ stiffness: 400, damping: 25, mass: 0.8 }}
+                />
+            </div>
+        )}
         </>
     )
 }

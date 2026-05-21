@@ -25,7 +25,7 @@ export default function AnimatedNavLink({ id, label, isActive, dimmed = false, o
       animate={{
         x: hovered && !isActive ? 8 : 0,
         paddingLeft: isActive ? 8 : 0,
-        color: isActive ? '#ffffff' : hovered ? '#000000' : dimmed ? '#c4c4c4' : '#1c1c1c',
+        color: isActive ? '#f5f5f7' : hovered ? '#404040' : dimmed ? '#c4c4c4' : '#404040',
       }}
       transition={{ type: 'spring', stiffness: 280, damping: 28, mass: 0.9 }}
       style={{ border: '1px solid transparent', borderRadius: '32px', display: 'inline-flex', alignItems: 'center', gap: '6px', paddingLeft: '0px', paddingRight: '8px', paddingTop: '3px', paddingBottom: '3px', position: 'relative', cursor: 'pointer' }}
@@ -37,7 +37,7 @@ export default function AnimatedNavLink({ id, label, isActive, dimmed = false, o
           ? { type: 'spring', stiffness: 280, damping: 28, mass: 0.9 }
           : { duration: 0 }
         }
-        style={{ position: 'absolute', inset: 0, backgroundColor: '#1c1c1c', borderRadius: '32px', originX: 0 }}
+        style={{ position: 'absolute', inset: 0, backgroundColor: '#404040', borderRadius: '32px', originX: 0 }}
       />
       <span style={{ position: 'relative', zIndex: 1, display: 'inherit', alignItems: 'inherit', gap: 'inherit' }}>
         {label}

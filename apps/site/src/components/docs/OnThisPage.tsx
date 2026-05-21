@@ -58,8 +58,8 @@ export default function OnThisPage({ headings, paddingTop }: { headings: string[
         <a
           key={heading}
           href={`#${toId(heading)}`}
-          className="text-[10px]"
-          style={{ color: activeHeading === heading ? '#1c1c1c' : '#c4c4c4' }}
+          className="text-[12px]"
+          style={{ color: activeHeading === heading ? '#404040' : '#c4c4c4' }}
         >
           {heading}
         </a>

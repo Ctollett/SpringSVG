@@ -17,27 +17,27 @@ export default function Demo() {
   const mobileIcons = iconPairs.slice(0, 9)
 
   return (
-    <section id="demo-section" className="flex flex-col border-t-1 border-dashed border-gray-600 pb-16">
-      <div className="flex flex-col justify-center items-center p-[16px] gap-2">
-        <h3>Less Setup. More Spring</h3>
-        <p className="text-center text-[8px]">Ruun slots into any framework in a single import and handles the physics so you don't have to</p>
+    <section id="demo-section" className="flex flex-col">
+      <div className="flex flex-col justify-center items-center pt-10 pb-6 gap-3">
+        <h3 className="text-[20px] font-semibold leading-none">Less Setup. More Spring</h3>
+        <p className="text-center text-[12px]" style={{ color: '#A3A3A3' }}>Ruun slots into any framework in a single import and handles the physics so you don't have to</p>
       </div>
 
       {/* Mobile grid */}
-      <div className="md:hidden grid grid-cols-3 w-full cursor-pointer">
+      <div className="md:hidden grid grid-cols-3 w-full cursor-pointer gap-1 pt-1 px-1" style={{ strokeWidth: 1 }}>
         {mobileIcons.map((icon, index) => (
           <div data-hover onClick={() => handleClick(index)}
-            className={`flex justify-center items-center aspect-square border-dashed border-gray-400 ${index % 3 !== 2 ? 'border-r' : ''} ${index < 6 ? 'border-b' : ''}`}
+            className="flex justify-center items-center aspect-square bg-[#DCDCDC] rounded-xl"
             key={index}
           ><RuunSVG className="w-[28px] h-[28px]" from={icon.from} to={icon.to} active={isActive[index]} config={icon.config}/></div>
         ))}
       </div>
 
       {/* Desktop grid */}
-      <div className="hidden md:grid grid-cols-8 w-full cursor-pointer">
+      <div className="hidden md:grid grid-cols-8 w-full cursor-pointer gap-1 pt-1 px-1" style={{ strokeWidth: 1 }}>
         {iconPairs.map((icon, index) => (
           <div data-hover onClick={() => handleClick(index)}
-            className={`flex justify-center items-center aspect-square border-dashed border-gray-400 ${index % 8 !== 7 ? 'border-r' : ''} ${index < 32 ? 'border-b' : ''}`}
+            className="flex justify-center items-center aspect-square bg-[#DCDCDC] rounded-xl"
             key={index}
           ><RuunSVG className="w-[24px] h-[24px]" from={icon.from} to={icon.to} active={isActive[index]} config={icon.config}/></div>
         ))}

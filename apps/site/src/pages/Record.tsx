@@ -33,7 +33,7 @@ export default function Record() {
           position: 'relative',
         }}
       >
-        <div style={{ position: 'absolute', top: '12px', left: '12px', backgroundColor: '#1c1c1c', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ position: 'absolute', top: '12px', left: '12px', backgroundColor: '#404040', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polygon points="3 11 22 2 13 21 11 13 3 11"/>
           </svg>

@@ -34,13 +34,13 @@ function SectionNav({ prev, next, onSelect }: { prev: typeof allSections[0] | nu
     <div className='flex flex-row justify-between w-full max-w-[640px] border-t border-dashed border-gray-200 pt-6 pb-16 mt-2'>
       {prev ? (
         <button onClick={() => onSelect(prev.id)} className='flex flex-col gap-1 text-left group'>
-          <span className='text-[9px] uppercase tracking-widest text-gray-400'>Previous</span>
+          <span className='text-[8px] uppercase tracking-widest text-gray-400'>Previous</span>
           <span className='text-[12px] font-medium text-gray-700 group-hover:text-black transition-colors'>← {prev.label}</span>
         </button>
       ) : <div />}
       {next ? (
         <button onClick={() => onSelect(next.id)} className='flex flex-col gap-1 text-right group'>
-          <span className='text-[9px] uppercase tracking-widest text-gray-400'>Next</span>
+          <span className='text-[8px] uppercase tracking-widest text-gray-400'>Next</span>
           <span className='text-[12px] font-medium text-gray-700 group-hover:text-black transition-colors'>{next.label} →</span>
         </button>
       ) : <div />}
@@ -76,11 +76,11 @@ export default function Docs() {
   }
 
   return (
-    <main className='bg-white min-h-screen'>
+    <main className='bg-[#f5f5f7] min-h-screen'>
 
       {/* Mobile top bar */}
-      <div className='md:hidden sticky top-0 z-40 bg-white border-b border-dashed border-gray-300 flex items-center justify-between px-4 h-14'>
-        <Link to="/"><p className='font-semibold text-[18px] leading-none'>Ruun.</p></Link>
+      <div className='md:hidden sticky top-0 z-40 bg-[#f5f5f7] border-b border-dashed border-gray-300 flex items-center justify-between px-4 h-14'>
+        <Link to="/"><p className='font-semibold text-[20px] leading-none'>Ruun.</p></Link>
         <button onClick={() => setDrawerOpen(true)} className='flex flex-col gap-[5px] justify-center items-end w-6'>
           <span className='block h-[1.5px] w-full bg-black' />
           <span className='block h-[1.5px] w-3/4 bg-black' />
@@ -92,7 +92,7 @@ export default function Docs() {
       {drawerOpen && (
         <div className='md:hidden fixed inset-0 z-50 flex justify-end'>
           <div className='absolute inset-0 bg-black/20' onClick={closeDrawer} />
-          <div className='relative bg-white w-[280px] h-full overflow-y-auto shadow-xl flex flex-col pt-8 px-4 gap-8'
+          <div className='relative bg-[#f5f5f7] w-[280px] h-full overflow-y-auto shadow-xl flex flex-col pt-8 px-4 gap-8'
                style={{ animation: `${drawerClosing ? 'slideOutRight' : 'slideInRight'} 0.2s ease` }}>
             <div className='flex flex-col pl-4 gap-3'>
               {docsConfig.flatMap(({ category, items }) => [

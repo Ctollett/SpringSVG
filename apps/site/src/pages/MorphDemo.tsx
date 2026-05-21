@@ -14,14 +14,14 @@ export default function MorphDemo() {
       <div
         data-hover
         onClick={() => setLightActive(v => !v)}
-        style={{ backgroundColor: '#ffffff', borderRadius: '16px', padding: '48px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: '#1c1c1c' }}
+        style={{ backgroundColor: '#ffffff', borderRadius: '16px', padding: '48px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: '#404040' }}
       >
         <RuunSVG className="w-[80px] h-[80px]" from={foxSvg} to={owlSvg} active={lightActive} config={{ stiffness: 200, damping: 16, mass: 1.0 }} />
       </div>
       <div
         data-hover
         onClick={() => setDarkActive(v => !v)}
-        style={{ backgroundColor: '#1c1c1c', borderRadius: '16px', padding: '48px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', color: '#ffffff' }}
+        style={{ backgroundColor: '#404040', borderRadius: '16px', padding: '48px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', color: '#ffffff' }}
       >
         <RuunSVG className="w-[80px] h-[80px]" from={skullSvg} to={ghostSvg} active={darkActive} config={{ stiffness: 200, damping: 16, mass: 1.0 }} />
       </div>

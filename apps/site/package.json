@@ -10,14 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.2",
     "framer-motion": "^12.38.0",
+    "getruun": "workspace:*",
+    "getruun-react": "workspace:*",
     "lenis": "^1.3.23",
     "lucide-react": "^1.8.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.14.2",
-    "getruun": "workspace:*",
-    "getruun-react": "workspace:*"
+    "react-router-dom": "^7.14.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

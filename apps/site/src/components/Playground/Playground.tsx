@@ -161,7 +161,7 @@ const [springConfig, setSpringConfig] = useState({stiffness: 200, damping: 20, m
 
   return (
     <section className="pb-16">
-      <div className="flex flex-col justify-center items-center h-84 gap-2">
+      <div className="flex flex-col justify-center items-center pb-10 gap-2">
         <h3 className='text-xl font-bold'>Try it Out</h3>
         <p className='text-sm text-ink-secondary'>Lorem ipsum dolor sit amet</p>
       </div>

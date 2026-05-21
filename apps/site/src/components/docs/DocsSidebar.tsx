@@ -12,7 +12,7 @@ export default function DocsSidebar({ activeId, onSelect }: { activeId: string, 
   return (
     <div className="flex flex-col pr-6 pb-4 gap-8" style={{ paddingTop: '112px', paddingLeft: '16px' }}>
       <Link to="/">
-        <button data-hover onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className="text-[18px] leading-none font-semibold">
+        <button data-hover onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className="text-[20px] leading-none font-semibold">
           <div className='flex flex-row items-center gap-2'>
             <RuunSVG className="w-[16px] h-[16px] overflow-visible" from={chevronLeftSvg} to={chevronsLeftSvg} active={hover} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
             <span>Ruun.</span>

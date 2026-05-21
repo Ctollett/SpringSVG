@@ -6,21 +6,21 @@ import { RuunSVG } from 'getruun-react'
 import { heroIconPairs } from "../data/iconPairs"
 import { useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 
-const textContainer = {
+const textContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 }
 
-const line = {
+const line: Variants = {
   hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
 }
 
-const buttons = {
+const buttons: Variants = {
   hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut', delay: 0.4 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 } },
 }
 
 

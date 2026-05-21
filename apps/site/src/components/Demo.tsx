@@ -29,7 +29,7 @@ export default function Demo() {
           <div data-hover onClick={() => handleClick(index)}
             className={`flex justify-center items-center aspect-square border-dashed border-gray-400 ${index % 3 !== 2 ? 'border-r' : ''} ${index < 6 ? 'border-b' : ''}`}
             key={index}
-          ><RuunSVG className="w-[36px] h-[36px]" from={icon.from} to={icon.to} active={isActive[index]} config={icon.config}/></div>
+          ><RuunSVG className="w-[28px] h-[28px]" from={icon.from} to={icon.to} active={isActive[index]} config={icon.config}/></div>
         ))}
       </div>
 

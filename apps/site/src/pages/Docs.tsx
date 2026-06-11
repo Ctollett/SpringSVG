@@ -111,12 +111,14 @@ export default function Docs() {
         <div style={{ position: 'sticky', top: 0, height: '100vh', overflowY: 'auto', flexShrink: 0 }}>
           <DocsSidebar activeId={activeId} onSelect={setActiveId} />
         </div>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: CONTENT_TOP }}>
-          {Section && <Section />}
-          <SectionNav prev={prev} next={next} onSelect={setActiveId} />
-        </div>
-        <div style={{ position: 'sticky', top: 0, height: '100vh', overflowY: 'auto', flexShrink: 0 }}>
-          <OnThisPage headings={activeHeadings} paddingTop={CONTENT_TOP} />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', paddingTop: CONTENT_TOP, gap: '48px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '640px', width: '100%' }}>
+            {Section && <Section />}
+            <SectionNav prev={prev} next={next} onSelect={setActiveId} />
+          </div>
+          <div style={{ position: 'sticky', top: CONTENT_TOP, flexShrink: 0 }}>
+            <OnThisPage headings={activeHeadings} paddingTop={0} />
+          </div>
         </div>
       </div>
 

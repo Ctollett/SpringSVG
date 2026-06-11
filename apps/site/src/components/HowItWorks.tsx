@@ -111,11 +111,13 @@ export default function HowItWorks() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-                  style={{ position: 'absolute', inset: 0, padding: '0 20px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}
+                  style={{ position: 'absolute', inset: 0, padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
                 >
-                  <p className="text-[8px] leading-none uppercase tracking-widest mb-2" style={{ color: '#C0C0C0' }}>{steps[activeStep].num}</p>
-                  <h4 className="text-[16px] font-semibold leading-snug mb-1">{steps[activeStep].title}</h4>
-                  <p className="text-[12px] leading-relaxed" style={{ color: '#A3A3A3' }}>{steps[activeStep].description}</p>
+                  <p className="text-[8px] leading-none uppercase tracking-widest" style={{ color: '#C0C0C0' }}>{steps[activeStep].num}</p>
+                  <div className="flex flex-col gap-2">
+                    <h4 className="text-[16px] font-semibold leading-snug">{steps[activeStep].title}</h4>
+                    <p className="text-[12px] leading-relaxed" style={{ color: '#A3A3A3' }}>{steps[activeStep].description}</p>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>

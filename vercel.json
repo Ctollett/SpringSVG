@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm --filter getruun build && pnpm --filter site build",
+  "buildCommand": "pnpm --filter getruun build && pnpm --filter getruun-react build && pnpm --filter site build",
   "outputDirectory": "apps/site/dist",
   "installCommand": "pnpm install --frozen-lockfile"
 }

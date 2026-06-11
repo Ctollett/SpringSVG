@@ -606,18 +606,6 @@ export function splitSubpaths(commands: PathCommand[]): PathCommand[][] {
     return subpaths
 }
 
-// Collapse a subpath to a zero-area point at (x, y) with enough C commands to
-// match partner curve count during resampling. Avoids fill-rule artifacts when
-// extra subpaths overlap with real cutout subpaths on the shorter side.
-function collapseToPoint(sub: PathCommand[], x: number, y: number): PathCommand[] {
-    const curveCount = Math.max(4, sub.filter(c => c.type === 'C').length)
-    const result: PathCommand[] = [{ type: 'M', values: [x, y] }]
-    for (let i = 0; i < curveCount; i++) {
-        result.push({ type: 'C', values: [x, y, x, y, x, y] })
-    }
-    return result
-}
-
 // For a resampled [M, C, C, ...] path, return the endpoint (x,y) of each C command.
 function curveEndpoints(cmds: PathCommand[]): [number, number][] {
     return cmds.filter(c => c.type === 'C').map(c => [c.values[4]!, c.values[5]!])
@@ -672,28 +660,14 @@ export function normalize(a: MorphTarget, b: MorphTarget): [MorphTarget, MorphTa
     const aSubs = filterDegenerate(splitSubpaths(aCmds))
     const bSubs = filterDegenerate(splitSubpaths(bCmds))
 
-    // When FROM has extra subpaths: collapse BOTH the FROM extra AND the TO padding to the
-    // same zero-area point so the spring has nothing to animate for those subpaths.
-    // The caller (morph.ts) is responsible for fading them out via an overlay element.
-    while (bSubs.length < aSubs.length) {
-        const idx = bSubs.length
-        const paired = aSubs[idx]!
-        const m = paired.find(c => c.type === 'M')!
-        const collapsed = collapseToPoint(paired, m.values[0]!, m.values[1]!)
-        aSubs[idx] = [...collapsed]   // also collapse FROM's extra — invisible in spring
-        bSubs.push([...collapsed])    // TO padding matches exactly → no movement
-    }
-    // When TO has extra subpaths: pad FROM with collapsed points but leave TO intact,
-    // so those subpaths grow from nothing to their final shape.
-    while (aSubs.length < bSubs.length) {
-        const paired = bSubs[aSubs.length]!
-        const m = paired.find(c => c.type === 'M')!
-        aSubs.push(collapseToPoint(paired, m.values[0]!, m.values[1]!))
-    }
+    // Only normalize the subpaths both shapes share. Extra subpaths on either
+    // side are handled by morph.ts via fade overlays — never by collapsed dots,
+    // which render as visible marks with round stroke linecaps.
+    const count = Math.min(aSubs.length, bSubs.length)
 
     const aNorm: PathCommand[] = []
     const bNorm: PathCommand[] = []
-    for (let i = 0; i < aSubs.length; i++) {
+    for (let i = 0; i < count; i++) {
         const aSub = aSubs[i]!
         const bSub = bSubs[i]!
         const N = Math.min(64, Math.max(32,

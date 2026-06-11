@@ -20,7 +20,7 @@ export default function Demo() {
     <section id="demo-section" className="flex flex-col">
       <div className="flex flex-col justify-center items-center pt-10 pb-6 gap-3">
         <h3 className="text-[20px] font-semibold leading-none">Less Setup. More Spring</h3>
-        <p className="text-center text-[12px]" style={{ color: '#A3A3A3' }}>Ruun slots into any framework in a single import and handles the physics so you don't have to</p>
+        <p className="text-center text-[12px]" style={{ color: '#A3A3A3' }}>Ruun slots into any framework in a single import<br className="block md:hidden" /> and handles the physics so you don't have to</p>
       </div>
 
       {/* Mobile grid */}

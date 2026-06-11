@@ -9,7 +9,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <div className="flex items-center justify-between w-full pt-24 pb-64">
+    <div className="flex items-center justify-center gap-10 pt-40 pb-64">
       {stats.map((stat, i) => (
         <motion.div
           key={stat.value}
@@ -19,8 +19,8 @@ export default function Stats() {
           transition={{ duration: 0.5, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true, amount: 0.5 }}
         >
-          <p className="text-[26px] font-semibold leading-none tracking-tight">{stat.value}</p>
-          <p className="text-[11px] uppercase tracking-widest" style={{ color: '#A3A3A3' }}>{stat.label}</p>
+          <p className="text-[18px] font-semibold leading-none tracking-tight">{stat.value}</p>
+          <p className="text-[10px] uppercase tracking-widest" style={{ color: '#A3A3A3' }}>{stat.label}</p>
         </motion.div>
       ))}
     </div>

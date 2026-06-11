@@ -6,7 +6,7 @@ import '../App.css'
 
 export default function Footer() {
   return (
-     <section data-cursor-invert className="w-full self-stretch bg-[#1a1a1a] sticky bottom-0 z-0">
+     <section data-cursor-invert className="w-full self-stretch bg-[#080808] sticky bottom-0 z-0">
       <div className="flex flex-col gap-4 items-center text-white pt-10 px-4">
         <h3 className="text-[16px] font-medium">Start animating any SVG in minutes</h3>
         <div className="flex flex-row gap-3">

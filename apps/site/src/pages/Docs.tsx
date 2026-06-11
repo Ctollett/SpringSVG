@@ -82,16 +82,16 @@ export default function Docs() {
       <div className='md:hidden sticky top-0 z-40 bg-[#f5f5f7] border-b border-dashed border-gray-300 flex items-center justify-between px-4 h-14'>
         <Link to="/"><p className='font-semibold text-[20px] leading-none'>Ruun.</p></Link>
         <button onClick={() => setDrawerOpen(true)} className='flex flex-col gap-[5px] justify-center items-end w-6'>
-          <span className='block h-[1.5px] w-full bg-black' />
-          <span className='block h-[1.5px] w-3/4 bg-black' />
-          <span className='block h-[1.5px] w-1/2 bg-black' />
+          <span className='block h-[1.5px] w-full bg-[#080808]' />
+          <span className='block h-[1.5px] w-3/4 bg-[#080808]' />
+          <span className='block h-[1.5px] w-1/2 bg-[#080808]' />
         </button>
       </div>
 
       {/* Mobile drawer */}
       {drawerOpen && (
         <div className='md:hidden fixed inset-0 z-50 flex justify-end'>
-          <div className='absolute inset-0 bg-black/20' onClick={closeDrawer} />
+          <div className='absolute inset-0 bg-[#080808]/20' onClick={closeDrawer} />
           <div className='relative bg-[#f5f5f7] w-[280px] h-full overflow-y-auto shadow-xl flex flex-col pt-8 px-4 gap-8'
                style={{ animation: `${drawerClosing ? 'slideOutRight' : 'slideInRight'} 0.2s ease` }}>
             <div className='flex flex-col pl-4 gap-3'>

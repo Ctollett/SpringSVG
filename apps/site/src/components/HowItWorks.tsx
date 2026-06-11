@@ -35,9 +35,9 @@ const steps = [
 ]
 
 export default function HowItWorks() {
-  const sectionRef   = useRef<HTMLDivElement>(null)
-  const svgRef       = useRef<SVGSVGElement>(null)
-  const initRef      = useRef(false)
+  const sectionRef    = useRef<HTMLDivElement>(null)
+  const svgRef        = useRef<SVGSVGElement>(null)
+  const initRef       = useRef(false)
   const activeStepRef = useRef(0)
   const morphTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [activeStep, setActiveStep] = useState(0)
@@ -52,7 +52,9 @@ export default function HowItWorks() {
     }
   }, [])
 
+  // Desktop only — scroll drives the morph
   useLenis(() => {
+    if (window.innerWidth < 768) return
     if (!sectionRef.current || !svgRef.current || !initRef.current) return
     const rect        = sectionRef.current.getBoundingClientRect()
     const scrolled    = -rect.top
@@ -65,16 +67,32 @@ export default function HowItWorks() {
     setActiveStep(step)
     if (morphTimerRef.current) clearTimeout(morphTimerRef.current)
     morphTimerRef.current = setTimeout(() => {
-      if (svgRef.current) morphSvg(svgRef.current, steps[activeStepRef.current].svg, 'smooth')
+      if (svgRef.current) morphSvg(svgRef.current, steps[activeStepRef.current].svg, { stiffness: 200, damping: 24, mass: 1 })
     }, 60)
   })
 
+  // Mobile only — chevron tap drives the morph
+  const goToStep = (next: number) => {
+    if (next < 0 || next >= steps.length || !svgRef.current || !initRef.current) return
+    activeStepRef.current = next
+    setActiveStep(next)
+    morphSvg(svgRef.current, steps[next].svg, { stiffness: 200, damping: 24, mass: 1 })
+  }
+
+  const dots = steps.map((_, i) => (
+    <div
+      key={i}
+      className="rounded-full bg-[#080808] transition-opacity duration-300"
+      style={{ width: '4px', height: '4px', opacity: i === activeStep ? 1 : 0.15 }}
+    />
+  ))
+
   return (
-    <section ref={sectionRef} style={{ height: '300vh' }}>
-      <div style={{ position: 'sticky', top: '50%', transform: 'translateY(-50%)' }} className="flex flex-col gap-8">
+    <section ref={sectionRef} className="md:h-[300vh]">
+      <div className="md:sticky md:top-1/2 md:-translate-y-1/2 flex flex-col gap-8">
         <p className="text-[20px] font-semibold leading-none">How it Works</p>
 
-        {/* Card + tab */}
+        {/* Card */}
         <div className="relative w-full">
           <div className="w-full rounded-xl flex flex-col" style={{ backgroundColor: '#DCDCDC', height: '420px' }}>
             {/* White SVG frame */}
@@ -103,16 +121,37 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Vertical progress tab */}
-          <div style={{ position: 'absolute', right: '-20px', top: '50%', transform: 'translateY(-50%)', backgroundColor: '#DCDCDC', borderRadius: '99px', padding: '10px 6px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            {steps.map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full bg-black transition-opacity duration-300"
-                style={{ width: '4px', height: '4px', opacity: i === activeStep ? 1 : 0.15 }}
-              />
-            ))}
+          {/* Vertical progress tab — desktop only */}
+          <div className="hidden md:flex" style={{ position: 'absolute', right: '-20px', top: '50%', transform: 'translateY(-50%)', backgroundColor: '#DCDCDC', borderRadius: '99px', padding: '10px 6px', flexDirection: 'column', gap: '6px' }}>
+            {dots}
           </div>
+        </div>
+
+        {/* Chevron navigation — mobile only */}
+        <div className="md:hidden flex items-center justify-center gap-6">
+          <button
+            onClick={() => goToStep(activeStep - 1)}
+            disabled={activeStep === 0}
+            className="flex items-center justify-center w-[56px] h-[56px] rounded-full bg-[#DCDCDC] transition-opacity"
+            style={{ opacity: activeStep === 0 ? 0.3 : 1 }}
+          >
+            <svg width="22" height="22" viewBox="0 0 14 14" fill="none">
+              <path d="M9 11L5 7l4-4" stroke="#080808" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          <div className="flex items-center gap-[6px]">{dots}</div>
+
+          <button
+            onClick={() => goToStep(activeStep + 1)}
+            disabled={activeStep === steps.length - 1}
+            className="flex items-center justify-center w-[56px] h-[56px] rounded-full bg-[#DCDCDC] transition-opacity"
+            style={{ opacity: activeStep === steps.length - 1 ? 0.3 : 1 }}
+          >
+            <svg width="22" height="22" viewBox="0 0 14 14" fill="none">
+              <path d="M5 3l4 4-4 4" stroke="#080808" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

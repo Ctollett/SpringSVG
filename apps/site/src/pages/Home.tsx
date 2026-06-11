@@ -8,13 +8,13 @@ import Footer from '../components/Footer'
 
 export default function Home() {
   return (
-    <main className='bg-[#1a1a1a] min-h-screen'>
+    <main className='bg-[#080808] min-h-screen'>
       <div className='flex flex-col justify-center items-center w-full self-stretch bg-white relative z-10 rounded-b-[48px] pb-[32px] shadow-[0_20px_60px_rgba(0,0,0,3.0)]'>
-        <div className='w-full max-w-[636px] px-4 md:px-0'>
+        <div className='w-full max-w-[700px] px-4 md:px-0'>
           <Nav />
           <Hero />
           <Demo />
-          <div style={{ height: '50vh' }} />
+          <div className="h-[96px] md:h-[50vh]" />
           <HowItWorks />
           <Stats />
           <div className='hidden md:block'>

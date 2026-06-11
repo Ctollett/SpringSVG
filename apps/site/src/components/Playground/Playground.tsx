@@ -53,7 +53,7 @@ import './Playground.css'
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              border: !isSettled ? '1px solid var(--color-border)' : '1px solid var(--color-border-strong)',
+              border: !isSettled ? '1px solid var(--color-border)' : fillHover ? '1px solid #080808' : '1px solid var(--color-border-strong)',
               borderRadius: '9999px',
               width: '80px',
               height: '26px',
@@ -62,7 +62,7 @@ import './Playground.css'
               cursor: !isSettled ? 'not-allowed' : 'pointer',
             }}
           >
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'var(--color-ink)', height: (fillHover && isSettled) || !isSettled ? '100%' : '0%', transition: 'height 0.4s ease' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#080808', height: (fillHover && isSettled) || !isSettled ? '100%' : '0%', transition: 'height 0.4s ease' }} />
             <span style={{ position: 'relative', zIndex: 10, mixBlendMode: 'difference', color: 'white', display: 'flex', alignItems: 'center', gap: '4px' }}>
               Morph
               <RuunSVG className="w-[8px] h-[8px] overflow-visible" from={arrowLeftRightSvg} to={arrowRightLeftSvg} active={arrowActive} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />

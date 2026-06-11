@@ -3,18 +3,18 @@ import { ReactLenis } from 'lenis/react'
 import { CursorProvider } from './components/useCursor'
 import Home from './pages/Home'
 import Docs from './pages/Docs'
-import Showcase from './pages/Showcase'
+import PullUpFooter from './pages/lab/PullUpFooter'
 import Record from './pages/Record'
 import MorphDemo from './pages/MorphDemo'
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ReactLenis root options={{ lerp: 0.08, duration: 1.2 }}>
+      <ReactLenis root options={{ lerp: 0.1, duration: 1.0 }}>
           <Routes>
             <Route path="/" element={<CursorProvider><Home /></CursorProvider>} />
             <Route path="/docs" element={<CursorProvider><Docs /></CursorProvider>} />
-            <Route path="/showcase" element={<Showcase />} />
+            <Route path="/lab/pull-up-footer" element={<PullUpFooter />} />
             <Route path="/record" element={<Record />} />
             <Route path="/morph" element={<MorphDemo />} />
           </Routes>

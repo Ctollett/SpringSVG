@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "packageManager": "pnpm@10.32.1",
   "scripts": {
-    "build": "pnpm --filter ruun build",
+    "build": "pnpm --filter getruun build",
     "dev": "pnpm --parallel --filter '*' dev",
-    "test": "pnpm --filter ruun test",
+    "test": "pnpm --filter getruun test",
     "lint": "pnpm --filter '*' lint"
   }
 }

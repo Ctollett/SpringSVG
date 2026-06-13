@@ -43,7 +43,7 @@ export default function Hero() {
       container.style.fontSize = '512px'
       const probeW = line1.offsetWidth
       if (probeW === 0) return
-      container.style.fontSize = Math.floor((available * 0.72 / probeW) * 512) + 'px'
+      container.style.fontSize = Math.floor((available * 0.88 / probeW) * 512) + 'px'
     }
     fit()
     document.fonts.ready.then(() => requestAnimationFrame(fit))
@@ -108,7 +108,7 @@ export default function Hero() {
           <motion.div variants={item} className='leading-none w-full overflow-hidden'>
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>SVG Morphing</span>
           </motion.div>
-          <motion.div variants={item} className='text-[12px] leading-snug font-normal' style={{ color: '#ABABAB', marginTop: '20px' }}>
+          <motion.div variants={item} className='text-[14px] leading-snug font-normal' style={{ color: '#ABABAB', marginTop: '20px' }}>
             <span>Drop in two SVG strings, hook up a trigger,</span>
             <br />
             <span>and the spring animation handles itself.</span>

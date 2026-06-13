@@ -12,7 +12,7 @@ export default function Footer() {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('npm install ruun')
+    navigator.clipboard.writeText('npm install getruun')
     setCopied(true)
   }
 
@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="flex flex-col gap-4 items-center text-white pt-10 px-4">
         <h3 className="text-[16px] font-medium">Start animating any SVG in minutes</h3>
         <div className="flex flex-row gap-3">
-          <button data-hover onClick={handleCopy} className="hidden md:flex leading-none gap-2 justify-center items-center text-[12px] px-4 h-[30px] rounded-full" style={{ color: copied ? '#A3A3A3' : 'white' }}>npm install ruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox="0 0 24 24" from={CopyIcon} to={checkMarkSvg} active={copied} config={{ stiffness: 400, damping: 20, mass: 0.8 }} /></button>
+          <button data-hover onClick={handleCopy} className="hidden md:flex leading-none gap-2 justify-center items-center text-[12px] px-4 h-[30px] rounded-full" style={{ color: copied ? '#A3A3A3' : 'white' }}>npm install getruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox="0 0 24 24" from={CopyIcon} to={checkMarkSvg} active={copied} config={{ stiffness: 400, damping: 20, mass: 0.8 }} /></button>
           <Link data-hover to="/docs" className="flex leading-none gap-2 justify-center items-center text-[12px] px-4 h-[30px] rounded-full">Read the docs <span className='rotate-270' style={{color: 'white', cursor: 'pointer'}} dangerouslySetInnerHTML={{ __html: ArrowIcon }} /></Link>
         </div>
         <div className="flex flex-row items-end w-full max-w-[636px] md:px-0 border-t border-dashed border-white/30 pt-6 pb-10 text-[12px] text-white/50">

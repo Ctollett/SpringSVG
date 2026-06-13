@@ -47,6 +47,23 @@ function fadeInExtraSubpaths(element: SVGPathElement, extraD: string): SVGPathEl
     return overlay
 }
 
+/**
+ * Low-level function that animates a single `<path>` element toward a target path string
+ * using spring physics. For most use cases, use {@link morphSvg} instead — it handles
+ * the full SVG container, viewBox scaling, multi-path SVGs, and preset configs.
+ *
+ * @param element - A single `<path>` DOM element to animate
+ * @param targetPath - The target SVG path `d` attribute string to morph toward
+ * @param config - Spring configuration object. Does not accept preset strings — use a {@link SpringConfig} object directly
+ * @param onSettle - Optional callback fired once the spring animation comes to rest
+ * @returns The animation ID — can be used internally to track or cancel the animation
+ *
+ * @remarks
+ * - Inherits velocity from any in-progress animation on the same element, so retargeting
+ *   mid-animation stays smooth with no jarring jump
+ * - Respects `prefers-reduced-motion` — jumps instantly to the target if enabled
+ * - Handles subpath count mismatches by fading extra subpaths in or out
+ */
 export function morph (
     element: SVGPathElement,
     targetPath: string,

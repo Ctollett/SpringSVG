@@ -1,28 +1,32 @@
-import { DocSection, DocSubsection, CodeBlock, prose, inline } from '../DocSection'
+import { DocSection, DocSubsection, CodeBlock, ParamList, ParamRow, prose, inline } from '../DocSection'
 
 export default function RuunSVG() {
   return (
     <DocSection id="ruun-svg" title="RuunSVG">
       <DocSubsection title="Usage">
-        <p style={prose}>The React component wrapper around <code style={inline}>morphSvg</code>. Toggle <code style={inline}>active</code> and the spring handles the rest — no refs, no effects.</p>
-        <CodeBlock>{`<RuunSVG
+        <p style={prose}>The React component for declarative morphing. Give it two SVG strings and flip <code style={inline}>active</code> to trigger the animation. You can toggle it mid-morph and the spring will pick up from wherever the paths are.</p>
+        <CodeBlock>{`import { RuunSVG } from 'getruun-react'
+
+<RuunSVG
   from={fromSvg}
   to={toSvg}
   active={isActive}
-  config={{ stiffness: 200, damping: 20, mass: 1 }}
+  config="smooth"
   onSettle={() => console.log('settled')}
 />`}</CodeBlock>
-        <p style={{ ...prose, marginTop: '12px' }}>You can flip <code style={inline}>active</code> mid-animation — the spring picks up from wherever the paths currently are and retargets smoothly.</p>
       </DocSubsection>
 
       <DocSubsection title="Props">
-        <p style={prose}>Only <code style={inline}>from</code> and <code style={inline}>to</code> are required. All other props are optional and fall back to library defaults.</p>
-        <CodeBlock>{`from      string         — source SVG string (required)
-to        string         — target SVG string (required)
-active    boolean        — drives direction of morph
-config    SpringConfig   — optional spring parameters
-onSettle  () => void     — called when animation settles
-className string         — applied to the svg element`}</CodeBlock>
+        <ParamList>
+          <ParamRow name="from" type="string" required>The source SVG string.</ParamRow>
+          <ParamRow name="to" type="string" required>The target SVG string.</ParamRow>
+          <ParamRow name="active" type="boolean" required>Controls which direction to morph.</ParamRow>
+          <ParamRow name="config" type="SpringConfig | string">A SpringConfig object or preset name. Defaults to 'smooth'.</ParamRow>
+          <ParamRow name="onSettle" type="() => void">Called when the animation finishes settling.</ParamRow>
+          <ParamRow name="className" type="string">Passed through to the underlying svg element.</ParamRow>
+          <ParamRow name="viewBox" type="string">Overrides the viewBox parsed from the source SVG.</ParamRow>
+        </ParamList>
+        <p style={{ ...prose, marginTop: '12px' }}>Preset names for <code style={inline}>config</code>: <code style={inline}>'gentle'</code>, <code style={inline}>'smooth'</code>, <code style={inline}>'stiff'</code>, <code style={inline}>'bouncy'</code>, <code style={inline}>'wobbly'</code>. Leave it out to use <code style={inline}>'smooth'</code> by default.</p>
       </DocSubsection>
     </DocSection>
   )

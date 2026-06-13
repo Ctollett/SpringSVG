@@ -4,7 +4,7 @@ import type { SpringConfig } from 'getruun'
 interface RuunProps {
     from: string,
     to: string,
-    config?: SpringConfig
+    config?: SpringConfig | string
     className?: string
     active: boolean,
     onSettle?: () => void

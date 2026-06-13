@@ -1,10 +1,10 @@
-import { DocSection, DocSubsection, CodeBlock, prose, inline } from '../DocSection'
+import { DocSection, DocSubsection, CodeBlock, ParamList, ParamRow, prose, inline } from '../DocSection'
 
 export default function MorphSvg() {
   return (
     <DocSection id="morph-svg" title="morphSvg">
       <DocSubsection title="Usage">
-        <p style={prose}>The core imperative API. Pass a container SVG element, a destination SVG string, and an optional spring config. The animation starts immediately.</p>
+        <p style={prose}>The main function for triggering a morph. Pass it the container, the SVG you want to animate toward, and an optional config. The animation starts right away.</p>
         <CodeBlock>{`import { morphSvg } from 'getruun'
 
 morphSvg(container, toSvg, {
@@ -15,15 +15,16 @@ morphSvg(container, toSvg, {
       </DocSubsection>
 
       <DocSubsection title="Parameters">
-        <p style={prose}>Only <code style={inline}>container</code> and <code style={inline}>toSvg</code> are required. <code style={inline}>config</code> accepts a <code style={inline}>SpringConfig</code> object or a preset string — <code style={inline}>'gentle'</code>, <code style={inline}>'smooth'</code>, <code style={inline}>'stiff'</code>, <code style={inline}>'bouncy'</code>, or <code style={inline}>'wobbly'</code>.</p>
-        <CodeBlock>{`container  SVGSVGElement          — the svg element to morph
-toSvg      string                 — destination SVG markup
-config     SpringConfig | string  — optional, defaults to 'smooth'
-onSettle   () => void             — optional, called when animation settles`}</CodeBlock>
+        <ParamList>
+          <ParamRow name="container" type="SVGSVGElement" required>The svg element previously set up with initMorphSvg. This is where the paths live and what gets animated.</ParamRow>
+          <ParamRow name="toSvg" type="string" required>The target SVG markup to animate toward.</ParamRow>
+          <ParamRow name="config" type="SpringConfig | string">A SpringConfig object or one of the preset names: 'gentle', 'smooth', 'stiff', 'bouncy', or 'wobbly'. Defaults to 'smooth'.</ParamRow>
+          <ParamRow name="onSettle" type="() => void">Called when the animation finishes settling.</ParamRow>
+        </ParamList>
       </DocSubsection>
 
       <DocSubsection title="Returns">
-        <p style={prose}><code style={inline}>morphSvg</code> returns <code style={inline}>void</code>. Calling it again mid-animation retargets smoothly — the spring inherits the current velocity so motion stays continuous.</p>
+        <p style={prose}>Returns <code style={inline}>void</code>. You can call it again while an animation is in progress and it will retarget smoothly, picking up from the current position and velocity.</p>
       </DocSubsection>
     </DocSection>
   )

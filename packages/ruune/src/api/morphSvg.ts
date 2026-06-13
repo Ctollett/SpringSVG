@@ -13,6 +13,26 @@ function containerViewBox(container: SVGSVGElement): [number, number, number, nu
     return [parts[0] ?? 0, parts[1] ?? 0, parts[2] ?? 100, parts[3] ?? 100]
 }
 
+/**
+ * Initializes a container `<svg>` element with path elements parsed from a source SVG string.
+ * Must be called once before {@link morphSvg} — it sets up the path elements that the
+ * spring animation will drive.
+ *
+ * @param container - An empty `<svg>` element in the DOM
+ * @param fromSvg - The starting SVG markup string, typically imported with `?raw` in Vite
+ *
+ * @remarks
+ * Safe to call multiple times — if the container already has path elements, this is a no-op.
+ *
+ * @example
+ * ```ts
+ * import { initMorphSvg } from 'getruun'
+ * import foxSvg from './fox.svg?raw'
+ *
+ * const container = document.querySelector('svg')
+ * initMorphSvg(container, foxSvg)
+ * ```
+ */
 export function initMorphSvg(
     container: SVGSVGElement,
     fromSvg: string,
@@ -36,6 +56,38 @@ export function initMorphSvg(
     els.forEach((el, i) => el.setAttribute('d', scaledFrom[i] ?? ''))
 }
 
+/**
+ * Morphs the paths inside a container `<svg>` element toward a target SVG using spring physics.
+ * The container must first be initialized with {@link initMorphSvg}.
+ *
+ * @param container - The `<svg>` element previously initialized with `initMorphSvg`
+ * @param toSvg - The target SVG markup string to morph toward
+ * @param config - Spring configuration object or a preset name. Defaults to `'smooth'`.
+ *                 Available presets: `'gentle'`, `'smooth'`, `'stiff'`, `'bouncy'`, `'wobbly'`
+ * @param onSettle - Optional callback fired once the spring animation comes to rest
+ *
+ * @remarks
+ * - Calling `morphSvg` mid-animation retargets smoothly — the spring inherits the current
+ *   velocity so motion stays continuous with no jarring jump
+ * - Automatically respects `prefers-reduced-motion` — jumps instantly to the target shape
+ *   if the user has reduced motion enabled
+ * - Handles multi-path SVGs — if the target has more or fewer paths than the source,
+ *   extra paths are faded in or out automatically
+ *
+ * @example
+ * ```ts
+ * import { initMorphSvg, morphSvg } from 'getruun'
+ * import foxSvg from './fox.svg?raw'
+ * import owlSvg from './owl.svg?raw'
+ *
+ * const container = document.querySelector('svg')
+ * initMorphSvg(container, foxSvg)
+ *
+ * button.addEventListener('click', () => {
+ *   morphSvg(container, owlSvg, { stiffness: 200, damping: 20, mass: 1 })
+ * })
+ * ```
+ */
 export function morphSvg(
     container: SVGSVGElement,
     toSvg: string,

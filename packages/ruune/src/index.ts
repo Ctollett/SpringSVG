@@ -1,7 +1,4 @@
 export { morph } from './api/morph'
 export { initMorphSvg, morphSvg } from './api/morphSvg'
-export { parseSvgPath, parseSvgPaths } from './api/parseSvg'
-export { parse, normalize, interpolate } from './svg/path'
-export { render } from './svg/renderer'
-export { parseViewBox, scaleD } from './svg/viewbox'
+export { loadSvg } from './api/loadSvg'
 export type { SpringConfig } from './engine/types'

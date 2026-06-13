@@ -1,25 +1,27 @@
-import { DocSection, DocSubsection, CodeBlock, prose, inline } from '../DocSection'
+import { DocSection, DocSubsection, CodeBlock, ParamList, ParamRow, prose, inline } from '../DocSection'
 
 export default function InitMorphSvg() {
   return (
     <DocSection id="init-morph-svg" title="initMorphSvg">
       <DocSubsection title="Usage">
-        <p style={prose}>Seeds path elements into an SVG container so the first <code style={inline}>morphSvg</code> call has no startup cost. Call it at mount time — by the time the user triggers the morph, the DOM is already populated and ready.</p>
+        <p style={prose}>Sets up the container SVG with path elements from the starting SVG. You need to call this once before the first <code style={inline}>morphSvg</code> call. After that, the container is ready and any subsequent morphs can fire without any first-frame delay.</p>
         <CodeBlock>{`import { initMorphSvg, morphSvg } from 'getruun'
 
-const container = document.querySelector('svg')
+const container = document.querySelector('svg') as SVGSVGElement
 
-// Seed the container with paths from the starting SVG
 initMorphSvg(container, fromSvg)
 
-// Later, morph to any target with no first-frame stutter
-morphSvg(container, toSvg)`}</CodeBlock>
+button.addEventListener('click', () => {
+  morphSvg(container, toSvg)
+})`}</CodeBlock>
+        <p style={{ ...prose, marginTop: '12px' }}>Call it during page load or when the component mounts. By the time the user interacts, the paths are already in the DOM and the first morph will be instant.</p>
       </DocSubsection>
 
       <DocSubsection title="Parameters">
-        <p style={prose}>Takes the container element and the starting SVG string. The container must be an <code style={inline}>SVGSVGElement</code> — the same element you'll later pass to <code style={inline}>morphSvg</code>.</p>
-        <CodeBlock>{`container  SVGSVGElement  — the svg element to populate
-fromSvg    string         — source SVG markup`}</CodeBlock>
+        <ParamList>
+          <ParamRow name="container" type="SVGSVGElement" required>An empty svg element in the DOM. You'll pass this same element to morphSvg later.</ParamRow>
+          <ParamRow name="fromSvg" type="string" required>The starting SVG markup.</ParamRow>
+        </ParamList>
       </DocSubsection>
     </DocSection>
   )

@@ -105,7 +105,7 @@ export default function Hero() {
               Get Started <RuunSVG className="w-[10px] h-[10px] overflow-visible" from={chevronSingleSvg} to={chevronTripleSvg} active={fillHover} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
             </div>
           </button>
-          <button data-hover onClick={handleClick} style={{ color: copied ? '#A3A3A3' : '#404040' }} className="flex leading-none gap-2 justify-center items-center text-[12px] px-6 h-[40px] rounded-full bg-[#f0f0f0]">npm install ruun<RuunSVG className="hidden md:block w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
+          <button data-hover onClick={handleClick} style={{ color: copied ? '#A3A3A3' : '#404040' }} className="flex leading-none gap-2 justify-center items-center text-[12px] px-6 h-[40px] rounded-full bg-[#f0f0f0]">npm install getruun<RuunSVG className="hidden md:block w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1], delay: 0.65 }}>
           <IconCarousel />

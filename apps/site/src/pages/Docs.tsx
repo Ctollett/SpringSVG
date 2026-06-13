@@ -5,6 +5,7 @@ import DocsSidebar from '../components/docs/DocsSidebar'
 import OnThisPage from '../components/docs/OnThisPage'
 import Installation from '../components/docs/sections/Installation'
 import QuickStart from '../components/docs/sections/QuickStart'
+import LoadSvg from '../components/docs/sections/LoadSvg'
 import MorphSvg from '../components/docs/sections/MorphSvg'
 import InitMorphSvg from '../components/docs/sections/InitMorphSvg'
 import SpringConfig from '../components/docs/sections/SpringConfig'
@@ -21,6 +22,7 @@ const sectionComponents: Record<string, ComponentType> = {
   'installation':   Installation,
   'quick-start':    QuickStart,
   'for-designers':  ForDesigners,
+  'load-svg':       LoadSvg,
   'morph-svg':      MorphSvg,
   'init-morph-svg': InitMorphSvg,
   'spring-config':  SpringConfig,
@@ -112,7 +114,7 @@ export default function Docs() {
           <DocsSidebar activeId={activeId} onSelect={setActiveId} />
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', paddingTop: CONTENT_TOP, gap: '48px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '640px', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '640px', width: '100%', paddingBottom: '50vh' }}>
             {Section && <Section />}
             <SectionNav prev={prev} next={next} onSelect={setActiveId} />
           </div>
@@ -123,7 +125,7 @@ export default function Docs() {
       </div>
 
       {/* Mobile content */}
-      <div className='md:hidden px-4 py-8 max-w-[636px] mx-auto'>
+      <div className='md:hidden px-4 py-8 max-w-[636px] mx-auto' style={{ paddingBottom: '50vh' }}>
         {Section && <Section />}
         <SectionNav prev={prev} next={next} onSelect={setActiveId} />
       </div>

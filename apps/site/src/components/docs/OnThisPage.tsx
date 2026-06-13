@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { useLenis } from 'lenis/react'
 import { RuunSVG } from 'getruun-react'
 import textAlignJustifySvg from '../../assets/lucide/text-align-justify.svg?raw'
@@ -8,23 +8,28 @@ export default function OnThisPage({ headings, paddingTop }: { headings: string[
   const [activeHeading, setActiveHeading] = useState<string | null>(null)
   const [morphActive, setMorphActive] = useState(false)
   const prevHeadingRef = useRef<string | null>(null)
+  const headingsRef = useRef(headings)
+
+  useEffect(() => { headingsRef.current = headings }, [headings])
 
   const toId = (heading: string) => heading.toLowerCase().replace(/\s+/g, '-')
 
-  const detectActive = () => {
-    let current: string | null = null
-    for (const heading of headings) {
-      const el = document.getElementById(toId(heading))
-      if (!el) continue
-      const rect = el.getBoundingClientRect()
-      if (rect.top <= window.innerHeight * 0.4) current = heading
-    }
+  const detectActive = useCallback(() => {
+    const current_headings = headingsRef.current
+    let current: string | null = current_headings[0] ?? null
 
-    // Short sections can't scroll far enough to bring later headings above 40%.
-    // When near the bottom of the page, activate the last heading.
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-    if (maxScroll > 10 && window.scrollY >= maxScroll - 50) {
-      current = headings[headings.length - 1] ?? current
+    if (window.scrollY > 50) {
+      for (const heading of current_headings) {
+        const el = document.getElementById(toId(heading))
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= window.innerHeight * 0.4) current = heading
+      }
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      if (maxScroll > 10 && window.scrollY >= maxScroll - 50) {
+        current = current_headings[current_headings.length - 1] ?? current
+      }
     }
 
     if (current !== prevHeadingRef.current) {
@@ -32,11 +37,11 @@ export default function OnThisPage({ headings, paddingTop }: { headings: string[
       setActiveHeading(current)
       setMorphActive(prev => !prev)
     }
-  }
+  }, [])
 
   useEffect(() => {
     prevHeadingRef.current = null
-    setActiveHeading(null)
+    setActiveHeading(headings[0] ?? null)
     requestAnimationFrame(() => requestAnimationFrame(detectActive))
   }, [headings])
 

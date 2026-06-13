@@ -1,4 +1,5 @@
 import copySvg from '../../assets/lucide/copy.svg?raw'
+import checkMarkSvg from '../../assets/shapes/check-mark.svg?raw'
 import arrowLeftRightSvg from '../../assets/lucide/arrow-left-right.svg?raw'
 import arrowRightLeftSvg from '../../assets/lucide/arrow-right-left.svg?raw'
 import triangleSvg from '../../assets/shapes/triangle.svg?raw'
@@ -6,8 +7,19 @@ import { HorizontalSlider } from '../HorizontalSlider'
 import circleSvg from '../../assets/shapes/circle.svg?raw'
 import { RuunSVG } from 'getruun-react'
 import { useState } from 'react'
+import { motion, type Variants } from 'framer-motion'
 import type { SpringConfig } from 'getruun'
 import './Playground.css'
+
+const pgContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+}
+
+const pgItem: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } },
+}
 
 
 
@@ -102,7 +114,7 @@ import './Playground.css'
       <div className='flex flex-col gap-6 p-5 w-1/2 rounded-xl justify-center items-center' style={{ border: '1px dashed #9ca3af' }}>
         <div className='flex w-full justify-end'>
           <button data-hover onClick={handleClick}>
-              <span style={{color: isCopied ? 'var(--color-ink-muted)' : 'var(--color-ink)', cursor: 'pointer'}} dangerouslySetInnerHTML={{ __html: copySvg }} />
+              <RuunSVG className="w-[14px] h-[14px] overflow-visible" viewBox="0 0 24 24" from={copySvg} to={checkMarkSvg} active={isCopied} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
           </button>
         </div>
         <pre style={{ fontSize: '13px', lineHeight: '1.7' }}>
@@ -161,18 +173,24 @@ const [springConfig, setSpringConfig] = useState({stiffness: 200, damping: 20, m
 
   return (
     <section className="pb-16">
-      <div className="flex flex-col justify-center items-center pb-10 gap-2">
-        <h3 className='text-xl font-bold'>Try it Out</h3>
-        <p className='text-sm text-ink-secondary'>Lorem ipsum dolor sit amet</p>
-      </div>
-      <div className='flex flex-col gap-16'>
-      <Shape config={springConfig} />
-      <ControlPanel config={springConfig} onUpdate={setSpringConfig} />
-      <div className='flex flex-row gap-4'>
-      <CodeSnippet config={springConfig} />
-      <SpringVisual config={springConfig} />
-      </div>
-      </div>
+      <motion.div
+        className='flex flex-col gap-16'
+        variants={pgContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <motion.div variants={pgItem} className="flex flex-col justify-center items-center pb-10 gap-2">
+          <h3 className='text-xl font-bold'>Try it Out</h3>
+          <p className='text-sm text-ink-secondary'>Drag the sliders to dial in your spring</p>
+        </motion.div>
+        <motion.div variants={pgItem}><Shape config={springConfig} /></motion.div>
+        <motion.div variants={pgItem}><ControlPanel config={springConfig} onUpdate={setSpringConfig} /></motion.div>
+        <motion.div variants={pgItem} className='flex flex-row gap-4'>
+          <CodeSnippet config={springConfig} />
+          <SpringVisual config={springConfig} />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

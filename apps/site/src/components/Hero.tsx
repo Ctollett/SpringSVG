@@ -78,7 +78,7 @@ export default function Hero() {
           <motion.div variants={item} className='leading-tight text-[28px]'>
             <span>Spring-powered SVG morphing</span>
           </motion.div>
-          <motion.div variants={item} className='leading-snug text-[14px]' style={{ color: '#D4D4D4' }}>
+          <motion.div variants={item} className='leading-snug text-[14px]' style={{ color: '#A3A3A3' }}>
             <span>Powered by Spring Physics · Any Framework, Any SVG</span>
           </motion.div>
         </motion.div>
@@ -88,13 +88,18 @@ export default function Hero() {
           <motion.div variants={item} className='leading-none w-full'>
             <span ref={titleRef} className='whitespace-nowrap font-semibold' style={{ fontSize: '48px', display: 'inline-block' }}>Spring-powered SVG morphing</span>
           </motion.div>
-          <motion.div variants={item} className='text-[16px] leading-none' style={{ color: '#D4D4D4' }}>
+          <motion.div variants={item} className='text-[16px] leading-none' style={{ color: '#A3A3A3' }}>
             <span>Powered by Spring Physics · Any Framework, Any SVG</span>
           </motion.div>
         </motion.div>
 
         <motion.div className="flex flex-row gap-4" variants={buttons} initial="hidden" animate="visible">
-          <button data-hover onMouseEnter={() => setFillHover(true)} onMouseLeave={() => setFillHover(false)} onClick={() => lenis?.scrollTo('#demo-section')} className="flex relative overflow-hidden leading-none justify-center items-center text-[12px] w-[128px] h-[40px] rounded-full" style={{ border: fillHover ? '1px solid #080808' : '1px solid transparent', background: 'linear-gradient(#f5f5f7, #f5f5f7) padding-box, radial-gradient(ellipse at 100% 85%, #b8b8b8 0%, #a4a4a4 30%, #a0a0a0 55%) border-box' }}>
+          <button data-hover onMouseEnter={() => setFillHover(true)} onMouseLeave={() => setFillHover(false)} onClick={() => {
+                const el = document.getElementById('demo-section')
+                if (!el || !lenis) return
+                const sectionTop = el.getBoundingClientRect().top + window.scrollY
+                lenis.scrollTo(sectionTop - (window.innerHeight - el.offsetHeight) / 2)
+              }} className="flex relative overflow-hidden leading-none justify-center items-center text-[12px] w-[128px] h-[40px] rounded-full" style={{ border: fillHover ? '1px solid #080808' : '1px solid transparent', background: 'linear-gradient(#f5f5f7, #f5f5f7) padding-box, radial-gradient(ellipse at 100% 85%, #b8b8b8 0%, #a4a4a4 30%, #a0a0a0 55%) border-box' }}>
             <div className="absolute bottom-0 left-0 right-0 bg-[#080808]" style={{ height: fillHover ? '100%' : '0%', transition: 'height 0.4s ease' }} />
             <div style={{ mixBlendMode: 'difference', color: 'white' }} className="relative z-10 flex items-center gap-2">
               Get Started <RuunSVG className="w-[10px] h-[10px] overflow-visible" from={chevronSingleSvg} to={chevronTripleSvg} active={fillHover} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />

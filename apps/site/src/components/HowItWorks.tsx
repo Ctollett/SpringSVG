@@ -93,7 +93,13 @@ export default function HowItWorks() {
         <p className="text-[20px] font-semibold leading-none">How it Works</p>
 
         {/* Card */}
-        <div className="relative w-full">
+        <motion.div
+          className="relative w-full"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <div className="w-full rounded-xl flex flex-col" style={{ backgroundColor: '#DCDCDC', height: '420px' }}>
             {/* White SVG frame */}
             <div className="flex-1" style={{ padding: '20px 20px 0' }}>
@@ -127,7 +133,7 @@ export default function HowItWorks() {
           <div className="hidden md:flex" style={{ position: 'absolute', right: '-20px', top: '50%', transform: 'translateY(-50%)', backgroundColor: '#DCDCDC', borderRadius: '99px', padding: '10px 6px', flexDirection: 'column', gap: '6px' }}>
             {dots}
           </div>
-        </div>
+        </motion.div>
 
         {/* Chevron navigation — mobile only */}
         <div className="md:hidden flex items-center justify-center gap-6">

@@ -125,7 +125,7 @@ export default function Docs() {
       </div>
 
       {/* Mobile content */}
-      <div className='md:hidden px-4 py-8 max-w-[636px] mx-auto' style={{ paddingBottom: '50vh' }}>
+      <div className='md:hidden px-4 py-8 max-w-[636px] mx-auto'>
         {Section && <Section />}
         <SectionNav prev={prev} next={next} onSelect={setActiveId} />
       </div>

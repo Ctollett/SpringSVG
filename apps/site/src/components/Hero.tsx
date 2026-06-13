@@ -30,6 +30,26 @@ export default function Hero() {
   const [fillHover, setFillHover] = useState(false)
   const lenis = useLenis()
   const titleRef = useRef<HTMLSpanElement>(null)
+  const mobileTitleRef = useRef<HTMLDivElement>(null)
+  const mobileLine1Ref = useRef<HTMLSpanElement>(null)
+
+  useLayoutEffect(() => {
+    const fit = () => {
+      const container = mobileTitleRef.current
+      const line1 = mobileLine1Ref.current
+      if (!container || !line1) return
+      const available = container.clientWidth
+      if (available === 0) return
+      container.style.fontSize = '512px'
+      const probeW = line1.offsetWidth
+      if (probeW === 0) return
+      container.style.fontSize = Math.floor((available * 0.72 / probeW) * 512) + 'px'
+    }
+    fit()
+    document.fonts.ready.then(() => requestAnimationFrame(fit))
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [])
 
   useLayoutEffect(() => {
     const el = titleRef.current
@@ -81,22 +101,27 @@ export default function Hero() {
     <section className="flex flex-col h-[85vh] w-full justify-center items-center pb-[16vh]">
       <div className="flex flex-col justify-center items-center gap-8 w-full">
         {/* Mobile layout */}
-        <motion.div variants={container} initial="hidden" animate="visible" className='md:hidden flex flex-col gap-4 items-center font-semibold text-center'>
-          <motion.div variants={item} className='leading-tight text-[28px]'>
-            <span>Spring-powered SVG morphing</span>
+        <motion.div ref={mobileTitleRef} variants={container} initial="hidden" animate="visible" className='md:hidden flex flex-col gap-[4px] items-center text-center font-semibold w-full' style={{ paddingBottom: '24px' }}>
+          <motion.div variants={item} className='leading-none w-full overflow-hidden'>
+            <span ref={mobileLine1Ref} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>Spring-powered</span>
           </motion.div>
-          <motion.div variants={item} className='leading-snug text-[14px]' style={{ color: '#A3A3A3' }}>
-            <span>Powered by Spring Physics · Any Framework, Any SVG</span>
+          <motion.div variants={item} className='leading-none w-full overflow-hidden'>
+            <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>SVG Morphing</span>
+          </motion.div>
+          <motion.div variants={item} className='text-[12px] leading-snug font-normal' style={{ color: '#ABABAB', marginTop: '20px' }}>
+            <span>Drop in two SVG strings, hook up a trigger,</span>
+            <br />
+            <span>and the spring animation handles itself.</span>
           </motion.div>
         </motion.div>
 
         {/* Desktop layout */}
-        <motion.div variants={container} initial="hidden" animate="visible" className="hidden md:flex md:flex-col md:items-center gap-4 text-center font-semibold w-full">
+        <motion.div variants={container} initial="hidden" animate="visible" className="hidden md:flex md:flex-col md:items-center gap-4 text-center font-semibold w-full" style={{ paddingBottom: '24px' }}>
           <motion.div variants={item} className='leading-none w-full'>
-            <span ref={titleRef} className='whitespace-nowrap font-semibold' style={{ fontSize: '48px', display: 'inline-block' }}>Spring-powered SVG morphing</span>
+            <span ref={titleRef} className='whitespace-nowrap font-semibold' style={{ fontSize: '48px', display: 'inline-block' }}>Spring-powered SVG Morphing</span>
           </motion.div>
-          <motion.div variants={item} className='text-[16px] leading-none' style={{ color: '#A3A3A3' }}>
-            <span>Powered by Spring Physics · Any Framework, Any SVG</span>
+          <motion.div variants={item} className='text-[16px] leading-relaxed font-normal' style={{ color: '#BCBCBC' }}>
+            <span>Drop in two SVG strings, hook up a trigger, and the spring animation handles itself.</span>
           </motion.div>
         </motion.div>
 

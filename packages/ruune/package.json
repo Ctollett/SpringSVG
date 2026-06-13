@@ -1,7 +1,7 @@
 {
   "name": "getruun",
   "version": "0.1.0",
-  "description": "Spring physics-based SVG morphing library",
+  "description": "Spring-powered SVG path morphing — animate between any two SVG shapes with real spring physics, no keyframes required.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -30,7 +30,12 @@
     "animation",
     "spring",
     "physics",
-    "morph"
+    "morph",
+    "svg-morphing",
+    "path-animation",
+    "path-morphing",
+    "motion",
+    "typescript"
   ],
   "license": "MIT",
   "homepage": "https://getruun.com",

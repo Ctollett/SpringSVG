@@ -1,7 +1,7 @@
 {
   "name": "getruun-react",
   "version": "0.1.0",
-  "description": "React wrapper for the Ruune SVG morphing library",
+  "description": "React component for spring-powered SVG morphing — drop in two SVG strings and animate between them with real spring physics.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -49,6 +49,11 @@
     "spring",
     "physics",
     "morph",
-    "react"
+    "react",
+    "svg-morphing",
+    "path-animation",
+    "path-morphing",
+    "motion",
+    "typescript"
   ]
 }

@@ -1,17 +1,17 @@
-# ruun
+# getruun
 
 Spring physics-based SVG morphing. Animate any SVG shape into any other with a single function call.
 
 ## Installation
 
 ```bash
-npm install ruun
+npm install getruun
 ```
 
 ## Quick start
 
 ```js
-import { initMorphSvg, morphSvg } from 'ruun'
+import { initMorphSvg, morphSvg } from 'getruun'
 
 const container = document.querySelector('svg')
 
@@ -61,7 +61,7 @@ interface SpringConfig {
 
 ## React
 
-For the React component wrapper, see [ruun-react](https://www.npmjs.com/package/ruun-react).
+For the React component wrapper, see [getruun-react](https://www.npmjs.com/package/getruun-react).
 
 ## License
 

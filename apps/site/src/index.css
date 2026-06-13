@@ -11,40 +11,6 @@
   --color-border-strong:  #71717a;
 }
 
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("./fonts/PPNeueMontreal-Book.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("./fonts/PPNeueMontreal-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("./fonts/PPNeueMontreal-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("./fonts/PPEditorialOld-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("./fonts/PPEditorialOld-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
-}
 
 @font-face {
   font-family: "MD UI XS";

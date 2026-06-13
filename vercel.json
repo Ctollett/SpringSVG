@@ -1,5 +1,6 @@
 {
   "buildCommand": "pnpm --filter getruun build && pnpm --filter getruun-react build && pnpm --filter site build",
   "outputDirectory": "apps/site/dist",
-  "installCommand": "pnpm install --no-frozen-lockfile"
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

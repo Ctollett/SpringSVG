@@ -1,17 +1,18 @@
-# ruun-react
+# getruun-react
 
 React component for spring physics-based SVG morphing. Toggle a boolean and the shape animates itself.
 
 ## Installation
 
 ```bash
-npm install ruun-react
+npm install getruun-react
 ```
 
 ## Usage
 
 ```tsx
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'getruun-react'
+
 import fromSvg from './icons/star.svg?raw'
 import toSvg from './icons/heart.svg?raw'
 

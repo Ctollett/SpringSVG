@@ -4,7 +4,7 @@ export default function Nav() {
   const { pathname } = useLocation()
 
   return (
-    <nav className="flex flex-row justify-between items-center h-16">
+    <nav className="flex flex-row justify-between items-center h-16 sticky top-0 z-50 bg-[#f5f5f7] md:relative md:bg-transparent md:z-auto">
       <Link to="/" className="text-[14px] font-semibold leading-none">Ruun</Link>
       <ul className="flex leading-none items-center gap-4 text-[12px] font-thin p-0">
         <li data-hover className="flex items-center cursor-pointer gap-2">

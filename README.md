@@ -1,4 +1,4 @@
-# ruun
+# getruun
 
 Spring physics-based SVG morphing for the web.
 
@@ -8,27 +8,27 @@ Animate any SVG shape into any other shape — icons, illustrations, logos — w
 
 | Package | Description |
 |---|---|
-| [`ruun`](./packages/ruune) | Core vanilla JS library |
-| [`ruun-react`](./packages/ruune-react) | React component wrapper |
+| [`getruun`](./packages/getruune) | Core vanilla JS library |
+| [`getruun-react`](./packages/getruune-react) | React component wrapper |
 
 ## Quick start
 
 ```bash
-npm install ruun
+npm install getruun
 # or for React
-npm install ruun-react
+npm install getruun-react
 ```
 
 ```tsx
 // React
-import { RuunSVG } from 'ruun-react'
+import { RuunSVG } from 'getruun-react'
 
 <RuunSVG from={starSvg} to={heartSvg} active={liked} />
 ```
 
 ```js
 // Vanilla JS
-import { initMorphSvg, morphSvg } from 'ruun'
+import { initMorphSvg, morphSvg } from 'getruun'
 
 initMorphSvg(container, fromSvg)
 morphSvg(container, toSvg, 'bouncy')

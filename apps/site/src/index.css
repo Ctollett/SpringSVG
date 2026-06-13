@@ -42,6 +42,12 @@ html {
   scroll-behavior: none;
 }
 
+@media (max-width: 767px) {
+  html, body {
+    background: #080808;
+  }
+}
+
 html::-webkit-scrollbar {
   display: none;
 }

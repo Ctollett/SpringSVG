@@ -64,10 +64,17 @@ export default function Hero() {
     }
   }, [])
 
-  const handleClick = () => {
+  const handleCopy = () => {
     navigator.clipboard.writeText(`npm install getruun`)
     setIsCopied(true)
     setMorph(true)
+  }
+
+  const handleScrollToDemo = () => {
+    const el = document.getElementById('demo-section')
+    if (!el || !lenis) return
+    const sectionTop = el.getBoundingClientRect().top + window.scrollY
+    lenis.scrollTo(sectionTop - (window.innerHeight - el.offsetHeight) / 2)
   }
 
   return (
@@ -94,18 +101,21 @@ export default function Hero() {
         </motion.div>
 
         <motion.div className="flex flex-row gap-4" variants={buttons} initial="hidden" animate="visible">
-          <button data-hover onMouseEnter={() => setFillHover(true)} onMouseLeave={() => setFillHover(false)} onClick={() => {
-                const el = document.getElementById('demo-section')
-                if (!el || !lenis) return
-                const sectionTop = el.getBoundingClientRect().top + window.scrollY
-                lenis.scrollTo(sectionTop - (window.innerHeight - el.offsetHeight) / 2)
-              }} className="flex relative overflow-hidden leading-none justify-center items-center text-[12px] w-[128px] h-[40px] rounded-full" style={{ border: fillHover ? '1px solid #080808' : '1px solid transparent', background: 'linear-gradient(#f5f5f7, #f5f5f7) padding-box, radial-gradient(ellipse at 100% 85%, #b8b8b8 0%, #a4a4a4 30%, #a0a0a0 55%) border-box' }}>
+          {/* Mobile Get Started */}
+          <button onClick={handleScrollToDemo} className="md:hidden flex leading-none justify-center items-center gap-2 text-[12px] w-[128px] h-[40px] rounded-full bg-[#080808] text-white">
+            Get Started <RuunSVG className="w-[10px] h-[10px] overflow-visible" from={chevronSingleSvg} to={chevronTripleSvg} active={false} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
+          </button>
+          {/* Desktop Get Started */}
+          <button data-hover onMouseEnter={() => setFillHover(true)} onMouseLeave={() => setFillHover(false)} onClick={handleScrollToDemo} className="hidden md:flex relative overflow-hidden leading-none justify-center items-center text-[12px] w-[128px] h-[40px] rounded-full" style={{ border: fillHover ? '1px solid #080808' : '1px solid transparent', background: 'linear-gradient(#f5f5f7, #f5f5f7) padding-box, radial-gradient(ellipse at 100% 85%, #b8b8b8 0%, #a4a4a4 30%, #a0a0a0 55%) border-box' }}>
             <div className="absolute bottom-0 left-0 right-0 bg-[#080808]" style={{ height: fillHover ? '100%' : '0%', transition: 'height 0.4s ease' }} />
             <div style={{ mixBlendMode: 'difference', color: 'white' }} className="relative z-10 flex items-center gap-2">
               Get Started <RuunSVG className="w-[10px] h-[10px] overflow-visible" from={chevronSingleSvg} to={chevronTripleSvg} active={fillHover} config={{ stiffness: 400, damping: 20, mass: 0.8 }} />
             </div>
           </button>
-          <button data-hover onClick={handleClick} style={{ color: copied ? '#A3A3A3' : '#404040' }} className="flex leading-none gap-2 justify-center items-center text-[12px] px-6 h-[40px] rounded-full bg-[#f0f0f0]">npm install getruun<RuunSVG className="hidden md:block w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
+          {/* Mobile npm button — plain pill, no copy interaction */}
+          <div className="md:hidden flex leading-none justify-center items-center text-[12px] px-6 h-[40px] rounded-full bg-[#f0f0f0]" style={{ color: '#404040' }}>npm install getruun</div>
+          {/* Desktop npm button — copies on click with icon morph */}
+          <button data-hover onClick={handleCopy} style={{ color: copied ? '#A3A3A3' : '#404040' }} className="hidden md:flex leading-none gap-2 justify-center items-center text-[12px] px-6 h-[40px] rounded-full bg-[#f0f0f0]">npm install getruun<RuunSVG className="w-[10px] h-[10px] overflow-visible" viewBox='0 0 24 24' from={CopyIcon} to={checkMarkSvg} active={morph} /></button>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1], delay: 0.65 }}>
           <IconCarousel />

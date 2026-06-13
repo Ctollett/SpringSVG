@@ -42,11 +42,6 @@ html {
   scroll-behavior: none;
 }
 
-@media (max-width: 767px) {
-  html, body {
-    background: #080808;
-  }
-}
 
 html::-webkit-scrollbar {
   display: none;
@@ -64,6 +59,12 @@ body {
   font-family: "MD UI XS", sans-serif;
   background: #f5f5f7;
   color: #404040;
+}
+
+@media (max-width: 767px) {
+  html, body, #root {
+    background: #080808;
+  }
 }
 
 * {

@@ -81,7 +81,7 @@ export default function Docs() {
     <main className='bg-[#f5f5f7] min-h-screen'>
 
       {/* Mobile top bar */}
-      <div className='md:hidden sticky top-0 z-40 bg-[#f5f5f7] border-b border-dashed border-gray-300 flex items-center justify-between px-4 h-14'>
+      <div className='md:hidden bg-[#f5f5f7] border-b border-dashed border-gray-300 flex items-center justify-between px-4 h-14'>
         <Link to="/"><p className='font-semibold text-[20px] leading-none'>Ruun.</p></Link>
         <button onClick={() => setDrawerOpen(true)} className='flex flex-col gap-[5px] justify-center items-end w-6'>
           <span className='block h-[1.5px] w-full bg-[#080808]' />
